@@ -1,0 +1,4 @@
+identifier = ndb.StringProperty(required=True)
+month = ndb.IntegerProperty(required=True)
+year = ndb.IntegerProperty(required=True)
+bookings = ndb.StructuredProperty(SurveyBooking, repeated=True)

@@ -1,0 +1,5 @@
+identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+state_key=ndb.StringProperty(required=True)
+archived=ndb.BooleanProperty(required=True)
+save_me=ndb.BooleanProperty(required=True)

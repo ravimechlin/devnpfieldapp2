@@ -1,0 +1,5 @@
+identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+total=ndb.FloatProperty(required=True)
+items=ndb.TextProperty(required=True)
+modified=ndb.DateTimeProperty(required=True)

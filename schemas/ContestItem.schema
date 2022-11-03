@@ -1,0 +1,8 @@
+identifier=ndb.StringProperty(required=True)
+name=ndb.StringProperty(required=True)
+start_time=ndb.DateTimeProperty(required=True)
+end_time=ndb.DateTimeProperty(required=True)
+description=ndb.TextProperty(required=True)
+announcable=ndb.BooleanProperty(required=True)
+winners=ndb.TextProperty(required=True)
+multiple_winners=ndb.BooleanProperty(required=True)

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Message Thread - {{ phone }}</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/bootstrap/js/moment.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $.post("/data", {"fn": "pull_threads_for_postal_campaign", "phone": "{{ phone }}"}).done(function(messages)
+                {
+                    messages.reverse();
+
+                    $("body").empty();
+                    $("<textarea></textarea>").attr("placeholder", "Type your reply here...").attr("id", "reply").appendTo($("body"));
+                    $("<div></div>").attr("id", "submit_btn").text("Send")
+                    .click(function()
+                    {
+                        var txt = $.trim($("#reply").val());
+                        while(txt.indexOf("\r") > -1)
+                        {
+                            txt = txt.replace("\r", "");
+                        }
+                        var that = $(this);
+                        that.css("opacity", "0.1");
+                        that.text("Sending...");
+                        $.post("/data", {"fn": "postal_campaign_send", "identifier": "{{ rep_identifier }}", "phone": "{{ phone }}", "msg": txt}).done(function()
+                        {
+                            that.text("Send");
+                            that.css("opacity", "1.0");
+                            $("#reply").val("");
+
+                            var p = $("<p></p>").addClass("you");
+
+                            p.append
+                            (
+                                $("<b></b>").html("You:" + "<br />")
+                            )
+                            .append
+                            (
+                                $("<span></span>").html(txt.split("\n").join("<br />"))
+                            )
+                            .append
+                            (
+                                $("<br />")
+                            )
+                            .append
+                            (
+                                $("<br />")
+                            )
+                            .append
+                            (
+                                $("<span></span>").addClass("timestamp").text(moment().format("MM/DD/YYYY hh:mm A"))
+                            )
+                            .insertAfter($("#submit_btn"));
+
+                            p.css("background", "#ea8a11");
+                            setTimeout(function()
+                            {
+                                p.removeAttr("style");
+                                setTimeout(function()
+                                {
+                                    p.css("background", "#ea8a11");
+                                    setTimeout(function()
+                                    {
+                                        p.removeAttr("style");
+                                    }, 250);
+                                }, 250);
+                            }, 250);
+                            p[0].scrollIntoView();
+
+                        });
+                    })
+                    .appendTo($("body"));
+
+                    $.each(messages, function(i, message)
+                    {
+                        while(message.message.indexOf("\r") > -1)
+                        {
+                            message.message = message.message.replace("\r", "");
+                        }
+                        var xyz = "Lead"
+                        if(message.rep_identifier !== "-1")
+                        {
+                            xyz = "You"
+                        }
+
+                        $("<p></p>").addClass(xyz.toLowerCase())
+                        .append
+                        (
+                            $("<b></b>").html(xyz + ": <br />")
+                        )
+                        .append
+                        (
+                            $("<span></span>").html(message.message.split("\n").join("<br />"))
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<span></span>").addClass("timestamp").text(moment(message.dt, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm A"))
+                        )
+                        .appendTo($("body"));
+                    });
+                });
+            });
+        </script>
+        <link rel="stylesheet" href="/bootstrap/css/symbola.css" />
+        <style type="text/css">
+            *
+            {
+                font-family: "Symbola";
+            }
+            body
+            {
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0px;
+                background: #000;
+            }
+            #reply
+            {
+                width: 100%;
+                min-height: 5em;
+                margin-left: auto;
+                margin-right: auto;
+                background: #525151;
+                padding: 0.5em;
+                border: 0px solid #000;
+                color: #FFF;
+            }
+            .you
+            {
+                background: #48899c;
+                color: #FFF;
+                padding: 1em;
+            }
+            .lead
+            {
+                color: #FFF;
+                padding: 1em;
+                background: #3b8667;
+            }
+            #submit_btn
+            {
+                color: #FFF;
+                text-shadow: 0px 0px 0.1em #000;
+                width: 100%;
+                text-align: center;
+                font-size: 2em;
+                background: #94231a;
+                cursor: pointer;
+                margin-bottom: 1em;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                padding-right: 0.5em;
+            }
+            .timestamp
+            {
+                float: right;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 0.25em;
+                position: relative;
+                top: -0.25em;
+            }
+        </style>
+    </head>
+    <body>
+        <center>Please Wait...</center>
+    </body>
+</html>

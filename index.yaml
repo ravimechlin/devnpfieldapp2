@@ -1,0 +1,447 @@
+indexes:
+
+- kind: FieldApplicationEntry
+  ancestor: no
+  properties:
+  - name: processed
+  - name: insert_time
+    direction: desc
+
+- kind: SurveyBooking
+  properties:
+  - name: booking_day
+  - name: booking_month
+  - name: booking_year
+  - name: completion_state
+  - name: office_identifier
+  - name: slot_number
+
+- kind: SurveyQuestion
+  properties:
+  - name: survey_identifier
+  - name: question_idx
+
+- kind: SurveyQuestion
+  properties:
+  - name: identifier
+  - name: question_idx
+
+- kind: PerfectPacketEntry
+  properties:
+  - name: archived
+  - name: rep_completion_state
+  - name: rep_identifier
+  - name: created
+    direction: desc
+
+- kind: FieldApplicationUser
+  properties:
+  - name: payscale_key
+  - name: user_type
+  - name: first_name
+  - name: last_name
+
+- kind: FieldApplicationUser
+  properties:
+  - name: user_type
+  - name: first_name
+  - name: last_name
+
+- kind: FieldApplicationUser
+  properties:
+  - name: current_status
+  - name: user_type
+  - name: first_name
+  - name: last_name
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: rejected
+  - name: rep_submission_date
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: rep_submission_date
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: rejected
+  - name: rep_submission_date
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: rejected
+  - name: last_rejection_date
+    direction: desc
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: rejected
+  - name: rep_identifier
+  - name: last_rejection_date
+
+- kind: MonetaryTransaction
+  properties:
+  - name: paid
+  - name: recipient
+  - name: effective_dt
+
+- kind: MonetaryTransaction
+  properties:
+  - name: approved
+  - name: denied
+  - name: recipient
+  - name: effective_dt
+
+- kind: SurveyBooking
+  properties:
+  - name: associated_rep_id
+  - name: has_associated_field_entry
+  - name: completion_state
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: archived
+  - name: rejected
+  - name: rep_identifier
+  - name: last_rejection_date
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: archived
+  - name: rejected
+  - name: last_rejection_date
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: office_identifier
+  - name: sp_two_time
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: archived
+  - name: rep_submission_date
+
+- kind: SurveyBooking
+  properties:
+  - name: identifier
+  - name: booking_year
+  - name: booking_month
+  - name: booking_day
+
+- kind: PerfectPacketEntry
+  properties:
+  - name: archived
+  - name: rep_completion_state
+  - name: rep_completion_date
+
+- kind: PerfectPacketApproval
+  properties:
+  - name: progress_closed
+  - name: approval_date
+
+- kind: CustomerProgressItem
+  properties:
+  - name: step_state
+  - name: updated
+
+- kind: CustomerProgressArchive
+  properties:
+  - name: entity_identifier
+  - name: step_state
+  - name: updated
+
+- kind: CustomerProgressItem
+  properties:
+  - name: closed
+  - name: step_state
+  - name: updated
+
+- kind: MonetaryTransaction
+  properties:
+  - name: approved
+  - name: denied
+  - name: check_number
+
+- kind: MonetaryTransaction
+  properties:
+  - name: approved
+  - name: denied
+  - name: identifier
+
+- kind: MonetaryTransaction
+  properties:
+  - name: approved
+  - name: denied
+  - name: recorded_dt
+
+- kind: FieldApplicationUser
+  properties:
+  - name: rep_phone
+  - name: current_status
+
+- kind: CustomerNote
+  properties:
+  - name: field_app_identifier
+  - name: inserted_utc
+
+- kind: FieldApplicationUser
+  properties:
+  - name: current_status
+  - name: first_name
+  - name: last_name
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: archived
+  - name: rejected
+  - name: rep_identifier
+  - name: last_rejection_date
+    direction: desc
+
+- kind: PerfectPacketEntry
+  properties:
+  - name: archived
+  - name: rep_completion_state
+  - name: rep_identifier
+  - name: rep_completion_date
+
+- kind: PerfectPacketApproval
+  properties:
+  - name: progress_closed
+  - name: rep_identifier
+  - name: approval_date
+
+- kind: CustomerProgressItem
+  properties:
+  - name: booking_identifier
+  - name: closed
+  - name: step_state
+  - name: updated
+
+- kind: CustomerProgressItem
+  properties:
+  - name: archived
+  - name: closed
+  - name: step_state
+  - name: updated
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: customer_first_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: customer_last_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: customer_first_name
+  - name: customer_last_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: has_holds
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: has_holds
+  - name: customer_first_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: has_holds
+  - name: customer_last_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: has_holds
+  - name: customer_first_name
+  - name: customer_last_name
+  - name: insert_time
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: rep_id
+  - name: insert_time
+    direction: desc
+
+- kind: MessageThread
+  properties:
+  - name: original_sender_identifier
+  - name: latest_activity
+    direction: desc
+
+- kind: MessageThread
+  properties:
+  - name: original_recipient_identifier
+  - name: latest_activity
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: identifier
+  - name: insert_time
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: rep_identifier
+  - name: rep_submission_date
+
+- kind: KeyValueStoreItem
+  properties:
+  - name: keyy
+  - name: expiration
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: archived
+  - name: rep_id
+  - name: sp_two_time
+
+- kind: SurveyResponse
+  properties:
+  - name: survey_identifier
+  - name: user_identifier
+  - name: insert_time
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: save_me
+  - name: save_me_dt
+
+- kind: PerfectPacketSubmission
+  properties:
+  - name: approved
+  - name: approval_date
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: proposal_state
+  - name: insert_time
+
+- kind: LeaderBoardStat
+  properties:
+  - name: metric_key
+  - name: recorded_dt
+
+- kind: CustomerNote
+  properties:
+  - name: note_key
+  - name: inserted_utc
+    direction: desc
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: booking_identifier
+  - name: sp_two_time
+
+- kind: LeaderBoardStat
+  properties:
+  - name: metric_key
+  - name: dt
+
+- kind: LeaderBoardStat
+  properties:
+  - name: metric_key
+  - name: office_identifier
+  - name: dt
+
+- kind: LeaderBoardStat
+  properties:
+  - name: office_identifier
+  - name: dt
+
+- kind: MonetaryTransactionV2
+  properties:
+  - name: recipient
+  - name: payout_date
+
+- kind: RepGoal
+  properties:
+  - name: rep_identifier
+  - name: start_date
+
+- kind: CalendarEvent
+  properties:
+  - name: calendar_key
+  - name: start_dt
+  
+- kind: MonetaryTransactionV2
+  properties:
+  - name: field_app_identifier
+  - name: payout_date
+
+- kind: MonetaryTransactionV2
+  properties:
+  - name: identifier
+  - name: payout_date
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: deal_closed
+  - name: insert_time
+
+- kind: UserLocationLogItem
+  properties:
+  - name: rep_identifier
+  - name: created
+
+- kind: SurveyBooking
+  properties:
+  - name: archived
+  - name: associated_rep_id
+  - name: has_associated_field_entry
+  - name: save_me
+  - name: completion_state
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: rep_id
+  - name: sp_two_time
+
+- kind: MonetaryTransactionV2
+  properties:
+  - name: approved
+  - name: denied
+  - name: description_key
+  - name: paid
+  - name: payout_date
+
+- kind: FieldApplicationEntry
+  properties:
+  - name: processed
+  - name: sp_two_time
+    direction: desc

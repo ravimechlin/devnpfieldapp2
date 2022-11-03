@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Beginning Backup</title>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        	<script type="text/javascript">
+            		$(document).ready(function()
+            		{
+				var form = $("<form></form>");
+				form.attr("action", "/data");
+				form.attr("method", "GET");
+				$("<input />").attr("type", "hidden").attr("name", "fn").attr("value", "update_schema").appendTo(form);
+				$("<input />").attr("type", "hidden").attr("name", "entity").attr("value", "{{ entity }}").appendTo(form);
+
+				$("<input />").attr("type", "hidden").attr("name", "token").attr("value", "{{ token }}").appendTo(form);
+				form.appendTo($("body"));
+
+				document.forms[0].submit();
+                	});
+	        </script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LocalStorage Test</title>
+	</head>
+	<script type='text/javascript'>
+		setTimeout(function()
+		{
+			var result = "FAIL";
+			try
+			{
+				localStorage.setItem("foo", "bar");
+				result = "PASS";
+			}
+			catch(e)
+			{
+			}
+
+			document.getElementById('res').innerHTML = result;
+		}, 3000);
+	</script>
+	<body>
+		<p>
+			Testing local storage....
+		</p>
+		<p>
+			Result: <span id='res'></span>
+		</p>
+	</body>
+</html>

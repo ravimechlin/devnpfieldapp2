@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <style type="text/css">
+                body
+                {
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: 0px;
+                }
+                textarea
+                {
+                    width: 25%;
+                    min-height: 5em;
+                }
+                h2
+                {
+                    color: blue;
+                }
+                button
+                {
+                    width: 50%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                    margin-top: 0.5em;
+                    background: #2121e0;
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 3em;
+                }
+                .symbola
+                {
+                    font-size: 3em;
+                }
+                i
+                {
+                    font-size: 0.8em;
+                }
+                .question_text
+                {
+                    font-weight: bold;
+                }
+            </style>
+            <link rel="stylesheet" href="./bootstrap/css/symbola.css" />
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script charset="utf-8"type="text/javascript" src="/bootstrap/js/hacks.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    var focus_element = function(jqEl)
+                    {
+                        jqEl[0].scrollIntoView();
+                        var old_border = jqEl.css("border");
+                        jqEl.css("border", "1px solid #FF0000");
+                        setTimeout(function()
+                        {
+                            jqEl.css("border", old_border);
+                        }, 2000)
+                    }
+                    window.user_type = "{{ user_type }}";
+
+                    window.loading_interval = setInterval(function()
+                    {
+                        var span = $("#loading_msg").find("span").first();
+                        var text = span.text();
+                        if(text === ".")
+                        {
+                            span.text("..");
+                        }
+                        else if(text === "..")
+                        {
+                            span.text("...");
+                        }
+                        else if(text === "...")
+                        {
+                            span.text("");
+                        }
+                        else if(text === "")
+                        {
+                            span.text(".");
+                        }
+                    }, 500);
+
+                    $("#twenty_hks_div").find("select").change(function()
+                    {
+                        var val = $(this).val();
+                        if(val === "Yes")
+                        {
+                            $("#reason_for_failed_to_hit_20_hks").val("n/a");
+                            $("#section_three_wrapper").css("display", "none");
+
+                        }
+                        else
+                        {
+                            $("#section_three_wrapper").css("display", "block");
+                            $("#reason_for_failed_to_hit_20_hks").val("");
+                        }
+                    });
+
+                    $.post("/data", {"fn": "pull_stats_for_spm_weekly_survey", "identifier": "{{ identifier }}", "office_identifier": "{{ office_identifier }}"}).done(function(r)
+                    {
+                        $("#loading_msg").remove();
+                        $("#wrapper_div").css("display", "block");
+                        console.log(r);
+                        $("#personal_hks").val(r.personal_hks + '');
+                        $("#personal_abs").val(r.personal_abs + '');
+                        $("#personal_aks").val(r.personal_aks + '');
+                        $("#personal_cds").val(r.personal_cds + '');
+
+                        var over_20 = (r.personal_hks >= 20);
+                        over_20 *= 1;
+                        $("#twenty_hks_y_n")[0].selectedIndex = over_20;
+                        $("#twenty_hks_y_n").trigger("change");
+
+                        $("#team_hks").val(r.team_hks + '');
+                        $("#team_abs").val(r.team_abs + '');
+                        $("#team_aks").val(r.team_aks + '');
+
+                        if(r.underperformers.length > 0)
+                        {
+                            $("#underpeformers_div").css("display", "block");
+
+                            $.each(r.underperformers, function(i, e)
+                            {
+                                var div = $("<div></div>");
+                                div.addClass("underperformer_item");
+                                div.attr("data-abs", e.abs + '');
+                                div.attr("data-aks", e.aks + '');
+                                div.attr("data-hks", e.hks + '');
+                                div.data("name", e.name);
+                                $("<p></p>").addClass("question_text").text(e.name + " was under 2 AKs for the week. HKs => " + (e.hks + '') + ", ABs => " + (e.abs + '') + ", AKs => " + (e.aks + '')).appendTo(div);
+                                $("<p></p>").addClass("question_text").text("What are you doing to make sure that " + e.name + " will hit a minimum of 2 AKs this week? Please specify your communication with him/her and your plan:").appendTo(div);
+                                var ta = $("<textarea></textarea>")
+                                
+                                ta.change(function()
+                                {
+                                    var hidden_input = $("#underperformers");
+                                    var string = "";
+                                    $(".underperformer_item").each(function(i, e)
+                                    {
+                                        string += "(" + $(e).data("name") + ": HKs => " + $(e).data("hks") + '';
+                                        string += (", ABs => " + $(e).data("abs") + '');
+                                        string += ", AKs => " + $(e).data("aks") + '';
+                                        string += ") ";
+                                        string += $.trim($(e).find("textarea").val());
+                                        string += "\n\n"
+                                    });
+                                    hidden_input.val(string);
+                                });
+                                
+                                ta.appendTo(div);
+                                div.appendTo($("#underpeformers_div"));
+                            });                            
+                        }
+                        $("#dinner_goal").change(function()
+                        {
+                            var that = $(this);
+                            if(that.val() === "yes")
+                            {
+                                $("#meal_goal_wrapper_location").css("display", "block");
+                                $("#meal_goal_location").val("");
+                            }
+                            else
+                            {
+                                $("#meal_goal_wrapper_location").css("display", "none");
+                                $("#meal_goal_location").val("n/a");
+                            }
+                        });
+                        $("#sub_btn").click(function()
+                        {
+                            var that2 = $(this);
+                            var payload = {};
+                            var ret = false;
+                            $("input, select, textarea").each(function(i, e)
+                            {
+                                if(ret)
+                                {
+                                    return;
+                                }
+                                var el = $(e);
+                                if(el.is("input") || el.is("textarea"))
+                                {
+                                    var val = $.trim(el.val());
+                                    if(val.length > 0)
+                                    {
+                                        payload[$(e).attr("id") + ''] = val;
+                                    }
+                                    else
+                                    {
+                                        focus_element(el);
+                                        ret = true;
+                                    }
+                                }
+                                else if(el.is("select"))
+                                {
+                                    var val = $(el).val();
+                                    if(val === "n/a")
+                                    {
+                                        focus_element(el);
+                                        ret = true;
+                                    }
+                                    else
+                                    {
+                                        payload[$(e).attr("id") + ''] = val;
+                                    }
+                                }
+                            });
+                            if(ret)
+                            {
+                                return;
+                            }
+                            that2.text("Submitting...");
+                            that2.css("opacity", "0.2");
+                            $.post(window.location.href, {"week_dt": "{{ week_dt }}", "user_type": "{{ user_type }}", "identifier": "{{ identifier }}", "data": JSON.stringify(payload)}).done(function(r)
+                            {
+                                window.location.href = "/";
+                            });
+                            console.log(payload);
+                        });
+                    });
+                    
+                });
+            </script>
+        </head>
+    <body>
+        <br />
+        <br />
+        <center id="loading_msg"><b>Please wait while we pull stats from your team</b><span>.</span></center>
+        <div id="wrapper_div" style="display: none;">
+            <h2>Personal Numbers</h2>
+            <div class="question" data-type="input">
+                <input type="hidden" id="office" value="{{ office_name }}" />
+            </div>
+            <div class="question" data-type="input" >
+                <p class="question_text">
+                    Personal HKs in Grid
+                </p>
+                <input id="personal_hks" type="text" size="2" />
+            </div>
+            <div class="question" data-type="input">
+                <p class="question_text">
+                    Personal ABs
+                </p>
+                <input id="personal_abs" type="text" size="2" />
+            </div>
+            <div class="question" data-type="input">
+                <p class="question_text">
+                    AKs from your ABs
+                </p>
+                <input id="personal_aks" type="text" size="2" />
+            </div>
+            <div class="question" data-type="input">
+                <p class="question_text">
+                    CDs from your ABs
+                </p>
+                <input id="personal_cds" type="text" size="2" />
+            </div>
+            <div class="question" data-type="input" style="display: none;">
+                <p class="question_text">
+                    How many paid sick days did you take this week?
+                </p>
+                <i>You have 3 personal paid sick days available per year.</i>
+                <br />
+                <input type="text" size="2" id="sick_days" value="0" />
+            </div>
+            <div class="question" data-type="select" id="twenty_hks_div">
+                <p class="question_text">Did you hit 20 HKs this week?</p>
+                <select id="twenty_hks_y_n">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>            
+            <div style="display: none;" id="section_three_wrapper">
+                <h2>Failed to hit 20 HKs</h2>
+                <div class="question" data-type="textarea">
+                    <i>As the SPM we expect you to hit 20 HKs each week</i>        
+                    <p class="question_text">Why didn't you hit your 20 HKs? Be as detailed as possible please.</p>
+                    <textarea id="reason_for_failed_to_hit_20_hks">n/a</textarea>
+                </div>
+            </div>
+            <h2>Team Numbers</h2>
+            <div class="question" data-type="input">
+                <p class="question_text">Team HKs</p>
+                <input type="text" id="team_hks" size="3" />
+            </div>
+            <div class="question" data-type="input">
+                <p class="question_text">Team ABs</p>
+                <input type="text" id="team_abs" size="2" />
+            </div>
+            <div class="question" data-type="input">
+                <p class="question_text">Team AKs</p>
+                <input type="text" id="team_aks" size="2" />
+            </div>
+            <div id="underpeformers_div" style="display: none;">
+                <h2>Some more details...</h2>
+                <input type="hidden" id="underperformers" value="n/a" />
+            </div>
+            <h2>Involvement</h2>
+            <div class="question" data-type="select">
+                <p class="question_text">How many of the five meetings did you attend?</p>
+                <select id="meeting_qty">
+                    <option value="n/a">Choose One</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="question" data-type="select">
+                <p class="question_text">How many days did you do power hour PERFECTLY from 12 noon until 1pm?  </p>
+                <select id="perfect_power_hour">
+                    <option value="n/a">Choose One</option>
+                    <option value="0">0 days</option>
+                    <option value="1">1 day</option>
+                    <option value="2">2 days</option>
+                    <option value="3">3 days</option>
+                    <option value="4">4 days</option>
+                    <option value="5">5 days</option>
+                </select>
+            </div>
+            <div class="question" data-type="select">
+                <p class="question_text">Did your team have an activity this week? </p>
+                <select id="had_activity">
+                    <option value="n/a">Choose One</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <div class="question" data-type="select">
+                <p class="question_text">Did your team hit its meal goal this week? </p>
+                <select id="dinner_goal">
+                    <option value="n/a">Choose One</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+            <div id="meal_goal_wrapper_location" style="display: none;">
+                <h2>Meal Goal</h2>
+                <p class="question_text">
+                    Since you hit your dinner goal, when and where are you doing the team meal?
+                </p>
+                <textarea id="meal_goal_location">n/a</textarea>
+            </div>
+            <h2>Goals</h2>
+            <i>Commit to hitting these no matter what!</i>
+            <div class="question" data-type="input">
+                <div class="question_text">
+                    How many personal AKs will you get?
+                </div>
+                <input type="text" size="2" id="personal_ak_goal" />
+            </div>
+            <div class="question" data-type="input">
+                <div class="question_text">
+                    How many AKs will your team get? (meal goal)
+                </div>
+                <input type="text" size="2" id="meal_ak_goal" />
+            </div>
+            <h2>How can we help you?</h2>
+            <i>Please let us know how the partners can help you out this week.</i>
+            <div class="question" data-type="textarea">
+                <p>Our goal is to see you put 100% effort into every week, to grow the team, make lots of money, and hit 20 HKs OR MORE per week.  How can we help you do that THIS WEEK?</p>
+                <textarea id="how_we_can_help"></textarea>
+            </div>
+            <button id="sub_btn" type="button" value="Submit">Submit</button>
+        </div>
+    </body>
+</html>

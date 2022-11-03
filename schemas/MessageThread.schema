@@ -1,0 +1,5 @@
+identifier = ndb.StringProperty(required=True)
+original_sender_identifier = ndb.StringProperty(required=True)
+original_recipient_identifier = ndb.StringProperty(required=True)
+latest_activity = ndb.DateTimeProperty(required=True)
+messages = ndb.StructuredProperty(Message, repeated=True)

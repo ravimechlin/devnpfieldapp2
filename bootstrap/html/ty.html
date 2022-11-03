@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            /*"GLAD TO BE AT NP"*/
+            $(window).resize(function()
+            {
+                window.location.reload();
+            });
+            $(document).ready(function()
+            {
+                var width = $(window).width();
+                width = parseFloat(width);
+                width /= 17;
+                width = parseInt(width);
+                $(".letter").css("width", (width + '') + 'px');
+                
+                var height = $(window).height();
+                height = parseFloat(height);
+                height *= 0.25;
+                height = parseInt(height);
+
+                $(".current_letter").css("font-size", (height + '') + 'px');
+
+                var height2 = $(window).height();
+                height2 = parseFloat(height2);
+                height2 *= 0.375;
+                height2 = parseInt(height2);
+
+                var width2 = $(window).width();
+                width2 = parseInt(width2);
+
+                var width3 = $(window).width();
+                width3 = parseFloat(width3);
+                width3 /= 16;
+                width3 *= 0.75;
+                width3 = parseInt(width3);
+                $(".letter").css("font-size", (width3 + '') + 'px');
+
+                var width4 = $(window).width();
+                width4 = parseFloat(width4);
+                width4 *= 0.25;
+
+                var height3 = parseFloat($(window).height());
+                height3 *= 0.5;
+                heigh3 = parseInt(height3);
+
+                $(".current_letter").css("top", (height2 + '') + 'px');
+                $(".current_letter").css("font-size", (height3 + '') + 'px');
+                $(".current_letter").css("margin-left", (width4 + ''));
+
+                var offset1 = parseInt($(".letter").first().offset().top);
+                var offset2 = parseInt($(".letter").last().offset().top);
+
+                while(offset2 > offset1)
+                {
+                    var curr_width = parseInt($(".letter").css("width").replace("px", ""));
+                    var new_width = curr_width -1;
+                    $(".letter").css("width", (new_width + "") + 'px');
+                    offset1 = parseInt($(".letter").first().offset().top);
+                    offset2 = parseInt($(".letter").last().offset().top);
+                    
+                }
+
+
+                function populate(ascii)
+                {
+                    
+                    if(ascii === 91)
+                    {
+                        $(".current_letter").text(":)")
+                        return;
+                    }
+                   
+                    var letter = String.fromCharCode(ascii);
+                    var current_letter_div = $(".current_letter").first();
+                    current_letter_div.animate
+                    (
+                        {"opacity": "0.0"},
+                        250,
+                        "swing",
+                        function()
+                        {
+                            current_letter_div.text(letter),
+                            current_letter_div.animate
+                            (
+                                {"opacity": "1.0"},
+                                250,
+                                "swing",
+                                function()
+                                {
+                                    var callback_count = 0;
+                                    var target_callback_count = $(".letter_" + letter.toLowerCase()).length;
+                                    console.log(target_callback_count);
+                                    if(target_callback_count > 0)
+                                    {
+                                        $(".letter_" + letter.toLowerCase()).each(function(i, e)
+                                        {
+                                            var div = $("<div></div>");
+                                            div.text(letter);
+                                            div.css("text-align", "center");
+                                            div.css("width", $(".letter").width());
+                                            div.css("z-index", "100");
+                                            var letter_height = $(e).height();
+                                            letter_height = parseInt(letter_height);
+                                            div.css("height", letter_height);
+                                            div.css("font-size", $(".current_letter").css("font-size"));
+                                            var current_offset = $(".current_letter").offset();
+                                            div.css("position", "absolute");
+
+                                            var current_top = parseInt(current_offset.top);
+                                            var current_left = parseInt(current_offset.left);
+
+                                            div.css("top", (current_top + '') + 'px');
+                                            div.css("left", (current_left + '') + 'px');
+
+                                            var new_offset = $(e).offset();
+                                            var new_top = parseInt(new_offset.top);
+                                            var new_left = parseInt(new_offset.left);
+
+                                            var new_font_size = $(e).css("font-size");
+
+                                            var props = {"top": (new_top + '') + 'px'};
+                                            props["left"] = (new_left + '') + 'px';
+                                            props["font-size"] = new_font_size;
+
+                                            div.appendTo($("body"));
+                                            div.animate(props, 500, "swing", function()
+                                            {
+                                                $(e).text(div.text());
+                                                div.remove();
+                                                callback_count++;
+                                            });
+                                          });
+                                          var interval = setInterval(function()
+                                          {
+                                              if(callback_count === target_callback_count)
+                                              {
+                                                  clearInterval(interval);
+                                                  populate(ascii + 1);
+                                              }
+                                          }, 10);
+                                    }
+                                    else
+                                    {
+                                        populate(ascii + 1);
+                                    }                                    
+                                }
+                            );
+                        }
+                    );
+                    
+                    
+                }
+                populate(65);
+            });
+        </script>
+        <style type="text/css">
+            body
+            {
+                background: #0686C1;                
+                padding: 0;
+                margin: 0;
+            }
+            .letter
+            {
+                color: #F79621;
+                font-size: 50px;
+                display: inline-block;
+            }
+            *
+            {
+                text-align: center;
+                font-family: monospace;
+                color: #F79621;
+                z-index: 0;
+                margin: 0;
+                padding: 0;
+            }
+            div
+            {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            .current_letter
+            {
+                font-size: 50px;
+                margin-left: auto;
+                margin-right: auto;
+                display: inline-block;
+            }
+        </style>        
+    </head>
+    <body>
+        <div class="letter letter_g">&nbsp;</div>
+        <div class="letter letter_l">&nbsp;</div>
+        <div class="letter letter_a">&nbsp;</div>
+        <div class="letter letter_d">&nbsp;</div>
+        <div class="letter">&nbsp;</div>
+        <div class="letter letter_t">&nbsp;</div>
+        <div class="letter letter_o">&nbsp;</div>
+        <div class="letter">&nbsp;</div>
+        <div class="letter letter_b">&nbsp;</div>
+        <div class="letter letter_e">&nbsp;</div>
+        <div class="letter">&nbsp;</div>
+        <div class="letter letter_a">&nbsp;</div>
+        <div class="letter letter_t">&nbsp;</div>
+        <div class="letter">&nbsp;</div>
+        <div class="letter letter_n">&nbsp;</div>
+        <div class="letter letter_p">&nbsp;</div>
+        <div class="current_letter">&nbsp;</div>
+    </body>
+</html>

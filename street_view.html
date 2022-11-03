@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Customer Followup
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="/bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="/bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="/bootstrap/css/datepicker.css" />
+        <script type="text/javascript">
+            var customers = {{customers|safe}};
+            window.current_idx = -1;
+            window.rescheduling = false;
+            window.saving = false;
+            $(document).ready(function()
+            {
+                if(customers.length > 0)
+                {
+                    showCustomer(customers[0], true);
+                }
+                else
+                {
+                    $("body").text("No action is required at this time");
+                    $("body").css("text-align", "center");
+                }
+                
+            });
+            
+            var init_view = function()
+            {
+                $("body").html("");
+                showCustomer(customers[window.current_idx], false);
+            };
+
+            $(window).resize(function()
+            {
+                if(window.saving)
+                {
+                    return;
+                }
+                init_view();                
+            });
+            window.on("orientationchange", function()
+            {
+                init_view();
+            });
+            function generateTimesInSelectMenus()
+            {
+                // do the hours
+                for(var i = 1; i < 13; i++)
+                {
+                    var padded_i = i + '';
+                    if(padded_i.length === 1)
+                    {
+                        padded_i = "0" + padded_i;
+                    }
+                    $("#sp2_hours").append($("<option></option>").attr("value", (i + '')).text(padded_i));
+                }
+
+                // do the mins
+                for(var i = 0; i <= 45; i += 15)
+                {
+                    var padded_i2 = i + '';
+                    if(padded_i2.length === 1)
+                    {
+                        padded_i2 = "0" + padded_i2;
+                    }
+                    $("#sp2_mins").append($("<option></option>").attr("value", (i + '')).text(padded_i2));
+                }
+            }
+            function showCustomer(customer, increment)
+            {
+                if(increment)
+                {
+                    window.current_idx++;
+                }
+                var phone = "8312750754";
+                var phone_formatted = "(831) 275-0754";
+                var width = parseInt($(window).width());
+                var height = parseInt($(window).height());
+                width += 'px';
+                height += 'px';
+
+                var img = $("<img />");
+                img.attr("src", "https://maps.googleapis.com/maps/api/streetview?size=" + width.replace("px", "") + "x" + height.replace("px", "") + "&location=" + encodeURIComponent(customer.address) + "&fov=90&pitch=10&key=AIzaSyC1JStq4qg-S61Y1bAXLzAWlq3ToUIscZk");
+                img.css("width", width);
+                img.css("height", height);
+                img.css("position", "relative");
+                img.css("z-index", "1");
+                img.on("load", function()
+                {
+                    var overlay_div = $("<div></div>");
+                    overlay_div.css("opacity", "0.0");
+                    overlay_div.css("background-color", "#174f83");
+                    overlay_div.css("position", "absolute");
+                    overlay_div.css("top", "0px");
+                    overlay_div.css("left", "0px");
+                    overlay_div.css("z-index", "2");
+                    overlay_div.css("width", width);
+                    overlay_div.css("height", height);
+                    overlay_div.appendTo($("body"));
+                    overlay_div.animate
+                    (
+                        {
+                            "opacity": "0.8"
+                        },
+                        1000,
+                        function()
+                        {
+                            overlay_div.animate({"opacity": "0.0"}, 1000, function()
+                            {
+                                overlay_div.css("background-color", "#f89a19;")
+                                overlay_div.animate({"opacity": "0.8"}, 1000, function()
+                                {
+                                    overlay_div.remove();
+                                });
+                                setTimeout(function()
+                                {
+                                    img.animate({"opacity": "0.0"}, 1000, function()
+                                    {
+                                        img.remove();
+                                        $("body").animate({"background-color": "#174f83"}, 1000, function()
+                                        {
+                                            var questions_div = $("<div></div>");
+                                            questions_div.css("display", "table");
+                                            questions_div.css("height", height);
+                                            questions_div.css("overflow", "hidden");
+                                            questions_div.css("top", "0px");
+                                            questions_div.css("left", "0px");
+                                            questions_div.css("opacity", "0.0");
+                                            questions_div.css("width", width);
+
+                                            var inner_div = $("<div></div>");
+                                            inner_div.css("display", "table-cell");
+                                            inner_div.css("vertical-align", "middle");
+
+                                            inner_div.css("text-align", "center");
+                                            $("<p></p>").css("text-align", "center").text("What happened with " + customer.name).appendTo(inner_div);
+                                            $("<b></b>").text(customer.address).appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<a></a>").attr("href", "tel:" + customer.phone).text(customer.phone_formatted).appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<h3></h3>").css("color", "#FFFFFF").text("Solar Pro Usage Type:").appendTo(inner_div);
+                                            $("<select></select>").attr("id", "real_or_estimated_sel")
+                                            .append
+                                            (
+                                                $("<option></option>").attr("value", "n/a").text("Choose One")
+                                            )
+                                            .append
+                                            (
+                                                $("<option></option>").attr("value", "real").text("Solar Pro usage data was real")
+                                            )
+                                            .append
+                                            (
+                                                $("<option></option>").attr("value", "estimated").text("Solar Pro usage data was estimated")
+                                            )
+                                            .append
+                                            (
+                                                $("<option></option>").attr("value", "not_applicable").text("Not Applicable/Don't Know")
+                                            )
+                                            .appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<p></p>").css("color", "red").text("Click 3 times to confirm your selection").appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            inner_div.appendTo(questions_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("AK").attr("id", "response_option_1").appendTo(inner_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("Not an AK").attr("id", "response_option_3").appendTo(inner_div);
+                                            questions_div.appendTo($("body"));
+
+                                            questions_div.find(".response_option").each(function(i, e)
+                                            {
+                                                $(e).click(function()
+                                                {
+                                                    var that = $(this);
+                                                    var min_opacity = parseFloat(500);
+                                                    var max_opacity = parseFloat(-500);
+                                                    
+                                                    $(".response_option").each(function(ii, ee)
+                                                    {
+                                                        var parsed = parseFloat($(ee).css("opacity"));
+                                                        if(parsed < min_opacity)
+                                                        {
+                                                            min_opacity = parsed;
+                                                        }
+                                                        if(parsed > max_opacity)
+                                                        {
+                                                            max_opacity = parsed;
+                                                        }
+                                                    });
+
+                                                    var parsed = that.css("opacity");
+                                                    if(parseFloat(that.css("opacity")) !== max_opacity)
+                                                    {
+                                                        $(".response_option").css("opacity", "1.0");                                                        
+                                                    }
+                                                    else
+                                                    {
+                                                        var new_opacity = 0;
+                                                        if(min_opacity === parseFloat(1))
+                                                        {
+                                                            new_opacity = 0.5;
+                                                        }
+                                                        if(min_opacity === parseFloat(0.5))
+                                                        {
+                                                            new_opacity = 0.25;
+                                                        }
+                                                        if(min_opacity === parseFloat(0))
+                                                        {
+                                                            new_opacity = 0;
+                                                        }
+
+                                                        $(".response_option").each(function(ii, ee)
+                                                        {
+                                                            if($(ee).attr("id") !== that.attr("id"))
+                                                            {
+                                                                $(ee).css("opacity", new_opacity.toFixed(2));
+                                                            }
+                                                        });
+                                                        if(new_opacity === 0)
+                                                        {
+                                                            processChoice(that, customer);
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                            
+                                            
+                                            
+                                            questions_div.animate({"opacity": "1.0"}, 2000, function()
+                                            {
+
+                                            });
+
+                                        });
+                                    });
+                                }, 1000);
+                            });
+                        }
+                    );
+                });
+                img.appendTo($("body"));
+            }
+            function processChoice(el, customer, extra_questions, extra_dia)            
+            {
+                if($("#real_or_estimated_sel").val() === "n/a")
+                {
+                    window.alert("You must specify the type of usage data obtained");
+                    $(".response_option").each(function(i, e)
+                    {
+                        $(e).css("opacity", "1.0");
+                    });
+                    return;
+                }
+                window.saving = true;
+                var option = el.attr("id").replace("response_option_", "");
+                if(option === "0" || option === "1" || option === "4")
+                {
+                    if(extra_questions === undefined)
+                    {
+                        var extra_html = $("<div></div>");
+                        $("<p></p>").css("color", "#000000").text("Did you get inside the home, sit down, and present?").appendTo(extra_html);
+                        $("<select></select>").attr("id", "inside_sel")
+                        .append
+                        (
+                            $("<option></option>").attr("value", "n/a").text("Choose One")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "No").text("No")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "Yes").text("Yes")
+                        )
+                        .appendTo(extra_html);
+                        $("<br />").appendTo(extra_html);
+                        $("<br />").appendTo(extra_html);
+                        $("<p></p>").css("color", "#000000").text("How many decision makers were there with you?").appendTo(extra_html);
+                        $("<input />").attr("type", "text").css("width", "3em").appendTo(extra_html).attr("id", "num").appendTo(extra_html);
+                        $("<br />").appendTo(extra_html);
+                        $("<br />").appendTo(extra_html);
+                        $("<p></p>").css("color", "#000000").text("Were ALL decision makers present for the appointment?").appendTo(extra_html);
+                        $("<select></select>").attr("id", "present_sel")
+                        .append
+                        (
+                            $("<option></option>").attr("value", "n/a").text("Choose One")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "No").text("No")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "Yes").text("Yes")
+                        )
+                        .appendTo(extra_html);
+                        BootstrapDialog.show
+                        (
+                            {
+                                "title": "Just a few more questions",
+                                "message": extra_html.html(),
+                                "buttons":
+                                [
+                                    {
+                                        "label": "OK",
+                                        "cssClass": "btn-primary",
+                                        "action": function(d)
+                                        {
+                                            if($("#inside_sel").val() === "n/a")
+                                            {
+                                                window.alert("You must answer all questions.");
+                                                return;
+                                            }
+                                            var parsed = parseInt($("#num").val());
+                                            if(Number.isNaN(parsed))
+                                            {
+                                                window.alert("You must specify how many decision makers were present as a number.");
+                                                return;
+                                            }
+                                            if($("#present_sel").val() === "n/a")
+                                            {
+                                                window.alert("You must answer all questions");
+                                                return;
+                                            }
+                                            var extra_data = {};
+                                            extra_data["got_inside"] = $("#inside_sel").val();
+                                            extra_data["decision_makers_tally"] = (parsed + '');
+                                            extra_data["all_present"] = $("#present_sel").val();                                            
+                                            $(".bootstrap-dialog-footer").find("button").text("Saving...");
+                                            extra_data["ran_credit"] = (option === "4");
+                                            $(".bootstrap-dialog-body").text("");
+                                            $("<p></p>").css("color", "#000000").text("Please Wait...").appendTo($(".bootstrap-dialog-body"));
+                                            $.post("/kv/ak_extras_" + customer.identifier, {"value": JSON.stringify(extra_data)}).done(function()
+                                            {
+                                                processChoice(el, customer, "got it", d);
+                                            });                                            
+                                        }
+                                    }
+                                ]
+                            }
+                        )
+                        return;
+                    }
+                }
+                if(option === "0" || option === "4")
+                {
+                    el.text("Saving...");
+                    el.css("opacity", "0.5");
+                    var payload = {};
+                    payload["fn"] = "confirm_sp2_lead";
+                    payload["data"] = JSON.stringify({"identifier": customer.identifier});
+                    payload["identifier"] = "{{user_identifier}}";
+                    payload["note_txt"] = "";
+                    payload["care_value"] = "1";
+                    payload["usage_type"] = $("#real_or_estimated_sel").val();
+                    payload["ran_credit"] = ((option === "4") * 1) + '';
+
+                    $.post("/data", payload).done(function(r)
+                    {
+                        $.post("/data", {"fn": "sp2_annoy", "identifier": "{{user_identifier}}", "tres": "1"}).done(function(r2)
+                        {
+                            if(r2.has_item && "{{single_mode}}" === "0")
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("Stay put, we have some more questions...");
+                                el.css("font-size", "0.8em");
+                                window.location.reload();
+                            }
+                            else
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("All Set, Thank You");
+                                if(extra_dia !== undefined)
+                                {
+                                    extra_dia.close();
+                                }
+
+                            }
+                        });
+                    });
+                }
+                else if(option === "1")
+                {
+                    el.text("Saving...");
+                    el.css("opacity", "0.5");
+                    var payload = {};
+                    payload["fn"] = "confirm_sp2_lead";
+                    payload["data"] = JSON.stringify({"identifier": customer.identifier});
+                    payload["identifier"] = "{{user_identifier}}";
+                    payload["note_txt"] = "";
+                    payload["care_value"] = "0";
+                    payload["usage_type"] = $("#real_or_estimated_sel").val();
+                    payload["ran_credit"] = ((option === "4") * 1) + '';
+
+                    $.post("/data", payload).done(function(r)
+                    {
+                        $.post("/data", {"fn": "sp2_annoy", "identifier": "{{user_identifier}}", "tres": "1"}).done(function(r2)
+                        {
+                            if(r2.has_item && "{{single_mode}}" === "0")
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("Stay put, we have some more questions...");
+                                el.css("font-size", "0.8em");
+                                window.location.reload();
+                            }
+                            else
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("All Set, Thank You");
+                                if(extra_dia !== undefined)
+                                {
+                                    extra_dia.close();
+                                }
+                            }
+                        });
+                    });
+                }
+                else if(option === "3")
+                {
+                    el.text("Saving...");
+                    el.css("opacity", "0.5");
+                    $.post("/data", {"fn": "complete_sp2_dialog", "identifier": customer.identifier}).done(function(r)
+                    {
+                        $.post("/data", {"fn": "sp2_annoy", "identifier": "{{user_identifier}}", "tres": "1"}).done(function(r2)
+                        {
+                            if(r2.has_item && "{{single_mode}}" === "0")
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("Stay put, we have some more questions...");
+                                el.css("font-size", "0.8em");
+                                window.location.reload();
+                            }
+                            else
+                            {
+                                el.css("opacity", "1.0");
+                                el.text("All Set, Thank You")
+                            }
+                        });
+                    });
+                }
+                else if(option === "2")
+                {
+                    BootstrapDialog.show
+                    (
+                        {
+                            "title": "Make a Selection",
+                            "buttons":
+                            [
+                                {
+                                    "label": "Set new SP2 Time",
+                                    "cssClass": "btn-primary",
+                                    "action": function(d)
+                                    {
+                                        d.close();
+                                        var html2 = $("<div></div>");
+                                        $("<p></p>").text("Choose a new date and time:").appendTo(html2);
+                                        $("<div></div>").attr("id", "dp_div").addClass("input-append").addClass("date").attr("data-date", moment().format("MM-DD-YYYY")).attr("data-date-format", "mm-dd-yyyy")
+                                        .append
+                                        (
+                                            $("<input  />").addClass("span2").addClass("eightpoint5").attr("size", "16").attr("type", "text").attr("value", moment().format("MM-DD-YYYY")).attr("id", "dp_input")
+                                            .on("keyup", function(ev)
+                                            {
+                                                ev.preventDefault();
+                                            })
+                                            .on("keydown", function(ev)
+                                            {
+                                                ev.preventDefault();
+                                            })
+                                            .on("keypress", function(ev)
+                                            {
+                                                ev.preventDefault();
+                                            })
+                                        )
+                                        .append
+                                        (
+                                            $("<span></span>").addClass("add-on")
+                                            .append
+                                            (
+                                                $("<i></i>").addClass("icon-th")
+                                            )
+                                        )
+                                        .appendTo(html2);
+                                        $("<br />").appendTo(html2);
+                                        $("<br />").appendTo(html2);
+                                        $("<select name='sp2_hours' id='sp2_hours' style='margin-right: 1em;''><option value='N/A'>Select One</option></select><select name='sp2_mins' style='margin-right: 1em;' id='sp2_mins'><option value='N/A'>Select One</option></select><select name='sp2_ampm' id='sp2_ampm'><option value='AM'>AM</option><option value='PM'>PM</option></select>").appendTo(html2);
+
+                                        BootstrapDialog.show
+                                        (
+                                            {
+                                                "title": "Choosing a new Date & Time",
+                                                "message": html2.html(),
+                                                "onshown": function(d)
+                                                {
+                                                    setTimeout(function()
+                                                    {
+                                                        $(".date").datepicker
+                                                        (
+                                                            {
+                                                                "format": "mm-dd-yyyy",
+                                                                "autoClose": true
+                                                            }
+                                                        );
+                                                        generateTimesInSelectMenus();
+                                                    }, 250);                                                    
+                                                },
+                                                "buttons":
+                                                [
+                                                    {
+                                                        "label": "Save",
+                                                        "cssClass": "btn-primary",
+                                                        "action": function(d)
+                                                        {
+                                                            if($.trim($("#sp2_hours").val()).toLowerCase() === "n/a")
+                                                            {
+                                                                window.alert("You must choose a complete time for the SP2 date");
+                                                                return false;
+                                                            }
+                                                            if($.trim($("#sp2_mins").val()).toLowerCase() === "n/a")
+                                                            {
+                                                                window.alert("You must choose a complete time for the SP2 date");
+                                                                return false;
+                                                            }
+                                                            $(".bootstrap-dialog-footer").find(".btn-primary").text("Saving...");
+                                                            $(".bootstrap-dialog-footer").find(".btn-primary").css("opacity", "0.5");
+                                                            var sp2_dayte_moment = moment($("#dp_div").find("input").first().val(), "MM-DD-YYYY");
+
+                                                            var add_twelve = ($("#sp2_ampm").val().toUpperCase() === "PM") && ($("#sp2_hours").val() !== "12");
+                                                            var is_pm = ($("#sp2_ampm").val().toUpperCase() === "PM");
+                                                            var mmm = parseInt($("#sp2_mins").val());
+                                                            var hhh = parseInt($("#sp2_hours").val());
+
+                                                            var spee2_hours = $("#sp2_hours").val();
+                                                            var spee2_mins = $("#sp2_mins").val();
+                                                            var spee2_ampm = $("#sp2_ampm").val();
+                                                            var sp2_dayte = $("#dp_div").find("input").first().val();
+
+                                                            $.post("/data", {"fn": "rep_sp2_reschedule_inhouse", "sp2_date": sp2_dayte, "sp2_hour": spee2_hours, "sp2_minute": spee2_mins, "sp2_ampm": spee2_ampm, "identifier": customer.identifier}).done(function(resp)
+                                                            {
+                                                                if(resp.success)
+                                                                {
+                                                                    $.post("/data", {"fn": "sp2_annoy", "identifier": "{{user_identifier}}", "tres": "1"}).done(function(r2)
+                                                                    {
+                                                                        if(r2.has_item && "{{single_mode}}" === "0")
+                                                                        {
+                                                                            $(".bootstrap-dialog-body").text("Stay Put! We have some more questions for you...");
+                                                                            window.location.reload();
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $(".bootstrap-dialog-body").text("All Set! You may now close this window.");
+                                                                        }
+                                                                    });
+                                                                }
+                                                                else
+                                                                {
+                                                                    window.alert("The chosen SP2 time conflicts with the following event:\n" + resp.conflicting_event);
+                                                                    $(".bootstrap-dialog-footer").find(".btn-primary").text("Try Again");
+                                                                    $(".bootstrap-dialog-footer").find(".btn-primary").css("opacity", "1.0");
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        );
+
+
+                                    }
+                                },
+                                {
+                                    "label": "Set SP2 Time Later",
+                                    "cssClass": "btn-primary btn-later",
+                                    "action": function(d)
+                                    {
+                                        $(".btn-later").text("Saving...");
+                                        $.post("/data", {"fn": "complete_sp2_dialog", "identifier": customer.identifier}).done(function(r)
+                                        {
+                                            $.post("/data", {"fn": "sp2_annoy", "identifier": "{{user_identifier}}", "tres": "1"}).done(function(r2)
+                                            {
+                                                if(r2.has_item && "{{single_mode}}" === "0")
+                                                {
+                                                    $(".bootstrap-dialog-body").text("Stay Put, we have some more questions...")
+                                                    window.location.reload();
+                                                }
+                                                else
+                                                {
+                                                    $(".bootstrap-dialog-body").text("All Set! You may now close this window.");
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            ]
+                        }
+                    )
+                }
+            }
+        </script>
+        <style type="text/css">
+            .response_option
+            {
+                background:#f89a19;
+                font-size: 1.25em;
+                width: 47%;
+                float: left;
+                margin-left: 1%;
+                margin-right: 1%;
+                color: #FFFFFF;
+                font-weight: bold;
+                text-shadow: 0px 0px 0.1em #000;
+                margin-bottom: 2em;
+                margin-top: 1em;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            body, img
+            {
+                margin: 0px;
+                padding: 0px;
+                background: #FFFFFF;
+                border: 0px solid #000;                
+            }
+            p
+            {
+                color: #FFFFFF;
+            }
+            a, a:visited, a:hover
+            {
+                color: #FFFFFF;
+            }
+            #real_or_estimated_sel
+            {
+                background: rgb(248, 154, 25);
+                color: #fff;
+                font-weight: bold;
+                text-shadow: 0px 0px 0.1em #000;
+                font-size: 1.5em;
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>

@@ -1,0 +1,9 @@
+
+def get_designee(self):
+    app_entry = FieldApplicationEntry.first(FieldApplicationEntry.identifier == self.field_app_identifier)
+    if not app_entry is None:
+        rep = FieldApplicationUser.first(FieldApplicationUser.rep_id == app_entry.rep_id)
+        if not rep is None:
+            return rep.identifier
+
+    return None

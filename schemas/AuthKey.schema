@@ -1,0 +1,5 @@
+identifier=ndb.StringProperty(required=True)
+user_identifier=ndb.TextProperty(required=True)
+rep_identifier=ndb.StringProperty(required=True)
+customer_phone=ndb.StringProperty(required=True)
+dt=ndb.DateTimeProperty(required=True)

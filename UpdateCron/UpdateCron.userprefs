@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{48DCBF5C-640D-4929-80EC-364BC862095D}|Default">
+  <MonoDevelop.Ide.ItemProperties.UpdateCron PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="UpdateCron/Program.cs">
+    <Files>
+      <File FileName="UpdateCron/Program.cs" Line="52" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,3 @@
+latest_recipient
+ndb.StringProperty
+-1

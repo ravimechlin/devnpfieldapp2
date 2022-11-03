@@ -1,0 +1,8 @@
+identifier=ndb.StringProperty(required=True)
+device_id=ndb.StringProperty(required=True)
+hash=ndb.StringProperty(required=True)
+office_ownership=ndb.StringProperty(required=True)
+rep_ownership=ndb.StringProperty(required=True)
+deployment_dt=ndb.DateTimeProperty(required=True)
+checked_out=ndb.BooleanProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)

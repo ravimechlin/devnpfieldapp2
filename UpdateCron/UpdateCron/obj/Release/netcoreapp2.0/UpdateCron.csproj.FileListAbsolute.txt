@@ -1,0 +1,10 @@
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/bin/Release/netcoreapp2.0/UpdateCron.deps.json
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/bin/Release/netcoreapp2.0/UpdateCron.runtimeconfig.json
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/bin/Release/netcoreapp2.0/UpdateCron.runtimeconfig.dev.json
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/bin/Release/netcoreapp2.0/UpdateCron.dll
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/bin/Release/netcoreapp2.0/UpdateCron.pdb
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/obj/Release/netcoreapp2.0/UpdateCron.csproj.CoreCompileInputs.cache
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/obj/Release/netcoreapp2.0/UpdateCron.AssemblyInfoInputs.cache
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/obj/Release/netcoreapp2.0/UpdateCron.AssemblyInfo.cs
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/obj/Release/netcoreapp2.0/UpdateCron.dll
+/Users/rnirnber1/Projects/UpdateCron/UpdateCron/obj/Release/netcoreapp2.0/UpdateCron.pdb

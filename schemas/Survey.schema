@@ -1,0 +1,11 @@
+identifier = ndb.StringProperty(required=True)
+name = ndb.StringProperty(required=True)
+start_time = ndb.DateTimeProperty(required=True)
+end_time = ndb.DateTimeProperty(required=True)
+question_identifiers = ndb.TextProperty(required=True)
+active_triggers = ndb.TextProperty(required=True, indexed=True)
+activated = ndb.BooleanProperty(required=True)
+is_trashed = ndb.BooleanProperty(required=True)
+anonymous = ndb.BooleanProperty(required=True)
+
+

@@ -1,0 +1,4 @@
+identifier=ndb.StringProperty(required=True)
+minutes=ndb.IntegerProperty(required=True)
+rep_identifier=ndb.StringProperty(required=True)
+dt=ndb.DateProperty(required=True)

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testing Logic</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#cb").change(function()
+            {
+                if($("#cb")[0].checked)
+                {
+                    var addtl_input_info =
+                    [
+                        {
+                            "size": "4",
+                            "name": "rej_year",
+                            "placeholder": "1970"
+                        },
+                        {
+                            "size": "2",
+                            "name": "rej_month",
+                            "placeholder": "12"
+                        },
+                        {
+                            "size": "2",
+                            "name": "rej_day",
+                            "placeholder": "30"
+                        }
+                    ];
+
+                    $.each(addtl_input_info, function(i, item)
+                    {
+                        $("<input />").attr("type", "text").attr("name", item.name).attr("size", item.size).attr("placeholder", item.placeholder).appendTo($("#append_area1"));
+                    });
+                }
+                else
+                {
+                    $("#append_area1 *").each(function(i, e)
+                    {
+                        $(e).remove();
+                    });
+                }
+                $("#included_rej_dt").val(($("#cb")[0].checked * 1) + '').attr("value", (($("#cb")[0].checked * 1) + ''));
+            });
+
+            $("#cb2").change(function()
+            {
+                if($("#cb2")[0].checked)
+                {
+                    var addtl_input_info =
+                    [
+                        {
+                            "size": "4",
+                            "name": "today_year",
+                            "placeholder": "1970"
+                        },
+                        {
+                            "size": "2",
+                            "name": "today_month",
+                            "placeholder": "12"
+                        },
+                        {
+                            "size": "2",
+                            "name": "today_day",
+                            "placeholder": "30"
+                        }
+                    ];
+
+                    $.each(addtl_input_info, function(i, item)
+                    {
+                        $("<input />").attr("type", "text").attr("name", item.name).attr("size", item.size).attr("placeholder", item.placeholder).appendTo($("#append_area2"));
+                    });
+                }
+                else
+                {
+                    $("#append_area2 *").each(function(i, e)
+                    {
+                        $(e).remove();
+                    });
+                }
+                $("#faked_today").val(($("#cb2")[0].checked * 1) + '').attr("value", (($("#cb2")[0].checked * 1) + ''));
+            });
+        });
+    </script>
+</head>
+<body>
+    <form action="/data?fn=test_pp_date_logic" method="POST">
+        <p>Rep Submission Date</p>
+        <input type="text" name="sub_year" size="4" placeholder="1970" />
+        <input type="text" name="sub_month" size="2" placeholder="12" />
+        <input type="text" name="sub_day" size="2" placeholder="30" />
+        <p></p>
+        <p>Include Rejection Date? <input type="checkbox" id="cb" /></p>
+        <p></p>
+        <div id="append_area1">
+        </div>
+        <p>Fake value of "today"? <input type="checkbox" id="cb2" /></p>
+        <p></p>
+        <div id="append_area2">
+        </div>
+        <input type="hidden" name="fn" value="test_pp_date_logic" />
+        <input type="hidden" name="included_rej_dt" id="included_rej_dt" value="0" />
+        <input type="hidden" name="faked_today" id="faked_today" value="0" />
+        <input type="hidden" name="post" value="1" />
+        <input type="submit" name="submit" value="Test" />
+    </form>
+</body>
+</html>

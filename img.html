@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile Picture</title>
+        <style type='text/css'>
+        html, body
+        {
+            margin: 0;
+            padding: 0;
+            display: block;
+            position: relative;
+        }
+        body
+        {
+            min-width: {{width}}px;
+            width: {{width}}px;
+            max-width: {{width}}px;
+            height: {{height}}px;
+            min-height: {{height}}px;
+            max-height: {{height}}px;
+        }
+        img
+        {
+            float: left;
+            display: block;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            padding: 0;
+            min-width: {{width}}px;
+            width: {{width}}px;
+            max-width: {{width}}px;
+            height: {{height}}px;
+            min-height: {{height}}px;
+            max-height: {{height}}px;
+        }
+        </style>
+    </head>
+    <body>
+        <img src="data:image/jpeg;base64,{{b64}}" />
+    </body>
+</html>

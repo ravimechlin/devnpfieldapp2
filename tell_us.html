@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <style type="text/css">
+                body
+                {
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding: 0px;
+                }
+                textarea
+                {
+                    width: 25%;
+                    min-height: 5em;
+                }
+                h2
+                {
+                    color: blue;
+                }
+                button
+                {
+                    width: 50%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                    margin-top: 0.5em;
+                    background: #2121e0;
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 3em;
+                }
+                .symbola
+                {
+                    font-size: 3em;
+                }
+            </style>
+            <link rel="stylesheet" href="./bootstrap/css/symbola.css" />
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script charset="utf-8"type="text/javascript" src="/bootstrap/js/hacks.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    var focus_element = function(jqEl)
+                    {
+                        jqEl[0].scrollIntoView();
+                        var old_border = jqEl.css("border");
+                        jqEl.css("border", "1px solid #FF0000");
+                        setTimeout(function()
+                        {
+                            jqEl.css("border", old_border);
+                        }, 2000)
+                    }
+                    var user_type = "{{ user_type }}";
+                    if(user_type === "energy_expert" || user_type === "sales_manager")
+                    {
+                        var body = $("body");
+                        var lb_data = $.parseJSON('{{leaderboard_data|safe}}');
+
+                        $("<h2></h2>").text("Personal Numbers from LAST WEEK").appendTo(body);
+
+                        $("<b></b>").text("Personal HKs in Grid:").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("value", lb_data["hours_knocked_v2"] + '').attr("id", "personal_hks").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<b></b>").text("Personal ABs:").attr("type", "text").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("value", lb_data["leads_acquired"] + '').attr("id", "personal_abs").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<b></b>").text("Personal AKs:").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("value", lb_data["appointments_kept"] + '').attr("id", "personal_aks").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<b></b>").text("Personal CDs:").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("value", lb_data["packets_submitted"] + '').attr("id", "personal_cds").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<b></b>").text("How many personal vacation days did you take this weeek?")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<p></p>").css("font-size", "0.8em").text("You have 12 personal vacation days available per year excluding work holidays.  You must notify Thomas at least 2 weeks in advance when you need to take a vacation day.")
+                        )
+                        .append
+                        (
+                            $("<input />").attr("size", "2").attr("type", "text").attr("id", "personal_days_taken")
+                        )
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<b></b>").text("What vacation days do you need to request off that you haven't already? (must give 2 weeks notice)")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<p></p>").css("font-size", "0.8em").text("You have 12 personal vacation days available per year excluding work holidays.  You must notify Thomas at least 2 weeks in advance when you need to take a vacation day.")
+                        )
+                        .append
+                        (
+                            $("<textarea></textarea>").attr("id", "personal_days_requested")
+                        )
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<b></b>").text("How many paid sick days did you take this weeek?")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<p></p>").css("font-size", "0.8em").text("You have 3 personal paid sick days available per year.")
+                        )
+                        .append
+                        (
+                            $("<input />").attr("size", "2").attr("type", "text").attr("id", "sick_days_taken")
+                        )
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<b></b>").text("How many paid miles did you drive this weeek?")                            
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<b></b>").css("color", "#FF0000").text("(MILES DRIVEN IN COMPANY VEHICLES OR RENTAL CARS PROVIDED BY NEW POWER DO NOT COUNT)")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (   
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<p></p>").css("font-size", "0.8em").text("You may not count the commute to the office or home from your last appointment at night.  You may also not count personal driving time such as to lunch, gas station, etc.  You may count drive time to appointments however.")
+                        )
+                        .append
+                        (
+                            $("<input />").attr("size", "4").attr("type", "text").attr("id", "miles_driven").attr("value", "0")
+                        )
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        $("<b></b>").text("Did you hit 24 Production Hours? (Note: If you had vacation days this week, did you average at least 4 hours and 48 minutes of PHs per work day?)").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<select></select>").attr("id", "ph_sel_24")
+                        .append
+                        (
+                            $("<option></option>").attr("value", "n/a").text("Choose One")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "yes").text("Yes")
+                        )
+                        .append
+                        (
+                            $("<option></option>").attr("value", "no").text("No")
+                        )
+                        .appendTo(body);
+                        $("<hr />").appendTo(body);
+
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<h2></h2>").text("Failed to hit 24 PHs")
+                        )
+                        .append
+                        (
+                            $("<b></b>").text("Why didn't you hit your 24 PHs or 4 hours 48 minutes per work day average? Be as detailed as possible please.")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (   
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<textarea></textarea>").attr("id", "reason_for_lower_ph")
+                        )                        
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        setInterval(function()
+                        {
+                            var value = $("#ph_sel_24").val();
+                            var parent_div = $("#reason_for_lower_ph").closest("div");
+                            if(value === "no")
+                            {
+                                if(parent_div.css("display").toLowerCase() !== "block")
+                                {
+                                    parent_div.css("display", "block");
+                                }
+                            }
+                            else
+                            {
+                                if(parent_div.css("display").toLowerCase() !== "none")
+                                {
+                                    parent_div.css("display", "none");
+                                }
+                            }
+                        }, 250);
+
+                        $("<h2></h2>").text("Closing %").appendTo(body);
+                        $("<b></b>").text("Please divide CDs/AKs and mark the category you were in last week").appendTo(body);
+                        $("<br />").appendTo(body);
+
+                        $("<div></div>")
+                        .append
+                        (
+                            $("<input />").attr("type", "radio").addClass('closing_percentage')
+                        )
+                        .append
+                        (
+                            $("<span></span>").text("0.00-19.99%")
+                        )
+                        .append
+                        (
+                            $("<div></div").addClass("symbola").html("&#128546;")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>")
+                        .append
+                        (
+                            $("<input />").attr("type", "radio").addClass('closing_percentage')
+                        )
+                        .append
+                        (
+                            $("<span></span>").text("20.00-29.99%")
+                        )
+                        .append
+                        (
+                            $("<div></div").addClass("symbola").html("&#128577;")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>")
+                        .append
+                        (
+                            $("<input />").attr("type", "radio").addClass('closing_percentage')
+                        )
+                        .append
+                        (
+                            $("<span></span>").text("30.00-39.99%")
+                        )
+                        .append
+                        (
+                            $("<div></div").addClass("symbola").html("&#128578;")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .appendTo(body);
+
+                        $("<div></div>")
+                        .append
+                        (
+                            $("<input />").attr("type", "radio").addClass('closing_percentage')
+                        )
+                        .append
+                        (
+                            $("<span></span>").text("40.00-100%")
+                        )
+                        .append
+                        (
+                            $("<div></div").addClass("symbola").html("&#128513;")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .appendTo(body);
+
+                        $(".closing_percentage").each(function(i, e)
+                        {
+                            $(e).change(function()
+                            {
+                                var that = $(this);
+
+                                $(".closing_percentage").each(function(ii, ee)
+                                {
+                                    $(ee)[0].checked = false;
+                                    that[0].checked = true;
+                                });
+
+                            });
+                        });
+
+                        var percentage = 0;
+                        if(lb_data["appointments_kept"] > 0)
+                        {
+                            var cd_tally = parseFloat(lb_data["packets_submitted"]);
+                            var ak_tally = parseFloat(lb_data["appointments_kept"]);
+
+                            var percentage = cd_tally / ak_tally;
+                            percentage *= 100;
+
+                            if(percentage <= 19.99)
+                            {
+                                $(".closing_percentage").first()[0].checked = true;
+                            }
+                            else if(percentage <= 29.99)
+                            {
+                                $(".closing_percentage").eq(1)[0].checked = true;
+                            }
+                            else if(percentage <= 39.99)
+                            {
+                                $(".closing_percentage").eq(2)[0].checked = true;
+                            }
+                            else
+                            {
+                                $(".closing_percentage").eq(3)[0].checked = true;
+                            }
+                        }
+                        else
+                        {
+                            $(".closing_percentage").eq(3)[0].checked = true;
+                        }
+
+
+                        $("<hr />").appendTo(body);
+
+                        $("<div></div>").css("display", "none")
+                        .append
+                        (
+                            $("<h2></h2>").text("Under 30% Closing Ratio")
+                        )
+                        .append
+                        (
+                            $("<b></b>").text("Your closing ratio this week was under 30%.  You understand that continuing to close under 30% of your AKs may result in fewer leads sent your way.")
+                        )
+                        .append
+                        (
+                            $("<br />")
+                        )
+                        .append
+                        (   
+                            $("<br />")
+                        )
+                        .append
+                        (
+                            $("<p></p>").text("I understand.  I will step it up and increase my closing ratio.")
+                        )
+                        .append
+                        (
+                            $("<input />").attr("type", "checkbox").attr("id", "under_30_agreement")
+                        )                        
+                        .append
+                        (
+                            $("<hr />")
+                        )
+                        .appendTo(body);
+
+                        setInterval(function()
+                        {
+                            var parent_div = $("#under_30_agreement").closest("div");
+                            var checked_idx = -1;
+                            $(".closing_percentage").each(function(i, e)
+                            {
+                                if($(e)[0].checked)
+                                {
+                                    checked_idx = i;
+                                }
+                            });
+                            if(checked_idx === 0 || checked_idx === 1)
+                            {
+                                
+                                if(parent_div.css("display").toLowerCase() !== "block")
+                                {
+                                    parent_div.css("display", "block");
+                                }
+                            }
+                            else
+                            {
+                                if(parent_div.css("display").toLowerCase() !== "none")
+                                {
+                                    parent_div.css("display", "none");
+                                }
+                            }
+                        }, 250);
+
+                        $("<h2></h2>").text("Goals for this Week").appendTo(body);
+                        $("<p></p>").text("Commit yourself to hitting these NO MATTER WHAT!").appendTo(body);
+
+                        $("<br />").appendTo(body);
+                        $("<br />").appendTo(body);
+
+                        $("<b></b>").text("I will get this many PHs this week:").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("id", "this_week_phs").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<b></b>").text("I will get this many CDs this week:").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<input />").attr("size", "2").attr("type", "text").attr("id", "this_week_cds").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<h2></h2>").text("How can we help you?").appendTo(body);
+
+                        $("<b></b>").text("Our goal is to see you put 100% effort into every week close lots of deals, and hit 24 PHs OR MORE per week.  How can we help you do that THIS WEEK?").appendTo(body);
+                        $("<br />").appendTo(body);
+                        $("<textarea></textarea>").attr("id", "how_can_we_help_you").appendTo(body);
+                        $("<hr />").appendTo(body);
+
+                        $("<button></button>").attr("type", "button").attr("value", "Submit").text("Submit")
+                        .click(function()
+                        {
+                            var btn = $(this);
+                            var payload = {};
+                            var ret_early = false;
+                            $("#personal_days_taken").val("---");
+                            $("#personal_days_requested").val("---");
+                            $("#sick_days_taken").val("---");
+                            $("#personal_hks, #personal_abs, #personal_aks, #personal_cds, #personal_days_taken, #sick_days_taken, #miles_driven, #personal_days_requested").each(function(i, e)
+                            {
+                                if(ret_early)
+                                {
+                                    return;
+                                }
+                                var value = $.trim($(e).val());
+                                if(value.length === 0)
+                                {
+                                    window.alert("Please provide a value for " + $(e).prevAll("b").first().text());
+                                    ret_early = true;
+                                    focus_element($(e));
+                                    
+                                }
+                                if($(e).attr("id") === "miles_driven")
+                                {
+                                    var parsed = parseFloat(value);
+                                    if(parsed === null || parsed === undefined || Number.isNaN(parsed))
+                                    {
+                                        window.alert("Your miles driven could not be parsed");
+                                        ret_early = true;
+                                        focus_element($(e));
+                                    }
+                                }
+                                payload[$(e).attr("id")] = value;
+                            });
+                            if(ret_early)
+                            {
+                                return;
+                            }
+                            var sel_val = $("#ph_sel_24").val();                            
+                            if(sel_val === "n/a")
+                            {
+                                window.alert("Please answer the question: '" + $("#ph_sel_24").prevAll("b").first().text());
+                                focus_element($("#ph_sel_24"));
+                                return;
+                            }
+                            payload["ph_sel_24"] = sel_val;
+                            if(sel_val === "yes")
+                            {
+                                payload["reason_for_lower_ph"] = "n/a"
+                            }
+                            else
+                            {
+                                var lower_ph_val = $.trim($("#reason_for_lower_ph").val());
+                                if(lower_ph_val.length === 0)
+                                {
+                                    window.alert("Please answer the question: '" + $("#reason_for_lower_ph").prevAll("b").first().text());
+                                    focus_element($("#reason_for_lower_ph"));
+                                }
+                                payload["reason_for_lower_ph"] = lower_ph_val;
+                            }
+                            var checked_tally = 0;
+                            $(".closing_percentage").each(function(i, e)
+                            {
+                                checked_tally += $(e)[0].checked * 1;
+                            });
+                            if(checked_tally === 0)
+                            {
+                                window.alert("Please specify your closing percentage.");
+                                var el = $(".closing_percentage").first().closest("div").prevAll("h2").first();
+                                focus_element(el);
+                            }
+                            $(".closing_percentage").each(function(i, e)
+                            {
+                                if($(e)[0].checked)
+                                {
+                                    payload["closing_percentage"] = $(e).nextAll("span").first().text();
+                                }
+                            });
+                            if(payload["closing_percentage"] === "0.00-19.99%" || payload["closing_percentage"] === "20.00-29.99%")
+                            {
+                                if($("#under_30_agreement")[0].checked === false)
+                                {
+                                    focus_element($("#under_30_agreement").prevAll("p").first());
+                                }
+                            }
+                            ret_early = false;
+                            $("#this_week_phs, #this_week_cds, #how_can_we_help_you").each(function(i, e)
+                            {
+                                if(ret_early)
+                                {
+                                    return;
+                                }
+                                var value = $.trim($(e).val());
+                                payload[$(e).attr("id")] = value;
+                                if(value.length === 0)
+                                {
+                                    ret_early = true;
+                                    window.alert("Please answer the question: " + $(e).prevAll("b").first().text());
+                                    focus_element($(e).prevAll("b").first());
+                                    return;
+                                }
+                            });
+                            if(ret_early)
+                            {
+                                return;
+                            }
+                            btn.text("Submitting...").css("opacity", "0.1");
+                            $.post(window.location.href, {"week_dt": "{{ week_dt }}", "user_type": "{{ user_type }}", "identifier": "{{ identifier }}", "data": JSON.stringify(payload)}).done(function(r)
+                            {
+                                window.location.href = "/";
+                            });
+
+                        })
+                        .appendTo(body);
+                    }
+
+                    
+                });
+            </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

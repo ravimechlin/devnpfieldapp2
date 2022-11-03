@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Watching lead acquisition in real-time</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+        .rep_img
+        {
+            display: block;
+            max-width: 100px;
+            margin-top: 1em;
+            margin-botom: 1em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .creep_cw
+        {
+            min-height: 400px;
+        }
+        </style>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="/bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            window.app_bucket = "{{ app_bucket }}";
+            $(document).ready(function()
+            {
+                $("body").trigger("click");
+            });
+            function initMap()
+            {
+                $.post("/creep").done(function(lp)
+                {
+                    //geolocation API key
+                    //AIzaSyAhhS3ugue4F0ZFstIOrAFA0z5D5NSV3mc
+                    var latest_post = lp;
+                    window.latest_identifier = lp.identifier;
+                    window.locations = [];
+                    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(latest_post.address + " " + latest_post.city + ", " + latest_post.state + " " + latest_post.postal)).done(function(resp)
+                    {
+                        var lat = resp.results[0].geometry.location.lat;
+                        var long = resp.results[0].geometry.location.lng;
+                        window.locations.push({"lat": lat, "lng": long});
+                        window.main_map = new google.maps.Map(document.getElementById('map'), 
+                            {
+                                zoom: 4,
+                                center: {"lat": lat, "lng": long}
+                            }
+                        );
+                        
+                        window.info_windows = 
+                        [
+                            new google.maps.InfoWindow
+                            (
+                                {
+                                    "content": "<div class='creep_cw'><h3><span class='utc_ts'>" + moment.utc(latest_post.utc).fromNow() + "</span></h3><p>" + latest_post.street + "</p><p>" + latest_post.city + ", " + latest_post.state + "</p><p>" + latest_post.postal + "</p><hr /><b>" + latest_post.rep_name + "</b><img class='rep_img' src='//storage.googleapis.com/" + window.app_bucket + "/Images/ProfilePictures/Thumb/" + latest_post.rep_identifier + ".jpg' /></div>"
+                                }
+                            )
+                        ];
+                        window.markers = 
+                        [
+                            new google.maps.Marker
+                            (
+                                {
+                                    "map": window.main_map,
+                                    "position": resp.results[0].geometry.location,
+                                }
+                            )
+                        ];
+                        window.utc_timestamps = 
+                        [
+                            latest_post.utc
+                        ];
+                        //window.markers[0].addListener("click", function()
+                        //{
+                            //window.info_windows[0].open(window.main_map, window.markers[0]);
+                        //});
+
+                        window.current_idx = 0;
+                        window.ajaxing = false;                        
+                        setInterval(function()
+                        {
+                            if(window.ajaxing)
+                            {
+                                return;
+                            }
+                            if((window.main_map.zoom * 1) === 4)
+                            {
+                                window.main_map.setZoom(8);
+                                return;
+                            }
+                            if((window.main_map.zoom * 1) === 8)
+                            {
+                                window.main_map.setZoom(12);
+                                return;
+                            }
+                            if((window.main_map.zoom * 1) === 12)
+                            {
+                                window.main_map.setZoom(16);
+                                return;
+                            }
+                            if((window.main_map.zoom * 1) === 16)
+                            {
+                                window.main_map.setZoom(20);
+                                return;
+                            }
+                            if($(".gm-style-iw").size() === 0)
+                            {
+                                var cw = window.info_windows[window.current_idx];
+                                var tmp_div = $("<div></div>").html(cw.getContent());
+                                tmp_div.find(".utc_ts").text(moment.utc(window.utc_timestamps[window.current_idx]).fromNow());
+                                cw.setContent(tmp_div.html());
+                                window.info_windows[window.current_idx].open(window.main_map, window.markers[window.current_idx]);
+                                return;
+                            }
+                            if($(".gm-style-iw").size() === 1)
+                            {
+                                $(".gm-style-iw").first().next().trigger("click");
+                                window.main_map.setZoom(4);                                
+                                window.current_idx++;
+                                if(window.current_idx === window.markers.length)
+                                {
+                                    window.current_idx = 0;
+                                }
+                                window.main_map.panTo(window.locations[current_idx]);
+                            }
+
+                        }, 2500);
+                        setInterval(function()
+                        {
+                            window.ajaxing = true;
+                            $.post("/creep", {"identifier": window.latest_identifier})
+                            .done(function(updated_post)
+                            {
+                                window.ajaxing = false;
+                                if(updated_post.exists)
+                                {
+                                    window.latest_identifier = updated_post.identifier;
+                                    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(updated_post.address + " " + updated_post.city + ", " + updated_post.state + " " + updated_post.postal)).done(function(resp5)
+                                    {
+                                        var lat = resp5.results[0].geometry.location.lat;
+                                        var long = resp5.results[0].geometry.location.lng;                                        
+                                        window.locations.push({"lat": lat, "lng": long});
+                                        window.info_windows.push
+                                        (
+                                            new google.maps.InfoWindow
+                                            (
+                                                {
+                                                    "content": "<div class='creep_cw'><h3><span class='utc_ts'>" + moment.utc(updated_post.utc).fromNow() + "</span></h3><p>" + updated_post.street + "</p><p>" + updated_post.city + ", " + updated_post.state + "</p><p>" + updated_post.postal + "</p><hr /><b>" + updated_post.rep_name + "</b><img class='rep_img' src='//storage.googleapis.com/" + window.app_bucket + "/Images/ProfilePictures/Thumb/" + updated_post.rep_identifier + ".jpg' /></div>"
+                                                }
+                                            )
+                                        );
+                                        window.markers.push 
+                                        (
+                                            new google.maps.Marker
+                                            (
+                                                {
+                                                    "map": window.main_map,
+                                                    "position": resp5.results[0].geometry.location,
+                                                }
+                                            )
+                                        );
+                                        window.utc_timestamps.push(updated_post.utc);
+                                        window.markers[window.markers.length - 1].setMap(window.main_map);
+                                    });
+                                }
+                            })
+                            .fail(function()
+                            {
+                                window.ajaxing = false;
+                            })
+                            .always(function()
+                            {
+                                window.ajaxing = false;
+                            });
+                        }, 60000);
+                    });
+                });
+            }
+        </script>
+    </head>
+    <body>
+    <div id="map">
+
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAhhS3ugue4F0ZFstIOrAFA0z5D5NSV3mc&callback=initMap&language=en&region=US" async defer></script>
+    </body>
+</html>

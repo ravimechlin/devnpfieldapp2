@@ -1,0 +1,2 @@
+identifier = ndb.StringProperty(required=True)
+email_address = ndb.StringProperty(required=True)

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="57x57" href="/bootstrap/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/bootstrap/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/bootstrap/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/bootstrap/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/bootstrap/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/bootstrap/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/bootstrap/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/bootstrap/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/bootstrap/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/bootstrap/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/bootstrap/images/favicon-16x16.png">
+        <link rel="manifest" href="/bootstrap/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/bootstrap/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <title>New Power Company - Login</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href='//fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css">
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <style type="text/css">
+            body
+            {
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+            }
+            #login_group, #password_group
+            {
+                position: relative;
+            }
+            #pass_span
+            {
+                width: 2.5em;
+                min-width: 2.5em;
+                max-width: 2.5em;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+                .control-label
+                {
+                    float: left;
+                    width: 100%;
+                    display: block;
+                    position: relative;
+                    text-align: center;
+                }
+                #rep_email_id, #rep_pass
+                {
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                    position: relative;
+                    width: 116.66%;
+                    left: 7.5%;
+                }
+                .btn-success
+                {
+                    width: 116.66%;
+                    left: -15%;
+                    position: relative;
+                }
+                #registration
+                {
+                      float: left;
+                      color: #27CC4E;
+                      display: block;
+                      position: relative;
+                      width: 116.66%;
+                      left: -16.66%;
+                      text-align: center;
+                      top: 2em;
+                      left: 50%;
+                }
+                #login_group, #password_group
+                {
+                    left: 0%;
+                }
+                #pass_span
+                {
+                    display: none;
+                }
+                #forgotpassword
+                {
+                    top: 2em;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+                .control-label
+                {
+                    float: left;
+                    width: 100%;
+                    display: block;
+                    position: relative;
+                    text-align: center !important;
+                }
+                #rep_email_id, #rep_pass
+                {
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                    position: relative;
+                    width: 116.66%;
+                    left: 7.5%;
+                }
+                .btn-success
+                {
+                    width: 116.66%;
+                    left: -15%;
+                    position: relative;
+                }
+                #registration
+                {
+                      float: left;
+                      color: #27CC4E;
+                      display: block;
+                      position: relative;
+                      width: 116.66%;
+                      left: -16.66%;
+                      text-align: center;
+                      top: 2em;
+                      left: 50%;
+                }
+                #login_group, #password_group
+                {
+                    left: 0%;
+                }
+                #pass_span
+                {
+                    display: none;
+                }
+                #forgotpassword
+                {
+                    top: 2em;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+                .control-label
+                {
+                    float: left;
+                    width: auto;
+                    display: inline-block;
+                    position: relative;
+                    text-align: left;
+                }
+                #rep_email_id, #rep_pass
+                {
+                    margin-left: 0;
+                    margin-right: 0;
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    left: 0px;
+                }
+                .btn-success
+                {
+                    width: auto;
+                    left: 0px;
+                    position: relative;
+                }
+                #registration
+                {
+                      float: right;
+                      color: #27CC4E;
+                      display: block;
+                      position: relative;
+                      width: auto;
+                      left: 0%;
+                      text-align: left;
+                      top: 0px;
+                }
+                #login_group, #password_group
+                {
+                    left: 2.5%;
+                }
+                #pass_span
+                {
+                    display: inline-block;
+                }
+                #forgotpassword
+                {
+                    top: -0.5em;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+                .control-label
+                {
+                    float: left;
+                    width: auto;
+                    display: inline-block;
+                    position: relative;
+                    text-align: left;
+                }
+                #rep_email_id, #rep_pass
+                {
+                    margin-left: 0;
+                    margin-right: 0;
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    left: 0;
+                }
+                .btn-success
+                {
+                    width: auto;
+                    left: 0px;
+                    position: relative;
+                }
+                #registration
+                {
+                      float: right;
+                      color: #27CC4E;
+                      display: block;
+                      position: relative;
+                      width: auto;
+                      left: 0%;
+                      text-align: left;
+                      top: 0px;
+                }
+                #login_group, #password_group
+                {
+                    left: 5%;
+                }
+                #pass_span
+                {
+                    display: inline-block;
+                }
+                #forgotpassword
+                {
+                    top: -0.5em;
+                }
+            }
+            .modal-header
+            {
+                background-color: #D19F28 !important;
+                text-align: center;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            .modal-body
+            {
+                background: #353030;
+            }
+            .bootstrap-dialog-message
+            {
+                color: #C6C2C2;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            input[type=text], input[type='text'], input[type="text"], input[type=password], input[type='password'], input[type="password"]
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+            }
+            .dropdown > button, .open > button
+            {
+                background: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:hover, .open > button:hover
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:focus, .open > button:focus
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .glyphicon-camera
+            {
+                color: #FB8A0B;
+                font-size: 5em;
+                cursor: pointer;
+            }
+            ::-webkit-input-placeholder
+            {
+                color: #000000;
+            }
+            :-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            ::-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            :-ms-input-placeholder
+            {
+                color: #909;
+            }
+            form
+            {
+                background: #4D4A46;
+                padding-top: 2em;
+                padding-bottom: 2em;
+                padding-right: 2em;
+                border-radius: 1em;
+            }
+            #registration
+            {
+                float: right;
+                color: #27CC4E;
+                display: block;
+                position: relative;
+            }
+            h3
+            {
+                text-align: center;
+                color: #FF7E7E;
+            }
+            .modal-footer
+            {
+                background: #353030;
+            }
+            #forgotpassword
+            {
+                text-align: right;
+                display: block;
+                color: rgb(8, 227, 255);
+                position: relative;
+                clear: both;
+            }
+            #login_btn
+            {
+                z-index: 999;
+            }
+            .step-1
+            {
+                padding-bottom: 5em;
+            }
+        </style>
+        <script type="text/javascript">
+            window.onunload = function() {};
+            window.login_error = ("{{ login_error }}" * 1) === 1;
+            window.login_error = window.location.href.indexOf("?error=true") > -1;
+            window.session_error = window.location.href.indexOf("?session_lost=true") > -1;
+            window.just_registered = window.location.href.indexOf("?just_registered=true") > -1;
+
+            $(document).ready(function()
+            {
+                if(window.location.protocol.toLowerCase().indexOf("https") === -1 && window.location.href.indexOf("localhost") === -1)
+                {
+                    $("body").html("");
+                    var url = window.location.href.toLowerCase();
+                    url = url.replace("http://", "https://");
+                    window.location.href = url;
+                    return;
+                }
+                if(window.login_error)
+                {
+                    $("<h3></h3>").text("Your credentials could not be verified").prependTo($("form").eq(0));
+                }
+                if(window.session_error)
+                {
+                    BootstrapDialog.alert({"title": "Session Was Lost", "message": "Your field entry <i>was saved</i>, however your session cookie has been lost. Please ensure your device/browser has sufficient storage space for cookies and has cookies enabled. Please also avoid connecting via remote proxy services, if you feel such services may be responsible for this mishap. Thank you and good luck retaining your session"});
+                }
+                if(window.just_registered)
+                {
+                    BootstrapDialog.alert({"title": "Thanks for registering", "message": "We're currently reviewing your application. Keep an eye on your inbox for further correspondence from New Power. <br><br>Thanks!"});
+                }
+                if(window.location.href.indexOf("next_url=") > -1)
+                {
+                    var next_url = window.location.href.substring(window.location.href.indexOf("next_url="));
+                    next_url = next_url.replace("next_url=", "");
+                    var red_url = "";
+                    for(var i = 0; i < next_url.length; i++)
+                    {
+                        if(next_url[i] === "&" || next_url[i] === "?")
+                        {
+                            i = next_url.length;
+                        }
+                        else
+                        {
+                            red_url += next_url[i];
+                        }
+                    }
+                    $("<input />").attr("type", "hidden").attr("name", "next_url").attr("value", red_url).val(red_url).appendTo($("form").eq(0));
+                }
+                $("form").eq(0).submit(function()
+                {
+                    if($("#rep_email_id").val().indexOf("@") > -1)
+                    {
+                        $("#rep_email_id").val($("#rep_email_id").val().toLowerCase());
+                    }
+                    else
+                    {
+                        $("#rep_email_id").val($("#rep_email_id").val().toUpperCase());
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Login
+                </div>
+            </div>
+            <form class="form-horizontal" role="form" action="./" method="POST">
+                <div class="form-group" id="login_group">
+                    <label class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2" for="rep_email_id">
+                        Rep ID or Email:
+                    </label>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <input type="text" class="form-control" id="rep_email_id" placeholder="joe@thepower.co" name="rep_email_id" required="required" />
+                    </div>
+                </div>
+                <div class="form-group" id="password_group">
+                    <label class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2" for="cust_last">
+                        Password:<span id="pass_span"></span>
+                    </label>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <input type="password" autocomplete="off" class="form-control" id="rep_pass" placeholder="******" name="rep_pass" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-10 col-md-offset-2 col-md-10 col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-success" id="login_btn">Login</button>
+                        <a href="./registration" id="registration">Registration</a>
+                        <a href="./forgotpassword" id="forgotpassword">Forgot Password?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

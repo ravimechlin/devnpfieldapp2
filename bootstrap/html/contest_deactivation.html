@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Are you quitting?</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://npfieldapp.appspot.com/bootstrap/js/moment.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                var mom = moment();
+                var mom2 = mom.add(7, "days");
+                $("input").first().val(mom2.format("MM/DD/YYYY"));
+
+                $("#sub").click(function()
+                {
+                    var that = $(this);
+                    
+                    var mom3 = moment($("input").first().val(), "MM/DD/YYYY");
+                    if(!mom3.isValid())
+                    {
+                        window.alert("The date provided was invalid, please check the formatting.");
+                        return;
+                    }
+                    that.remove();
+                    var url = window.location.href.toLowerCase();
+                    var split_values = url.split("?")
+                    var identifier = split_values[1];
+                    identifier = identifier.replace("identifier=", "");
+                    $.post("/data", {"fn": "contest_deactivation", "identifier": identifier, "dt": mom3.format("YYYY-MM-DD")}).done(function(r)
+                    {
+                        $("body").text("Great, we look forward to seeing you again on " + mom3.format("MM/DD/YYYY"));
+                    });
+                });
+            });            
+        </script>
+        <style type="text/css">
+            body
+            {
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <b>Please provide an estimated date you will return to work:</b>
+        <br />
+        <b><span style="color: red;">IMPORTANT:</span> The date should be in an MM/DD/YYYY format</b>
+        <br />
+        <input type="text" vale="MM/DD/YYYY" />
+        <br />
+        <br />
+        <button type="text" id="sub" style="font-size: 2em;">No I am not qutting...</button>
+    </body>
+</html>

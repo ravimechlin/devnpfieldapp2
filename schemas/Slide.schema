@@ -1,0 +1,6 @@
+identifier=ndb.StringProperty(required=True)
+slide_count=ndb.IntegerProperty(required=True)
+slide_identifiers=ndb.TextProperty(required=True)
+name=ndb.StringProperty(required=True)
+options=ndb.TextProperty(required=True)
+image_assets=ndb.TextProperty(required=True)

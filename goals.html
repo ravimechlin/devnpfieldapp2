@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="57x57" href="/bootstrap/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/bootstrap/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/bootstrap/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/bootstrap/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/bootstrap/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/bootstrap/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/bootstrap/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/bootstrap/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/bootstrap/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/bootstrap/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/bootstrap/images/favicon-16x16.png">
+        <link rel="manifest" href="/bootstrap/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/bootstrap/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <title>New Power Company - Rep Portal</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/hashids.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/changepass_v12.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-clockpicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/jquery-clockpicker.js" type="text/javasccript"></script>
+        <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/jquery.waypoints.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/jquery.counterup.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/jquery.cookie.js" type="text/javascript"></script>
+        <!-- script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script -->
+        <script>
+            window.FileAPI = {
+                  debug: false // debug mode
+                , staticPath: './bootstrap/js/jquery.fileapi/FileAPI/' // path to *.swf
+            };
+        </script>
+        <script src="./bootstrap/js/jquery.fileapi/FileAPI/FileAPI.min.js"></script>
+        <script src="./bootstrap/js/jquery.fileapi/FileAPI/FileAPI.exif.js"></script>
+        <script src="./bootstrap/js/jquery.fileapi/jquery.fileapi.min.js"></script>
+        <script src="./bootstrap/js/jquery.fileapi/jcrop/jquery.Jcrop.min.js"></script>
+        <script src="./bootstrap/js/chart.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/randomColor.js" type="text/javascript"></script>
+        <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+        <link href="//fonts.googleapis.com/css?family=Qwigley" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
+        <link href="//fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+        <link rel="stylesheet" href="./bootstrap/css/changepass_v12.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-clockpicker.css" />
+        <link rel="stylesheet" href="./bootstrap/css/jquery-clockpicker.css" />
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" href="./bootstrap/css/fullcalendar.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/symbola.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        <link href="/bootstrap/js/jquery.fileapi/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+        <style type="text/css">
+            body
+            {
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+            }
+            .upcoming_appointment_day
+            {
+                background: #867F7F;
+                text-shadow: 0px 0px 0.1em #000;
+                text-align: center;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+                .upcoming_inner
+                {
+                    text-align: center;
+                }
+                .col-xs-0
+                {
+                    display: none;
+                }
+                .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12
+                {
+                    display: block;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+                .upcoming_inner
+                {
+                    text-align: center;
+                }
+                .col-sm-0
+                {
+                    display: none;
+                }
+                .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12
+                {
+                    display: block;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+                .upcoming_inner
+                {
+                    text-align: left;
+                }
+                .col-md-0
+                {
+                    display: none;
+                }
+                .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12
+                {
+                    display: block;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+                .upcoming_inner
+                {
+                    text-align: left;
+                }
+                #dropdownMenuAdditionalActions
+                {
+                    width: 24em;
+                }
+                #mainbtns .open>.dropdown-menu
+                {
+                    width: 24em;
+                }
+                .col-lg-0
+                {
+                    display: none;
+                }
+                .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12
+                {
+                    display: block;
+                }
+            }
+            #last_week_stats, #next_week_stats
+            {
+                width: 80%;
+            }
+            #last_week_stats th, #next_week_stats th
+            {
+                background: #376a82;
+                padding: 0.5em;
+                text-shadow: 0px 0px 0.1em #000;
+                border: 1px solid rgba(255, 255, 255, 0.25);
+            }
+            #last_week_stats td, #next_week_stats td
+            {
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                padding: 0.5em;
+            }
+            #last_week_stats input, #next_week_stats input
+            {
+                background: #757070;
+                border: 0px solid #000;
+                width: 3em;
+                margin-top: 0.5em;
+                text-indent: 0.5em;
+            }
+            #sub_btn
+            {
+                display: block;
+                margin-top: 2em;
+                width: 80%;
+                background: #376a82;
+            }
+            .error
+            {
+                background: red;
+            }
+        </style>
+
+
+
+        <script type="text/javascript">
+            String.prototype.digits = function()
+            {
+              var arr = [];
+              var digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+              for(var i = 0; i < this.length; i++)
+              {
+                if(digits.indexOf(this[i]) > -1)
+                {
+                  arr.push(this[i]);
+                }
+              }
+              if(arr.length === 0)
+              {
+                return null;
+              }
+              return arr.join("");
+            };
+            $(document).ready(function()
+            {
+                var last_week_start_cpy = moment("{{last_week_start}}", "YYYY-MM-DD");
+                var last_week_start = moment("{{last_week_start}}", "YYYY-MM-DD");
+                var weekdays_arr = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                for(var i = 0; i < 7; i++)
+                {                                        
+                    $("<tr></tr>")
+                    .append
+                    (
+                        $("<td></td>").html(weekdays_arr[last_week_start.isoWeekday()] + " : <span>" + last_week_start.format("MM/DD/YYYY") + "</span>")
+                    )
+                    .append
+                    (
+                        $("<td></td>")
+                        .append
+                        (
+                            $("<input />").attr("type", "text")
+                        )
+                    )
+                    .appendTo($("#last_week_stats").find("tbody"));
+                    last_week_start = last_week_start.add(1, "days");
+                }
+
+                $("#sub_btn").click(function()
+                {
+                    var data = {};
+                    //data["last_weeks_stats"] = [];
+
+                    $(".error").removeClass("error");
+                    /*$("#last_week_stats").find("tr").each(function(i, e)
+                    {
+                        
+                        if(i === 0 || $(".error").size() > 0)
+                        {
+                            return;
+                        }
+
+                        var date = moment($(e).find("td").first().find("span").text(), "MM/DD/YYYY");
+                        var obj = {"date": date.format("YYYY-MM-DD"), "appointments_kept": parseInt($(e).find("td").eq(1).find("input").first().val())};                        
+                        if(Number.isNaN(obj.appointments_kept) || obj.appointments_kept === null)
+                        {
+                            $(e).find("td").each(function(i, e)
+                            {
+                                $(e).addClass("error");
+                            });
+                            $(e)[0].scrollIntoView();
+                            return;
+                        }
+                        data["last_weeks_stats"].push(obj);
+                    });*/
+
+
+                    data["next_weeks_stats"] = {};
+                    $("#next_week_stats").find("tr").each(function(i, e)
+                    {
+                        if(i === 0 || $(".error").size() > 0)
+                        {
+                            return;
+                        }
+                        
+                        if(i === 1)
+                        {
+                            data["next_weeks_stats"]["AC"] = parseInt($(e).find("td").eq(1).find("input").first().val());
+                            if(Number.isNaN(data["next_weeks_stats"]["AC"]) || data["next_weeks_stats"]["AC"] === null)
+                            {
+                                $(e).find("td").each(function(i, e)
+                                {
+                                    $(e).addClass("error");
+                                });
+                                $(e)[0].scrollIntoView();
+                                return;
+                            }
+                        }
+                        else if(i === 2)
+                        {
+                            data["next_weeks_stats"]["AK"] = parseInt($(e).find("td").eq(1).find("input").first().val());
+                            if(Number.isNaN(data["next_weeks_stats"]["AK"]) || data["next_weeks_stats"]["AK"] === null)
+                            {
+                                $(e).find("td").each(function(i, e)
+                                {
+                                    $(e).addClass("error");
+                                });
+                                $(e)[0].scrollIntoView();
+                                return;
+                            }
+                        }
+                        else if(i === 3)
+                        {
+                            data["next_weeks_stats"]["CD"] = parseInt($(e).find("td").eq(1).find("input").first().val());
+                            if(Number.isNaN(data["next_weeks_stats"]["CD"]) || data["next_weeks_stats"]["CD"] === null)
+                            {
+                                $(e).find("td").each(function(i, e)
+                                {
+                                    $(e).addClass("error");
+                                });
+                                $(e)[0].scrollIntoView();
+                                return;
+                            }
+                        }
+                    });
+
+                    if($(".error").size() === 0)
+                    {
+                        $("body").css("opacity", "0.2");
+                        $.post("/data", {"fn": "provide_rep_goals_and_stats", "identifier": "{{user_identifier}}", "data": JSON.stringify(data), "start_date": "{{last_week_start}}"}).done(function(r)
+                        {
+                            window.location.reload();
+                        });
+                    }
+
+                });
+            });
+        </script>
+    </head>
+    <body>        
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="signout">
+                    ({{ user_name }}) | <a id="href_change_pass" href="javascript:void(0);">Change Password</a> | <a href="/logout">SignOut</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Set Goals</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="app_area">
+                <h2 style="display: none;">Please provide last week's stats:</h2>
+                <table id="last_week_stats" style="display: none;">
+                    <tbody>
+                        <tr>
+                            <th>Date</th>
+                            <th>Appointments Attended</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+                <h2>Please provide your goals for this week:</h2>
+                <table id="next_week_stats">
+                    <tbody>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Target Number for Goal</th>
+                        </tr>
+                        <tr>
+                            <td>ACs this Week</td>
+                            <td><input type="text" /></td>
+                        </tr>
+                        <tr>                            
+                            <td>AKs this Week</td>
+                            <td><input type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td>CDs this Week</td>
+                            <td><input type="text" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" id="sub_btn">Submit</button>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>

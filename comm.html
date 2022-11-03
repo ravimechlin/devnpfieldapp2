@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="/bootstrap/css/symbola.css" />
+        <script type="text/javascript" src="/bootstrap/js/moment.min.js"></script>
+        <style type="text/css">
+            body
+            {
+                margin: 0;
+                padding: 0;
+                background: #0686C1;                
+            }
+            *
+            {
+                color: #FFF;
+                font-family: "Symbola", 'Symbola', Symbola, Arial, Helvetica, sans-serif;
+            }
+            .reply_box
+            {
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                min-height: 6em;
+                margin-top: 1em;
+                background: #F79621;
+                margin-bottom: 1em;
+                padding: 0.5em;
+                font-size: 1.25em;
+                box-shadow: 0px 0px 0.1em #000;
+                border: 0px solid #000;
+            }
+            #reply_btn
+            {
+                font-size: 1.5em;
+                font-family: Arial, Helvetica, sans-serif;
+                cursor: pointer;
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                background: #F79621;
+                box-shadow: 0px 0px 0.1em #000;
+                border: 0px solid #000;
+                border-radius: 0.25em;
+            }
+            .msg_container
+            {
+                background: rgba(0, 0, 0, 0.1);
+                padding: 1em;
+                margin-bottom: 1em;
+                font-size: 0.8em;
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .msg
+            {
+                font-size: 1.25em;
+            }
+            .attachment
+            {
+                background: #f79523;
+                padding: 0.5em;
+                text-shadow: 0px 0px 0.1em #000;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            center
+            {
+                font-size: 2em;
+                margin-top: 0.5em;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
+        <script type="text/javascript">
+            $.post("/data2", {"fn": "cust_comm", "identifier": "{{ identifier }}"}).done(function(r)
+            {
+                $("body").find("h2").remove();
+                $("<center></center>").text(r.customer).appendTo($("body"));
+                $("<textarea></textarea>").attr("placeholder", "Type your reply...").addClass("reply_box").appendTo($("body"));
+                $("<button></button>").text("Reply").attr("id", "reply_btn").appendTo($("body"));
+                $.each(r.communications, function(i, e)
+                {
+                    var div = $("<div></div>").addClass("msg_container");
+                    $("<p></p>").addClass("msg").text(e.sender + " - " + moment(e.dt, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm:ss A") + ": " + e.msg).appendTo(div);
+                    if(e.media_url !== null)
+                    {
+                        $("<p></p>").addClass("attachment").html("Attachment: " + "<a href='" + e.media_url + "'>Download</a>").appendTo(div);
+                    }
+                    div.appendTo($("body"));
+                });
+
+                $("#reply_btn").click(function()
+                {
+                    var msg = $.trim($(".reply_box").val());
+                    if(msg.length === 0)
+                    {
+                        window.alert("Your reply was blank");
+                    }
+                    else
+                    {
+                        $(".reply_box").css("opacity", "0.1");
+                        $.post(window.location.href, {"msg": msg}).done(function(r)
+                        {
+                            window.location.reload();
+                        });
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h2>Loading...</h2>
+    </body>
+</html>

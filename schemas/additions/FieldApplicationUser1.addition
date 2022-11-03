@@ -1,0 +1,3 @@
+automatic_override_amount
+ndb.FloatProperty
+10.0

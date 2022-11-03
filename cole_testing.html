@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        Cole Testing
+    </title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#sub_btn").click(function()
+            {
+                $("#result_json").val("");
+                var that = $(this);
+                var old_text = that.text();
+                that.text("Fetching...");
+
+                var payload = {"type": "ColeQuery", "address": $.trim($("#address").val()), "postal": $.trim($("#postal").val()), "state": $("#state").val(), "debugging": "1"};
+
+                $.ajax
+                (
+                    {
+                        type: "POST",
+                        url: "/AppData",
+                        data: JSON.stringify(payload),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            $("#result_json").val(JSON.stringify(data));
+                            that.text(old_text);
+                        }                    
+                    }
+                );
+            });
+        });        
+    </script>
+    <body>
+        <p>Convert JSON to CSV here: <a href="https://json-csv.com/">Click Here</a></p>
+        <input placeholder="Address (No city/state)" id="address"/>
+        <br />
+        <input placeholder="State" value="CA" id="state"/>
+        <br />
+        <input placeholder="Postal Code" id="postal" />
+        <button type="button" id="sub_btn">Get Results</button>
+        <hr />
+        <p>Results as JSON (Copy Paste and Convert to CSV at link above</p>
+        <hr />
+        <textarea id="result_json" style="max-width: 500px;"></textarea>
+    </body>
+</html>

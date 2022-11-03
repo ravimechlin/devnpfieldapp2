@@ -1,0 +1,4 @@
+identifier=ndb.StringProperty(required=True)
+views=ndb.TextProperty(required=True)
+idx=ndb.IntegerProperty(required=True)
+options=ndb.TextProperty(required=True)

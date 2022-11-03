@@ -1,0 +1,52 @@
+#temp_curr, #temp_pass, #temp_confirm
+{
+    display: block;
+    position: relative;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-indent: 0.5em;
+    background: #585555;
+    color: #E8E8E8;
+    border: none;
+    margin-bottom: 0.5em;
+}
+.change_pass_label
+{
+    text-align: center;
+}
+#temp_btn_change_pass
+{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: #286836;
+    color: #ffffff;
+    border: none;
+    text-shadow: 0px 0px 0.1em #000;
+}
+#temp_btn_change_pass
+{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: #286836;
+    color: #ffffff;
+    border: none;
+    text-shadow: 0px 0px 0.1em #000;
+}
+#temp_btn_change_pass_cancel
+{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: #C14339;
+    color: #ffffff;
+    border: none;
+    text-shadow: 0px 0px 0.1em #000;
+    top: 1em;
+    position: relative;
+}

@@ -1,0 +1,6 @@
+identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+success=ndb.BooleanProperty(required=True)
+score=ndb.IntegerProperty(required=True)
+last_four=ndb.IntegerProperty(required=True)
+recorded_dt=ndb.DateTimeProperty(required=True)

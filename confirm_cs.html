@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Confirm Backup Success</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $("#cont_btn").click(function()
+		{
+			var form = $("<form></form>");
+			form.attr("action", "/data");
+			form.attr("method", "GET");
+			$("<input />").attr("type", "hidden").attr("name", "fn").attr("value", "update_schema").appendTo(form);
+			$("<input />").attr("type", "hidden").attr("name", "entity").attr("value", "{{ entity }}").appendTo(form);
+			$("<input />").attr("type", "hidden").attr("name", "token").attr("value", "{{ token }}").appendTo(form);
+			$("<input />").attr("type", "hidden").attr("name", "step").attr("value", "truncate_entity").appendTo(form);
+			form.appendTo($("body"));
+			setTimeout(function()
+			{
+				document.forms[0].submit();
+			}, 500);
+		});
+            });
+        </script>
+    </head>
+    <body>
+	Please confirm the backup was successful by inspecting the cloud storage bucket and looking @ the .json files in the 'TempBackups' folder. They should be prefixed with...<br />
+	{{ token }}_{{ entity }}
+	<p></p>
+	<p></p>
+	<center><input type='button' id='cont_btn' value='Continue' /></center>
+    </body>
+</html>

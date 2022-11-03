@@ -1,0 +1,55 @@
+
+def fix_additional_amount(self):
+  self.fix_system_size()
+  services = Helpers.read_setting("services_schedule")
+  service_price_dict = {}
+  service_points_dict = {}
+  service_per_kw_dict = {}
+  for svc in services:
+      service_price_dict[svc["value"]] = float(svc["price"])
+      service_points_dict[svc["value"]] = float(svc["points"])
+      service_per_kw_dict[svc["value"]] = svc["per_kw"]
+  info = json.loads(self.info)
+  subtotal = float(0)
+  service_points_total = float(0)
+  if "additional_svcs" in info.keys():
+      for item in info["additional_svcs"]:
+          if item["value"] in service_price_dict.keys():
+              multip_factor = float(1)
+              if service_per_kw_dict[item["value"]]:
+                  multip_factor = float(info["system_size"])
+              subtotal += float(item["qty"]) * service_price_dict[item["value"]] * multip_factor
+              service_points_total += float(service_points_dict[item["value"]])
+
+
+  panel_points_total = 0
+  sys_options = Helpers.read_setting("system_options")
+  if "panel_type" in info.keys():
+      if "[[[" in info["panel_type"]:
+          panel_type = info["panel_type"][0:info["panel_type"].index("[[[")]
+          panel_pts = sys_options["panel_points"]
+          keys = panel_pts.keys()
+          for key in keys:
+              if key == panel_type:
+                  panel_points_total += float(panel_pts[key])
+
+  info["additional_amount"] = str(subtotal)
+  info["service_points"] = service_points_total
+  info["panel_points"] = panel_points_total
+  info["all_points"] = info["service_points"] + info["panel_points"]
+  self.info = json.dumps(info)
+
+def fix_system_size(self):
+  proposal_dict = json.loads(self.info)
+  if "panel_type" in proposal_dict.keys() and "new_panel_qty" in proposal_dict.keys() and "panel_qty_override" in proposal_dict.keys():
+    if "[[[" in proposal_dict["panel_type"]:
+      wattage = proposal_dict["panel_type"][proposal_dict["panel_type"].index("[[["):]
+      wattage = wattage.replace("[[[", "").replace("]]]", "")
+      wattage = float(wattage)
+
+      new_ss = wattage * float(proposal_dict["new_panel_qty"])
+      new_ss /= float(1000)
+      proposal_dict["system_size"] = str(new_ss)
+      self.info = json.dumps(proposal_dict)
+
+

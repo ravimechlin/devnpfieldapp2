@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>New Power Company - Field Application</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/hashids.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script>
+        <style type="text/css">
+            #loading
+            {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2000px;
+                opacity: 0.9;
+                z-index: 100;
+                background: #000;
+            }
+            #loading h3
+            {
+                text-align: center;
+                top: 200px;
+                position: relative;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+            body
+            {
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+                position: relative;
+                z-index: 2;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            .modal-header
+            {
+                background-color: #D19F28 !important;
+                text-align: center;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            .modal-body
+            {
+                background: #353030;
+            }
+            .bootstrap-dialog-message
+            {
+                color: #C6C2C2;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            input[type=text], input[type='text'], input[type="text"], input[type=email], input[type='email'], input[type="email"]
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+            }
+            .dropdown > button, .open > button
+            {
+                background: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:hover, .open > button:hover
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:focus, .open > button:focus
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .glyphicon-camera
+            {
+                color: #FB8A0B;
+                font-size: 5em;
+                cursor: pointer;
+            }
+            #file_sel_confirm
+            {
+                top: -3.5em;
+                position: relative;
+                display: block;
+                left: 6em;
+                color: #FFF;
+                display: none;
+            }
+            .modal-footer
+            {
+                background: #353030;
+                border-top: 0px solid #000;
+            }
+            ::-webkit-input-placeholder
+            {
+                color: #000000;
+            }
+            :-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            ::-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            :-ms-input-placeholder
+            {
+                color: #909;
+            }
+            #signout
+            {
+                text-align: right;
+                line-height: 2em;
+            }
+            input[disabled]
+            {
+                background: #AAAAAA !important;
+                color: #000000 !important;
+                border: 1px solid #ff0000;
+            }
+            #lead_id
+            {
+                font-family: monospace, "MonoSpace";
+            }
+            .datepicker
+            {
+                color: #000000;
+            }
+            #cust_dob, #cust_signature_date, #cust_appointment_date
+            {
+                text-indent: 1em;
+                position: relative;
+                top: 0.5em;
+            }
+            #cust_banner
+            {
+                background: #286432;
+                color: #fff;
+                width: 105%;
+                left: -2.5%;
+                position: relative;
+                text-indent: 1em;
+            }
+            #confirmation_box
+            {
+                background: #6B6868;
+                padding-top: 1%;
+                padding-bottom: 1%;
+                border-radius: 1em;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $("#gen_docs").click(function()
+                {
+                    showSubmitScreen();
+                    window.location.href = "/continue?e_identifier={{ app_entry_identifier }}&b_identifier={{ booking_identifier }}";
+                });
+            });
+
+            window.ellipsis_count = 0;
+            function showSubmitScreen()
+            {
+                if($("#loading").find("#temp_submitting").size() === 0)
+                {
+                    $("#loading").css("display", "block").children("h3").html("<span id='temp_submitting'>Submitting&nbsp;&nbsp;&nbsp;</span><br><br><span id='submission_disclaimer'>(This process can take several minutes)</span>");
+                    setTimeout(function()
+                    {
+                        showSubmitScreen();
+                    }, 400);
+                    return;
+                }
+                var submitting = $("#temp_submitting").eq(0);
+                if(submitting.text().indexOf("...") !== -1)
+                {
+                    ellipsis_count++;
+                    submitting.html("Submitting&nbsp;&nbsp;&nbsp;");
+                    if(ellipsis_count % 3 === 0)
+                    {
+                        if($("#submission_disclaimer").text().indexOf("can take") > -1)
+                        {
+                            $("#submission_disclaimer").text("(Please do not close the browser tab)");
+                        }
+                        else
+                        {
+                            $("#submission_disclaimer").text("(This process can take several minutes)");
+                        }
+                    }
+                }
+                else if(submitting.text().indexOf("..") !== -1)
+                {
+                    submitting.html("Submitting...");
+                }
+                else if(submitting.text().indexOf(".") !== -1)
+                {
+                    submitting.html("Submitting..&nbsp;");
+                }
+                else
+                {
+                    submitting.html("Submitting.&nbsp;&nbsp;");
+                }
+                setTimeout(function()
+                {
+                    showSubmitScreen();
+                }, 400);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="loading">
+            <h3>Pausing... (please wait for redirect)</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="signout">
+                    ({{ user_name }}) | <a href="/logout">SignOut</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Field Application
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 col-sm-3 col-md-4 col-lg-3">
+                    &nbsp;
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6" id="confirmation_box">
+                    <p id="cust_banner">The customer's survey appointment was succesfully confirmed.</p>
+                    <hr />
+                    <p>
+                        <span class="lbl">Customer Name</span>:
+                        {{cust_name}}
+                    </p>
+                    <p>
+                        <span class="lbl">Appointment</span>:
+                        <br />
+                        {{date}}
+                        <br />
+                        {{slot}}
+                    </p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <center>
+                    <h4>
+                        <button type="button" class="btn btn-success" id="gen_docs" style="width: 50%;">Generate Documents</button>
+                    </h4>
+                </center>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,4 @@
+identifier = ndb.StringProperty(required=True)
+keyy = ndb.StringProperty(required=True)
+val = ndb.TextProperty(required=True)
+modified = ndb.DateTimeProperty(required=True, auto_now=True)

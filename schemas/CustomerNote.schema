@@ -1,0 +1,8 @@
+identifier = ndb.StringProperty(required=True)
+field_app_identifier = ndb.StringProperty(required=True)
+inserted_pacific = ndb.DateTimeProperty(required=True)
+inserted_utc = ndb.DateTimeProperty(required=True)
+author = ndb.StringProperty(required=True)
+perms = ndb.StringProperty(required=True)
+content = ndb.TextProperty(required=True)
+blob_count = ndb.IntegerProperty(required=True)

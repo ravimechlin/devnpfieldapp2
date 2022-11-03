@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Registration - {{rep_name}}</title>
+        <style type="text/css">
+            .m-signature-pad {
+            position: absolute;
+            font-size: 10px;
+            width: 700px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin-left: -350px;
+            margin-top: -150px;
+            border: 1px solid #e8e8e8;
+            background-color: #0686C1;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
+            border-radius: 4px;
+        }
+        .m-signature-pad:before,
+        .m-signature-pad:after {
+            position: absolute;
+            z-index: -1;
+            content: "";
+            width: 40%;
+            height: 10px;
+            left: 20px;
+            bottom: 10px;
+            background: transparent;
+            -webkit-transform: skew(-3deg) rotate(-3deg);
+            -moz-transform: skew(-3deg) rotate(-3deg);
+            -ms-transform: skew(-3deg) rotate(-3deg);
+            -o-transform: skew(-3deg) rotate(-3deg);
+            transform: skew(-3deg) rotate(-3deg);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+        .m-signature-pad:after {
+            left: auto;
+            right: 20px;
+            -webkit-transform: skew(3deg) rotate(3deg);
+            -moz-transform: skew(3deg) rotate(3deg);
+            -ms-transform: skew(3deg) rotate(3deg);
+            -o-transform: skew(3deg) rotate(3deg);
+            transform: skew(3deg) rotate(3deg);
+        }
+        .m-signature-pad--body {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            top: 20px;
+            bottom: 60px;
+            border: 1px solid #696969;
+        }
+        .m-signature-pad--body canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
+            background: #fff;
+        }
+        .m-signature-pad--footer {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            height: 40px;
+        }
+        .m-signature-pad--footer .description {
+            color: #000000;
+            font-size: 1.2em;
+            margin-top: 1.8em;
+        }
+        .m-signature-pad--footer span {
+                margin-left: 5%;
+                font-size: 2em;
+                color: #fff;
+                text-shadow: 0px 0px 0.1em #000;
+        }
+        .m-signature-pad--footer .button {
+            position: absolute;
+            bottom: 0;
+        }
+        .m-signature-pad--footer .button.clear {
+            left: 0;
+        }
+        .m-signature-pad--footer .button.save {
+            right: 0;
+        }
+        .description button
+            {
+                border: 0px;
+                background: #F79621;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 0px 0px 0.1em #000;
+                font-size: 2em;
+                /* padding: 0.25em; */
+                /* margin-bottom: 0.5em; */
+                /* display: block; */
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                box-shadow: inset 0px 0px 0.25em rgba(0, 0, 0, 0.4);
+                margin-right: 0.5em;
+            }
+        @media screen and (max-width: 1024px) {
+            .m-signature-pad {
+                top: 250px;
+                left: 100px;
+                right: 0;
+                bottom: 0;
+                min-width: 250px;
+                min-height: 140px;
+                margin: 5%;
+            }
+        }
+        @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            .m-signature-pad {
+                margin: 10%;
+            }
+        }
+        @media screen and (max-height: 320px) {
+            .m-signature-pad--body {
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 32px;
+            }
+            .m-signature-pad--footer {
+                left: 20px;
+                right: 20px;
+                bottom: 4px;
+                height: 28px;
+            }
+            .m-signature-pad--footer .description {
+                font-size: 1em;
+                margin-top: 1em;
+            }
+        }
+
+            .container-sun{
+              text-align:center;
+            }
+            /* the svg element */
+            .svg-sun{
+              width:300px;
+              height:300px;
+
+              -webkit-transform-origin: center center;
+              -moz-transform-origin: 50% 50%;
+              -o-transform-origin: center center;
+              -ms-transform-origin: center center;
+              transform-origin:50% 50%;
+
+            -webkit-animation: spin 25s linear infinite, sun-glow 3s 0s linear infinite;
+            -moz-animation: spin 25s linear infinite, sun-glow 3s 0s linear infinite;
+            -o-animation:spin 25s linear infinite, sun-glow 3s 0s linear infinite;
+            -ms-animation: spin 25s linear infinite, sun-glow 3s 0s ease-in-out infinite;
+            animation: spin 25s linear infinite,sun-glow 3s 0s linear infinite;
+
+            }
+            /* the circle element in the svg itself */
+            #sun{
+              stroke-width:18;
+              stroke-dasharray:2;
+              stroke-dashoffset:2;
+            }
+            /* animation for the sun glowing effect */
+            @-webkit-keyframes sun-glow {
+                0% { fill: #f1c40f; stroke:#f1c40f;}
+                50% { fill: #e67e22; stroke:#e67e22;}
+                100% { fill: #f1c40f; stroke:#f1c40f;}
+            }
+            @-moz-keyframes sun-glow {
+                0% { fill: #f1c40f; stroke:#f1c40f;}
+                50% { fill: #e67e22; stroke:#e67e22;}
+                100% { fill: #f1c40f; stroke:#f1c40f;}
+            }
+            @-o-keyframes sun-glow {
+                0% { fill: #f1c40f; stroke:#f1c40f;}
+                50% { fill: #e67e22; stroke:#e67e22;}
+                100% { fill: #f1c40f; stroke:#f1c40f;}
+            }
+            @-ms-keyframes sun-glow {
+                0% { fill: #f1c40f; stroke:#f1c40f;}
+                50% { fill: #e67e22; stroke:#e67e22;}
+                100% { fill: #f1c40f; stroke:#f1c40f;}
+            }
+            @keyframes sun-glow {
+                0% { fill: #f1c40f; stroke:#f1c40f;}
+                50% { fill: #e67e22; stroke:#e67e22;}
+                100% { fill: #f1c40f; stroke:#f1c40f;}
+            }
+
+            /* start spin animation */
+            @-webkit-keyframes spin{
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+            @-moz-keyframes spin{
+                100% {
+                    -moz-transform: rotate(360deg);
+                }
+            }
+            @-o-keyframes spin{
+                100% {
+                    -o-transform: rotate(360deg);
+                }
+            }
+            @-ms-keyframes spin{
+                100% {
+                    -ms-transform: rotate(360deg);
+                }
+            }
+            @keyframes spin{
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            #np_logo
+            {
+                display: block;
+                position: relative;
+                width: 25%;
+            }
+            #np_logo img
+            {
+                padding-left: 2em;
+                display: block;
+                position: relative;
+                width: 100%;
+                top: 100px;
+            }
+            body
+            {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            body
+            {
+                background-color: rgba(255, 255, 255, 1.0);
+            }
+            #welcome_text
+            {
+                opacity: 0;
+                font-weight: bold;
+                text-align: center;
+                font-size: 1.5em;
+                margin-top: 3em;
+                color: #534A4A;
+            }
+            .get_started
+            {
+                font-weight: bold;
+                background: #f79621;
+                color: #fff;
+                box-shadow: inset 0px 0px 0.25em rgba(0, 0, 0, 0.25);
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                font-size: 3em;
+                display: block;
+                position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 2.5em;
+                cursor: pointer;
+                text-shadow: 0px 0px 0.1em #454545;
+                border: 0px;
+                padding-bottom: 0.25em;
+                padding-top: 0.25em;
+            }
+            #suntbl
+            {
+                display: none;
+                margin-top: 100%;
+                position: relative;
+                left: 0%;
+            }
+            #suntbl tbody
+            {
+                display: block;
+                position: relative;
+                width: 100%;
+            }
+            #sunbtbl td
+            {
+                width: 100%:
+            }
+            .docimg
+            {
+                display: block;
+                position: relative;
+                min-width: 612px;
+                min-height: 792px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+                top: 120px;
+                box-shadow: 0px 0px 0.1em #000;
+                max-width: 612px;
+                max-height: 792px;
+            }
+            #signing_header
+            {
+                background-color: #1C92C7;
+                text-align: center;
+                font-size: 2em;
+                margin: 0;
+                margin-bottom: 2em;
+                color: #fff;
+                text-shadow: 0px 0px 0.1em #000;
+                width: 100%;
+                position: fixed;
+                z-index: 2;
+                left: 0;
+                top: 0;
+            }
+            #next_btn
+            {
+                background-color: #F79621;
+                color: #fff;
+                font-weight: bold;
+                border: 0;
+                float: right;
+                padding-bottom: 0.5em;
+                padding-top: 0.5em;
+                padding-left: 0.5em;
+                text-shadow: 0px 0px 0.1em #000;
+                font-weight: bold;
+                font-size: 0.75em;
+                cursor: pointer;
+            }
+            .loading
+            {
+                display: block;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 50;
+                color: #fff;
+                text-align: center;
+                font-size: 2em;
+                line-height: 20em;
+                padding: 0;
+                margin: 0;
+                left: 0;
+                top: 0;
+            }
+            .signature_overlay
+            {
+                position: absolute;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                height: 100%;
+                top: 0;
+                left: 0;
+            }
+            .tmp_sig_btn
+            {
+                position: absolute;
+                display: block;
+
+            }
+            #sign_btn, #initials_btn
+            {
+                display: none;
+                background-color: #F79621;
+                color: #fff;
+                font-weight: bold;
+                border: 0;
+                float: right;
+                padding-bottom: 0.5em;
+                padding-top: 0.5em;
+                padding-left: 0.5em;
+                text-shadow: 0px 0px 0.1em #000;
+                font-weight: bold;
+                font-size: 0.75em;
+                cursor: pointer;
+                margin-left: 1em;
+            }
+            .initials .m-signature-pad
+            {
+                width: 600px;
+            }
+            .initials .m-signature-pad--body
+            {
+                width: 225px;
+                height: 225px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .thankyou
+            {
+                margin-top: 2em;
+                font-size: 3em;
+                color: #fff;
+                text-shadow: 0px 0px 0.1em #6B6666;
+                text-align: center;
+                background: rgb(247, 150, 33);
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+            }
+            .lastfour
+            {
+                opacity: 1;
+                display: block;
+                position: relative;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 1em;
+                font-size: 2em;
+                background: #1C92C7;
+                border: 0px;
+                box-shadow: inset 0px 0px 0.1em #000;
+                color: #fff;
+                padding-left: 0.25em;
+                padding-right: 0.25em;
+                width: 2.5em;
+                letter-spacing: 0.1em;
+            }
+            .adopt
+            {
+                visibility: hidden;
+            }
+        </style>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="/bootstrap/js/signature_pad.js" type="text/javascript"></script>
+        <script src="/bootstrap/js/jquery.jrumble.1.3.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var rep_name = "{{rep_name}}";
+            var rep_first_name = "{{rep_first_name}}";
+            var docs = {{docs|safe}};
+            
+            var pending_user_identifier = "{{pending_user_identifier}}";
+            $(document).ready(function()
+            {
+
+                signDoc(docs[0]);
+            });
+            function doAnim()
+            {
+                window.cb_count_1 = 0;
+                $("#np_logo, #welcome_text").animate({opacity: 0.0}, 250, function()
+                {
+                    window.cb_count_1 += 1;
+                });
+
+                window.temp_interval_1 = setInterval(function()
+                {
+                    if(window.cb_count_1 === 2)
+                    {
+                        window.clearInterval(window.temp_interval_1);
+                        $("#np_logo, #welcome_text").remove();
+                        $("body").animate({backgroundColor: "rgba(6, 134, 193, 1.0)"}, 1000, function()
+                        {
+
+                        });
+                        $("#suntbl").css("display", "block");
+                        $("#suntbl").animate({marginTop: "0%"}, 1000, function()
+                        {
+                            setTimeout(function()
+                            {
+                                window.cb_count_2 = 0;
+                                $("#suntbl").animate({"left": "100%"}, 500, function()
+                                {
+                                    $("#suntbl").remove();
+                                    window.cb_count_2++;
+                                });
+                                $("body").animate({backgroundColor: "rgba(247, 150, 33, 1.0)"}, 500, function()
+                                {
+                                    window.cb_count_2++;
+                                });
+
+                                window.temp_interval_2 = setInterval(function()
+                                {
+                                    if(window.cb_count_2 === 2)
+                                    {
+                                        window.clearInterval(window.temp_interval_2);
+                                        $("body").animate({backgroundColor: "rgba(255, 255, 255, 1.0)"}, 500, function()
+                                        {
+                                            $("#signing_header").css("display", "block");
+                                            $("#signing_header").animate({backgroundColor: "rgba(6, 134, 193, 1.0)"}, 500, function()
+                                            {
+                                                signDoc(docs[0]);
+                                            });
+                                        });
+                                    }
+                                }, 50);
+                            }, 2500);
+                        });
+                    }
+                }, 20);
+            }
+            window.signature_acquired = false;
+            window.initials_acquired = false;
+
+            function signDoc(doc, idx, step)
+            {
+                if(typeof(doc) + '' === "undefined")
+                {
+                    completeSigningProcess();
+                    return;
+                }
+                $("#next_btn").off("click");
+                $(".tmp_sig_btn").remove();
+                if(typeof(idx) + '' === "undefined")
+                {
+                    idx = 0;
+                }
+                if(typeof(step) + '' === "undefined")
+                {
+                    step = 0;
+                }
+
+                var todo_items = [];
+                try
+                {
+                    $.each(doc.items[idx], function(i, item)
+                    {
+                        if(item.value === "customer_signature" || item.value === "customer_initials" || item.value === "employee_signature")
+                        {
+                            todo_items.push(item);
+                        }
+                    });
+                }
+                catch(e5)
+                {
+                }
+
+                var existing_imgs = $(".docimg");
+                if(typeof(todo_items[step]) + '' !== "undefined")
+                {
+                    $("#next_btn, #sign_btn, #initials_btn").css("display", "none");
+                    var todo_item = todo_items[step];
+
+                    $("<img />").addClass("docimg").attr("src", "/doc_frame/" + doc.token + "/" + (idx + '') + "/" + pending_user_identifier + "?step=" + step)
+                    .on("load", function()
+                    {
+                        hideLoading();
+                        existing_imgs.remove();
+                        $("body").scrollTop(todo_item.y + 120);
+                        $("#next_btn").css("display", "none");
+
+                        btn_map =
+                        {
+                            "employee_signature": "sign_btn",
+                            "customer_signature": "sign_btn",
+                            "customer_initials": "initials_btn"
+                        };
+                        var acquire_fn_map =
+                        {
+                            "employee_signature": acquireSignature,
+                            "customer_signature": acquireSignature,
+                            "customer_initials": acquireInitials
+                        };
+                        var flag_map =
+                        {
+                            "employee_signature": window.signature_acquired,
+                            "customer_signature": window.signature_acquired,
+                            "customer_initials": window.initials_acquired
+                        };
+
+                        $("#" + btn_map[todo_item.value]).off("click");
+                        $("#" + btn_map[todo_item.value]).on("click", function()
+                        {
+                            if(!flag_map[todo_item.value])
+                            {
+                                acquire_fn_map[todo_item.value](function()
+                                {
+                                    signDoc(doc, idx, step + 1);
+                                });
+                                return;
+                            }
+                            signDoc(doc, idx, step + 1);
+                        })
+                        .css("display", "block");
+                    })
+                    .appendTo($("body"));
+
+                    showLoading();
+                }
+                else
+                {
+                    $("<img />").addClass("docimg").attr("src", "/doc_frame/" + doc.token + "/" + (idx + '') + "/" + pending_user_identifier + "?step=" + step)
+                    .on("load", function()
+                    {
+                        $("#sign_btn, #initials_btn").css("display", "none");
+                        $("#next_btn").css("display", "block");
+
+                        hideLoading();
+                        existing_imgs.remove();
+                        if(todo_items.length > 0)
+                        {
+                            $("body").scrollTop(120 + todo_items[todo_items.length - 1].y);
+                        }
+                        $("#next_btn").on("click", function()
+                        {
+                            // do we go to the next page?
+
+                            if((idx + 1) < doc.page_count)
+                            {
+                                signDoc(doc, idx + 1);
+                                return;
+                            }
+
+                            // is there another doc in the bundle?
+                            var idx2 = -1;
+                            $.each(docs, function(i, docc)
+                            {
+                                if(idx2 > -1)
+                                {
+                                    return;
+                                }
+                                if(docc.identifier === doc.identifier)
+                                {
+                                    idx2 = i;
+                                }
+                            });
+                            idx2 += 1;
+                            if(typeof(docs[idx2]) + '' !== "undefined")
+                            {
+                                signDoc(docs[idx2]);
+                            }
+                            else
+                            {
+                                completeSigningProcess();
+                            }
+                        });
+                    })
+                    .appendTo($("body"));
+
+                    showLoading();
+
+                }
+            }
+            window.signature_drawing_millis = 0;
+            window.signature_check_interval = setInterval(function()
+            {
+                if(window.signature_drawing_millis > 1000)
+                {
+                    if($(".adoptsignature").size() > 0)
+                    {
+                        if($(".adoptsignature").css("visibility") !== "visible")
+                        {
+                            $(".adoptsignature").css("visibility", "visible");
+                        }
+                    }
+
+                }
+            }, 200);
+            function acquireSignature(cb)
+            {
+
+                $("<div></div>").addClass("signature_overlay")
+                .append
+                (
+                    $("<div></div>").attr("id", "signature-pad").addClass("m-signature-pad")
+                    .append
+                    (
+                        $("<div></div>").addClass("m-signature-pad--body")
+                        .append
+                        (
+                            $("<canvas></canvas>")
+                        )
+                    )
+                    .append
+                    (
+                        $("<div></div>").addClass("m-signature-pad--footer")
+                        .append
+                        (
+                            $("<div></div>").addClass("description")
+                            .append
+                            (
+                                $("<input />").attr("type", "hidden").attr("id", "user-signature").attr("name", "user-signature").attr("value", "")
+                            )
+                            .append
+                            (
+                                $("<button class='btn btn-info clear'>Clear</button>")
+                            )
+                            .append
+                            (
+                                $("<button type='button' class='btn btn-success adopt adoptsignature'>Done</button>")
+                            )
+                            .append
+                            (
+                                $("<span class='sign_annotation'>Sign Above&uarr;</span>")
+                            )
+                        )
+                    )
+                ).appendTo($("body"));
+
+                // Adjust canvas coordinate space taking into account pixel ratio,
+                // to make it look crisp on mobile devices.
+                // This also causes canvas to be cleared.
+                var resizeCanvas = function()
+                {
+                    var canvas = $("canvas")[0];
+                    // When zoomed out to less than 100%, for some very strange reason,
+                    // some browsers report devicePixelRatio as less than 1
+                    // and only part of the canvas is cleared then.
+                    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                    canvas.width = canvas.offsetWidth * ratio;
+                    canvas.height = canvas.offsetHeight * ratio;
+                    canvas.getContext("2d").scale(ratio, ratio);
+                    $("canvas").on("mousedown", function(ev)
+                    {
+                        window.mousedown_signature_start = new Date().getTime();
+                    });
+                    $("canvas").on("touchstart", function(ev)
+                    {
+                        $(this).trigger("mousedown");
+                    });
+                    $("canvas").on("mouseup", function(ev)
+                    {
+                        window.mousedown_signature_end = new Date().getTime();
+                        window.signature_drawing_millis += (window.mousedown_signature_end - window.mousedown_signature_start);
+                    });
+                    $("canvas").on("touchend", function(ev)
+                    {
+                        $(this).trigger("mouseup");
+                    });
+                }
+
+                //window.onresize = resizeCanvas;
+                resizeCanvas();
+
+                window.signaturePad = new SignaturePad($("canvas")[0], {dotSize: 1});
+
+                $(".adopt").click(function()
+                {
+                    var sig = signaturePad.toDataURL();
+                    $("canvas")
+                    $(".signature_overlay").remove();
+                    showLoading();
+                    $.post("/data", {"fn": "save_employee_signature", "identifier": pending_user_identifier, "sig": sig}).done(function(resp)
+                    {
+                        window.signature_acquired = true;
+                        hideLoading();
+                        cb();
+                    });
+                });
+                $(".clear").click(function()
+                {
+                    signaturePad.clear();
+                    $(".signature_overlay").remove();
+                });
+                $("body").scrollTop(0);
+            }
+            window.initials_drawing_millis = 0;
+            window.initials_check_interval = setInterval(function()
+            {
+                if(window.initials_drawing_millis > 1000)
+                {
+                    if($(".adoptinitials").size() > 0)
+                    {
+                        if($(".adoptinitials").css("visibility") !== "visible")
+                        {
+                            $(".adoptinitials").css("visibility", "visible");
+                        }
+                    }
+
+                }
+            }, 200);
+            function acquireInitials(cb)
+            {
+                $("<div></div>").addClass("signature_overlay").addClass("initials")
+                .append
+                (
+                    $("<div></div>").attr("id", "signature-pad").addClass("m-signature-pad")
+                    .append
+                    (
+                        $("<div></div>").addClass("m-signature-pad--body")
+                        .append
+                        (
+                            $("<canvas></canvas>")
+                        )
+                    )
+                    .append
+                    (
+                        $("<div></div>").addClass("m-signature-pad--footer")
+                        .append
+                        (
+                            $("<div></div>").addClass("description")
+                            .append
+                            (
+                                $("<input />").attr("type", "hidden").attr("id", "user-signature").attr("name", "user-signature").attr("value", "")
+                            )
+                            .append
+                            (
+                                $("<button class='btn btn-info clear'>Clear</button>")
+                            )
+                            .append
+                            (
+                                $("<button type='button' class='btn btn-success adopt adoptinitials'>Done</button>")
+                            )
+                            .append
+                            (
+                                $("<span class='sign_annotation'>Initial Above&uarr;</span>")
+                            )
+                        )
+                    )
+                ).appendTo($("body"));
+
+                // Adjust canvas coordinate space taking into account pixel ratio,
+                // to make it look crisp on mobile devices.
+                // This also causes canvas to be cleared.
+                var resizeCanvas = function()
+                {
+                    var canvas = $("canvas")[0];
+                    // When zoomed out to less than 100%, for some very strange reason,
+                    // some browsers report devicePixelRatio as less than 1
+                    // and only part of the canvas is cleared then.
+                    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                    canvas.width = canvas.offsetWidth * ratio;
+                    canvas.height = canvas.offsetHeight * ratio;
+                    canvas.getContext("2d").scale(ratio, ratio);
+
+                    $("canvas").on("mousedown", function(ev)
+                    {
+                        window.mousedown_initials_start = new Date().getTime();
+                    });
+                    $("canvas").on("touchstart", function(ev)
+                    {
+                        $(this).trigger("mousedown");
+                    });
+                    $("canvas").on("mouseup", function(ev)
+                    {
+                        window.mousedown_initials_end = new Date().getTime();
+                        window.initials_drawing_millis += (window.mousedown_initials_end - window.mousedown_initials_start);
+                    });
+                    $("canvas").on("touchend", function(ev)
+                    {
+                        $(this).trigger("mouseup");
+                    });
+                }
+
+                //window.onresize = resizeCanvas;
+                resizeCanvas();
+
+                window.signaturePad = new SignaturePad($("canvas")[0], {dotSize: 1});
+
+                $(".adopt").click(function()
+                {
+                    var sig = signaturePad.toDataURL();
+                    $("canvas")
+                    $(".signature_overlay").remove();
+                    showLoading();
+                    $.post("/data", {"fn": "save_customer_initials", "identifier": app_entry_identifier, "sig": sig}).done(function(resp)
+                    {
+                        window.initials_acquired = true;
+                        hideLoading();
+                        cb();
+                    });
+                });
+                $(".clear").click(function()
+                {
+                    signaturePad.clear();
+                    $(".signature_overlay").remove();
+                });
+                $("body").scrollTop(0);
+            }
+            function showLoading()
+            {
+                $("<div></div>").addClass("loading").text("Loading...").appendTo($("body"));
+            }
+            function hideLoading()
+            {
+                $(".loading").remove();
+            }
+            function completeSigningProcess()
+            {
+                showLoading();
+                var payload = {"fn": "sign_docs", "identifier": pending_user_identifier}
+                if(window.location.href.indexOf("?bundle_key=") > -1)
+                {
+                    var bundle_key = window.location.href.substring(window.location.href.indexOf("?bundle_key=") + "?bundle_key=".length);
+                    bundle_key = bundle_key.split("&")[0];
+                    bundle_key = decodeURIComponent(bundle_key);
+                    payload["bundle_key"] = bundle_key;
+                }
+                else if(window.location.href.indexOf("&bundle_key=") > -1)
+                {
+                    var bundle_key = window.location.href.substring(window.location.href.indexOf("&bundle_key=") + "&bundle_key=".length);
+                    bundle_key = bundle_key.split("&")[0];
+                    bundle_key = decodeURIComponent(bundle_key);
+                    payload["bundle_key"] = bundle_key;
+                }
+                $.post("/data", payload).done(function(resp)
+                {
+                    hideLoading();
+                    $("body").css("padding", "0px").css("margin", "0px").empty().animate({backgroundColor: "#0686C1"}, 100, function()
+                    {
+                        window.location.href = "https://" + document.domain + "?just_registered=true";
+                    });
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="signing_header">
+           Paperwork Review - {{rep_name}}<br /><button id="next_btn">Continue</button><button id="sign_btn">Add Signature</button><button id="initials_btn">Add Initials</button>
+        </div>
+        <div id="np_logo">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdwAAACgCAIAAAApVkqsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozNjg2MkQ0QUNEN0NFNDExQTZGNkQzRjNBQUM1OERDNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxODE1RkNDMkZDM0ExMUU1OUFCREQyODM3NjdERkNBRiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxODE1RkNDMUZDM0ExMUU1OUFCREQyODM3NjdERkNBRiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOmRmYjY1ZjAwLTQ3NzItOTA0Yi05YjVhLTlkMDRlMzhlMTIyMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozNjg2MkQ0QUNEN0NFNDExQTZGNkQzRjNBQUM1OERDNSIvPiA8L3JkZjpEZXNj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" />
+        </div>
+        <div id="welcome_text"></div>
+        <table id="suntbl">
+            <tbody valign="center">
+                <tr>
+                    <td align="center">
+                        <div class="container-sun">
+                            <svg class="svg-sun" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="xMinYMin meet">
+                                <circle cx="50" cy="50" r="35" id="sun"></circle>
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

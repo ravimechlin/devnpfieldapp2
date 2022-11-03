@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>New Power Company - Field Application</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href='//fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css">
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script>
+        <style type='text/css'>
+        body
+        {
+            font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background: #353030;
+        }
+        @media(max-width:767px)
+        {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+        }
+        @media(min-width:768px)
+        {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+        }
+        @media(min-width:992px)
+        {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+        }
+        @media(min-width:1200px)
+        {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+        }
+        .dataitem > img
+        {
+            box-shadow: 0px 0px 7px #000000;
+            -webkit-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+        }
+        .dataitem > img:hover
+        {
+            box-shadow: 0px 0px 25px #000000;
+        }
+        .dataitem > img
+        {
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 275px;
+        }
+        </style>
+        <script type="text/javascript">
+        $(document).ready(function()
+        {
+            if(window.location.href.indexOf("?offset=") === -1)
+            {
+                window.location.href = window.location.href + "?offset=0";
+                return;
+            }
+            if(window.location.protocol.toLowerCase().indexOf("https") === -1)
+            {
+                $("body").html("");
+                var url = window.location.href.toLowerCase();
+                url = url.replace("http://", "https://");
+                window.location.href = url;
+                return;
+            }
+            window.offset = window.location.href.substring(window.location.href.indexOf("?offset=") + 8);
+            refreshData();
+        });
+        function refreshData()
+        {
+            if($(".datarow").size() === 0)
+            {
+                $("<div></div>").addClass("row").addClass("datarow").appendTo($(".container").eq(0));
+            }
+            $.post("./data", {"offset": offset}, function(resp)
+            {
+                $.each(resp.entries, function(i, entry)
+                {
+                    var div = $("<div></div>");
+                    div.addClass("col-xs-6").addClass("col-sm-6");
+                    div.addClass("col-md-3").addClass("col-lg-3");
+                    div.addClass("dataitem");
+                    var img = $("<img />");
+                    img.attr("src", "//storage.googleapis.com/npfieldapp.appspot.com/QualificationCards/" + entry.identifier + entry.image_extension);
+                    img.addClass("img").addClass("img-responsive");
+                    img.appendTo(div);
+
+                    var hidden_div = $("<div class='hiddenn'></div>");
+                    hidden_div.css("visibility", "hidden");
+                    $("<p></p>").text("Customer Name: " + entry.customer_first_name + " " + entry.customer_last_name).appendTo(hidden_div);
+                    $("<p></p>").text("Price per kWh: " + entry.customer_kwh_price).appendTo(hidden_div);
+                    var phone_num = "(";
+                    for(var i = 0; i < 3; i++)
+                    {
+                        phone_num += entry.rep_phone[i];
+                    }
+                    phone_num += ") ";
+                    for(var i = 3; i < 6; i++)
+                    {
+                        phone_num += entry.rep_phone[i];
+                    }
+                    phone_num += "-";
+                    for(var i = 6; i < 10; i++)
+                    {
+                        phone_num += entry.rep_phone[i];
+                    }
+                    $("<p></p>").html("Rep info: " + phone_num + "<br />" + "<a href='mailto:" + entry.rep_email + "'>" + entry.rep_email + "</a>").appendTo(hidden_div);
+                    hidden_div.appendTo(div);
+                    div.find("> img").click(function()
+                    {
+                        $(".hiddenn").css("visibility", "hidden");
+                        if(!div.find(".hiddenn").hasClass("clicked"))
+                        {
+                            $(".clicked").removeClass("clicked");
+                            div.find(".hiddenn").css("visibility", "visible").addClass("clicked");
+                        }
+                        else
+                        {
+                            $(".clicked").removeClass("clicked");
+                            div.find(".hiddenn").css("visibility", "hidden");
+                        }
+                    }).on("dblclick", function()
+                    {
+                        $("<a></a>").attr("target", "_blank").attr("href", div.find("> img").attr("src")).attr("id", "temp_a").appendTo($("body"));
+                        document.getElementById('temp_a').click();
+                        $("#temp_a").remove();
+                    }).mouseenter(function()
+                    {
+                        div.find(".hiddenn").css("visibility", "visible");
+                    }).mouseleave(function()
+                    {
+                        if(!div.find(".hiddenn").eq(0).hasClass("clicked"))
+                        {
+                            div.find(".hiddenn").css("visibility", "hidden");
+                        }
+                    });
+
+                    var less_than_four = $(".datarow").last().find(".dataitem").size() < 4;
+                    if(!less_than_four)
+                    {
+                        $("<div></div>").addClass("row").addClass("datarow").appendTo($(".container").eq(0));
+                    }
+                    div.appendTo($(".datarow").last());
+
+
+
+                });
+            }, "json");
+        }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Administration Panel
+                </div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+        </div>
+    </body>
+</html>

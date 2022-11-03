@@ -1,0 +1,3 @@
+identifier = ndb.StringProperty(required=True)
+action_name = ndb.StringProperty(required=True)
+notification_list = ndb.StructuredProperty(PersonToNotify, repeated=True)

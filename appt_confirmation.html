@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Appointment Confirmation Details</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="/bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <style type="text/css">
+            .click_to_call
+            {
+                background: #2b9ffb;
+                text-decoration: none;
+                font-size: 2em;
+                width: 50%;
+                display: inline-block;
+                color: #FFF;
+                text-shadow: 0px 0px 0.1em #000;   
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                var app_entry_identifier = "{{ app_entry_identifier}}";
+                var closer_identifier = "{{ closer_identifier }}";
+
+                $.post("/data", {"fn": "pull_confirmation_details", "identifier": app_entry_identifier, "closer": closer_identifier}).done(function(r)
+                {
+                    var root = $("body").find("center").first();
+                    root.empty();
+                    $("<h2></h2>").text("Appointment Time:").appendTo(root);
+                    $("<p></p>").text(moment(r.sp2, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm A")).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<h2></h2>").text("Customer Name:").appendTo(root);
+                    $("<p></p>").text(r.customer_name).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<h2></h2>").text("Customer Address:").appendTo(root);
+                    $("<p></p>").html([r.address, r.city + ", " + r.state, r.postal].join("<br />")).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<h2></h2>").text("Customer Phone:").appendTo(root);
+                    $("<a></a>").attr("id", "cust_phone_a").attr("href", "tel:" + r.customer_phone).text(r.customer_phone_formatted).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<h2></h2>").text("Total KWHs:").appendTo(root);
+                    $("<p></p>").text(r.total_kwhs).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<h2>/h2>").text("Highest Monthly Bill:").appendTo(root);
+                    $("<p></p>").text(r.highest_monthly_bill).appendTo(root);
+                    $("<hr />").appendTo(root);
+                    $("<br />").appendTo(root);
+                    $("<br />").appendTo(root);
+                    $("<a></a>").addClass("click_to_call").attr("href", "tel:" + r.closer_phone).text("Click to Call " + r.closer_first + "[ " + r.closer_phone_formatted + " ]")
+                    .click(function()
+                    {
+                        var payload = {};
+                        payload["fn"] = "confirmation_blast";
+                        payload["string"] = "New Lead. Customer Name: " + r.customer_name + ", ";
+                        payload["string"] += "Address: " + r.address + " " + r.city + ", " + r.state + " " + r.postal + ", "; 
+                        payload["string"] += "Phone Number: " + r.customer_phone_formatted + ", ";
+                        payload["string"] += "Total Kwhs: " + r.total_kwhs + ", ";
+                        payload["string"] += "Highest Bill: " + r.highest_monthly_bill + ", ";
+                        payload["string"] += "SP2: " + moment(r.sp2, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm A");
+                        payload["phone"] = r.customer_phone;
+                        $.post("/data", payload);
+                        
+                    })
+                    .appendTo(root);
+
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <center>Please Wait</center>
+    </body>
+</html>

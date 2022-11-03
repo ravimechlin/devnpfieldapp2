@@ -1,0 +1,7 @@
+identifier=ndb.StringProperty(required=True)
+name=ndb.StringProperty(required=True)
+rep_payout_amount=ndb.FloatProperty(required=True)
+recruiter_payout_amount=ndb.FloatProperty(required=True)
+incentives=ndb.TextProperty(required=True)
+requirements=ndb.TextProperty(required=True)
+display_index=ndb.IntegerProperty(required=True)

@@ -1,0 +1,8 @@
+identifier = ndb.StringProperty(required=True)
+entity_identifier = ndb.StringProperty(required=True)
+field_app_identifier = ndb.StringProperty(required=True)
+booking_identifier = ndb.StringProperty(required=True)
+step_state=ndb.StringProperty(required=True)
+updated = ndb.DateProperty(required=True)
+extra_info = ndb.TextProperty(required=True)
+insert_time = ndb.DateTimeProperty(required=True, auto_now=True)

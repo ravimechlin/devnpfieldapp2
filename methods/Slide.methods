@@ -1,0 +1,23 @@
+def children(self, as_json=False):
+    child_identifiers = json.loads(self.slide_identifiers)
+    if len(child_identifiers) == 0:
+        return []
+        
+    childrenn = SlideItem.query(SlideItem.identifier.IN(child_identifiers))
+    childrenn2 = []
+    for item in childrenn:
+        childrenn2.append(item)
+    childrenn = childrenn2
+    childrenn = Helpers.bubble_sort(childrenn, "idx")
+    ret_children = []
+    for child in childrenn:
+        ret_children.append(child)
+        
+    if as_json:
+        dcts = []
+        for item in ret_children:
+            dct = {"identifier": item.identifier, "views": json.loads(item.views), "idx": item.idx, "options": json.loads(item.options)}
+            dcts.append(dct)
+            
+        return dcts
+    return ret_children

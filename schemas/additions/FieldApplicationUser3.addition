@@ -1,0 +1,3 @@
+automatic_override_enabled
+ndb.BooleanProperty
+True

@@ -1,0 +1,3 @@
+deal_closed
+ndb.BooleanProperty
+False

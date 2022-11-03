@@ -1,0 +1,16 @@
+
+def post_to_ledger(self):
+    keyy = hashlib.md5(self.description + "|||" + self.description_key + "|||" + str(self.dollars) + "|||" + str(self.cents) + "|||" + self.recipient).hexdigest()
+    val = memcache.get(keyy)
+
+    if val is None:
+
+        mts = MonetaryTransaction.query(ndb.AND(MonetaryTransaction.description == self.description, MonetaryTransaction.description_key == self.description_key, MonetaryTransaction.dollars == self.dollars, MonetaryTransaction.cents == self.cents, MonetaryTransaction.recipient == self.recipient))
+
+        found = False
+        for mt in mts:
+            found = True
+
+        if not found:
+            memcache.set(key=keyy, value="kk", time=60 * 60)
+            self.put()

@@ -1,0 +1,4 @@
+identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+folder_key=ndb.StringProperty(required=True)
+foreign_id=ndb.StringProperty(required=True)

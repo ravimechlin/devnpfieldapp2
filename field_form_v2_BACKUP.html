@@ -1,0 +1,3931 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="57x57" href="/bootstrap/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/bootstrap/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/bootstrap/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/bootstrap/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/bootstrap/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/bootstrap/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/bootstrap/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/bootstrap/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/bootstrap/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/bootstrap/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/bootstrap/images/favicon-16x16.png">
+        <link rel="manifest" href="/bootstrap/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/bootstrap/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <title>New Power Company - Field Application</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+        <link rel="stylesheet" href="./bootstrap/css/changepass_v12.css" />
+        <link rel="stylesheet" href="./bootstrap/css/fullcalendar.min.css" />
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/hashids.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/changepass_v12.js" type="text/javascript"></script>
+        <script charset="utf-8" src="/bootstrap/js/hacks.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/fullcalendar.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            window.CLOSERS_DICT = {{ closers_dict|safe}};
+        </script>
+        <!-- script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script -->
+        <style type="text/css">
+            #loading
+            {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2000px;
+                opacity: 0.9;
+                z-index: 100;
+                background: #000;
+            }
+            #loading h3
+            {
+                text-align: center;
+                top: 200px;
+                position: relative;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+            body
+            {
+                cursor: wait;
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+                position: relative;
+                z-index: 2;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            .modal-header
+            {
+                background-color: #D19F28 !important;
+                text-align: center;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            .modal-body
+            {
+                background: #353030;
+            }
+            .bootstrap-dialog-message
+            {
+                color: #C6C2C2;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            input[type=text], input[type='text'], input[type="text"], input[type=email], input[type='email'], input[type="email"], select
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+            }
+            .dropdown > button, .open > button
+            {
+                background: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:hover, .open > button:hover
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:focus, .open > button:focus
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .glyphicon-camera
+            {
+                color: #FB8A0B;
+                font-size: 5em;
+                cursor: pointer;
+                float: left;
+            }
+            #file_sel_confirm, #file_sel_confirm2
+            {
+                top: -1.25em;
+                position: relative;
+                display: block;
+                left: -5em;
+                color: #FFF;
+                display: none;
+                float: left;
+            }
+            .modal-footer
+            {
+                background: #353030;
+                border-top: 0px solid #000;
+            }
+            ::-webkit-input-placeholder
+            {
+                color: #000000;
+            }
+            :-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            ::-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            :-ms-input-placeholder
+            {
+                color: #909;
+            }
+            #signout
+            {
+                text-align: right;
+                line-height: 2em;
+            }
+            input[disabled]
+            {
+                background: #AAAAAA !important;
+                color: #000000 !important;
+                border: 1px solid #ff0000;
+            }
+            #lead_id
+            {
+                font-family: monospace, "MonoSpace";
+            }
+            .datepicker
+            {
+                color: #000000;
+            }
+            #cust_signature_date, #cust_appointment_date, #sp2_date
+            {
+                text-indent: 1em;
+                position: relative;
+                top: 0.5em;
+            }
+            .glyphicon-list-alt
+            {
+                  font-size: 3.25em;
+                  cursor: pointer;
+                  color: #FB8A0B;
+                  text-indent: 0.5em;
+                  top: 0.35em;
+                  left: 0.5em;
+                  float: left;
+            }
+            #temp_textarea
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+                padding: 1.5%;
+                display: block;
+                width: 50%;
+                height: 200px;
+                margin-bottom: 0em;
+                margin-top: 1em;
+            }
+            .glyphicon-eye-open, .glyphicon-eye-close
+            {
+                  color: #FB8A0B;
+                  font-size: 1em;
+                  left: -0.4em;
+                  top: -0.5em;
+            }
+            .eightpoint5, #dropdownMenu3
+            {
+                width: 8.5em;
+            }
+            hr
+            {
+                opacity: 0;
+            }
+            form hr
+            {
+                opacity: 0.2;
+            }
+            .special_fix
+            {
+                left: -1.5em;
+            }
+            .special_fix2
+            {
+                  left: -6.8em;
+                  top:
+            }
+            select, option
+            {
+                -webkit-appearance:none;
+            }
+            .scheduler_row .dropdown-menu
+            {
+                margin-top: -2em;
+            }
+            #restore_session_email, #restore_session_password
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+                text-indent: 0.5em;
+            }
+            #dropdownMenu33
+            {
+                margin-left: 1em;
+            }
+            .dropdown button
+            {
+                min-width: 17em;
+            }
+            #util_form_group .open ul
+            {
+                margin-left: 14.75em;
+            }
+            #usage_months_div
+            {
+                display: none;
+            }
+            #usage_months
+            {
+                margin-top: 1em;
+                margin-left: 1em;
+                width: 15.25em;
+            }
+            #total_kwhs_div
+            {
+                display: none;
+            }
+            #total_kwhs
+            {
+                margin-left: 0.9em;
+            }
+            #total_kwhs, #total_dollars, #highest_bill
+            {
+                text-indent: 0.5em;
+            }
+            #total_dollars_div
+            {
+                display: none;
+            }
+            #highest_bill_div
+            {
+                display: none;
+            }
+            .dolla_hint
+            {
+                font-size: 1.5em;
+                color: #1CC472;
+                line-height: 1.75em;
+            }
+            .usage_data_div
+            {
+                /*display: none;*/
+            }
+            .usage_data_div input
+            {
+                text-indent: 0.5em;
+            }
+            .usage_data_div td
+            {
+                padding: 1em;
+            }
+            .usage_data_div table
+            {
+                margin-top: 0.25em;
+                margin-bottom: 1em;
+                background: rgba(31, 111, 189, 0.25);
+            }
+            #annual_income, #monthly_mortgage
+            {
+                position: relative;
+                left: -1em;
+                text-indent: 0.5em;
+            }
+            .dollar_note
+            {
+                position: relative;
+                left: -0.75em;
+                color: #4CAF50;
+                font-size: 1.5em;
+                top: 0.1em;
+            }
+            #meter_number_form_group
+            {
+                display: none;
+            }
+            #second_person_first_div, #second_person_last_div, #second_person_email_div, #second_person_last_four_div
+            {
+                display: none;
+            }
+            .twelve_months_div_1, .twelve_months_div_0
+            {
+                display: none;
+            }
+            .twelve_months_div_1 input, .twelve_months_div_0 input
+            {
+                position: relative;
+                left: 1em;
+                text-indent: 0.5em;
+            }
+            @media(min-width:768px)
+            {
+                .twelve_months_div_1 input, .twelve_months_div_0 input
+                {
+                    top: 0.75em;
+                }
+            }
+            #cust_sig_div
+            {
+                display: none;
+            }
+            #twelve_months
+            {
+                display: none;
+            }
+            #survey_area_div_group
+            {
+                display: none;
+            }
+            #rep_id_div, #rep_email_div, #rep_phone_div
+            {
+                display: none;
+            }
+            #cash_div
+            {
+                display: none;
+            }
+            #annaul_income_forgm_group, #monthly_mortgage_form_group, #last_four_ssn_form_group
+            {
+                display: none;
+            }
+            .thomas_warning_2
+            {
+                display: block;
+                color: red;
+                font-size: 2em;
+                padding-left: 1em;
+                padding-right: 1em;
+            }
+            #data_logger_warning, #data_logger_id_div, #data_logger_started_logging, #data_logger_location_div
+            {
+                display: none;
+            }
+            #time_lbl, #closer_lbl
+            {
+                text-shadow: 0px 0px 0.1em #000;
+                cursor: pointer;
+            }
+            .closer
+            {
+                background: #2e6da4;
+                text-indent: 0.5em;
+                cursor: pointer;
+            }
+            #override_lbl
+            {
+                text-shadow: 0px 0px 0.1em #000;
+                cursor: pointer;
+            }
+            #minimum_kwhs_lbl
+            {
+                text-shadow: 0px 0px 0.1em #000;
+                cursor: pointer;
+            }
+            #data_logger_override_div
+            {
+                display: none;
+            }
+            .fc-today-button
+            {
+                display: none;
+            }
+            .fc-day-grid
+            {
+                /*display: none;*/
+            }
+            .fc-time-grid .fc-slats td
+            {
+                height: 5em;
+                min-height: 5em;
+            }
+            .fc-unthemed .fc-today
+            {
+                background: #484847;
+            }
+            .fc-event
+            {
+                border: 1px solid #000000;
+                background-color: #117B29;
+                font-weight: 400;
+                padding-top: 0.5em;
+                padding-left: 0.5em;
+            }
+            #closer_schedule_lbl {
+                text-shadow: 0px 0px 0.1em #000;
+                cursor: pointer;
+            }
+            .closer_name_schedule {
+                background: #337ab7;
+                text-shadow: 0px 0px 0.1em #000;
+                text-indent: 0.5em;
+            }
+            .schedule_date_option
+            {
+                margin-right: 1em;
+            }
+            .fc-left, .fc-corner-right
+            {
+                display: none;
+            }
+            .info_hints
+            {
+                color: #f5ef19;
+            }
+        </style>
+        <script type="text/javascript">
+
+            String.prototype.digits = function()
+            {
+              var arr = [];
+              var digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+              for(var i = 0; i < this.length; i++)
+              {
+                if(digits.indexOf(this[i]) > -1)
+                {
+                  arr.push(this[i]);
+                }
+              }
+              if(arr.length === 0)
+              {
+                return null;
+              }
+              return arr.join("");
+            };
+            String.prototype.floatingPointParsable = function()
+            {
+                var arr = [];
+                var digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+                for(var i = 0; i < this.length; i++)
+                {
+                  if(digits.indexOf(this[i]) > -1)
+                  {
+                    arr.push(this[i]);
+                  }
+                }
+                if(arr.length === 0)
+                {
+                  return null;
+                }
+                return arr.join("");
+            }
+
+            function getDateString()
+            {
+                var fn = function()
+                {
+                    var d = new Date();
+                    var str = (d.getMonth() + 1) + '';
+                    str += "/";
+                    str += d.getDate() + '';
+                    str += "/";
+                    str += d.getFullYear() + '';
+
+                    return str;
+
+                    str += " ";
+                    var hours = d.getHours();
+                    var is_pm = false;
+                    if(hours > 11)
+                    {
+                        is_pm = true;
+                        hours -= 12;
+                    }
+                    str += hours + '';
+                    str += ":";
+                    var mins_str = d.getMinutes() + '';
+                    if(mins_str.length === 1)
+                    {
+                        mins_str = "0" + mins_str;
+                    }
+                    str += mins_str;
+                    str += ":";
+                    var seconds_str = d.getSeconds() + '';
+                    if(seconds_str.length === 1)
+                    {
+                        seconds_str = "0" + seconds_str;
+                    }
+                    str += " ";
+                    if(is_pm)
+                    {
+                        str += "PM";
+                    }
+                    else
+                    {
+                        str += "AM";
+                    }
+                    return str;
+                };
+                return fn();
+            }
+            /*window.onunload = function() {killReservations(false);};
+            window.onbeforeunload = function() {killReservations(false);};*/
+            window.all_keys_reserved = {};
+            window.current_reservation_key = "";
+            window.all_keys_reserved = [];
+            window.utility_providers = {{ utility_providers|safe }};
+            window.pre_populated_info = {{ pre_populated_info|safe}};
+            window.user_identifier = "{{ user_identifier }}";
+            function killReservations(rightBeforePOST)
+            {
+                return;
+                
+            }
+            function initSurveyDateWidget(office_id)
+            {
+                return;
+                $("body").css("cursor", "wait");
+                $("#appt_slot_num").nextAll(".dropdown").each(function(i, e)
+                {
+                    $(e).remove();
+                });
+                var first_run = false;
+                if(typeof(office_id) + "" === "undefined")
+                {
+                    office_id = "{{ rep_office }}";
+                    first_run = true;
+                }
+                else
+                {
+                    var html = $("#dt3").parent().html();
+                    $("#dt3").parent().html("");
+                    $("#dt3").parent().html(html);
+                }
+
+                var disabled_days = [];
+
+                var val = getDateString();
+                var split = val.split("/");
+                for(var i = 0; i < split.length; i++)
+                {
+                    if(split[i].length === 1)
+                    {
+                        split[i] = "0" + split[i];
+                    }
+                }
+                disabled_days.push(split.join("-"));
+                var switched_up = split[2] + "-" + split[0] + "-" + split[1];
+
+                var today = moment(switched_up);
+                for(var i = 0; i < 712; i++)
+                {
+                    var day = today;
+                    disabled_days.push(day.format("MM-DD-YYYY"));
+                    day = day.subtract(1, "days");
+                    today = day;
+                }
+                var today2 = moment(switched_up);
+                for(var i = 0; i < 712; i++)
+                {
+                    var day = today2;
+                    disabled_days.push(day.format("MM-DD-YYYY"));
+                    day = day.add(1, "days");
+                    today2 = day;
+                }
+                var office_idd = office_id;
+                if($("#rep_office").val() !== "")
+                {
+                    office_idd = $("#rep_office").val();
+                }
+                $.post("./data", {"fn": "time_slot_days_available", "office_id": office_idd, "lead_id": $("#lead_id").val()}).done(function(resp)
+                {
+                    if(typeof(window.office_time_slots) + '' === "undefined" || !window.office_time_slots)
+                    {
+                        window.office_time_slots = {};
+                    }
+                    if(typeof(window.office_time_slots["o_" + office_id]) + '' === "undefined" || !window.office_time_slots["o_" + office_id])
+                    {
+                        window.office_time_slots["o_" + office_id] = {};
+                    }
+                    for(var i = 0; i < resp.dates.length; i++)
+                    {
+                        var date_str = resp.dates[i].date;
+                        if(typeof(window.office_time_slots["o_" + office_id]["d_" + date_str]) + '' === "undefined" || !window.office_time_slots["o_" + office_id]["d_" + date_str])
+                        {
+                            window.office_time_slots["o_" + office_id]["d_" + date_str] = {};
+                        }
+                        var slot_available = false;
+                        for(var j = 1; j < 13; j++)
+                        {
+                            window.office_time_slots["o_" + office_id]["d_" + date_str]["slot_" + (j + '') + "_enabled"] = resp.dates[i]["slot_" + (j + '') + "_enabled"];
+                            if(resp.dates[i]["slot_" + (j + '') + "_enabled"])
+                            {
+                                slot_available = true;
+                                j = 13;
+                            }
+                        }
+                        if(slot_available)
+                        {
+                            while(disabled_days.indexOf(date_str) !== -1)
+                            {
+                                disabled_days.splice(disabled_days.indexOf(date_str), 1);
+                            }
+                        }
+                    }
+                    var clone = $("#cust_appointment_date").clone();
+                    clone.addClass("cloned_dp");
+                    clone.removeAttr("id");
+                    $("#cust_appointment_date").replaceWith(clone);
+                    $(".cloned_dp").attr("id", "cust_appointment_date").removeClass("cloned_dp");
+                    var suggested_day = resp.suggested_date + '';
+                    var suggested_slot_num = resp.suggested_slot_number + '';
+                    if(suggested_day !== "undefined")
+                    {
+                        $("#cust_appointment_date").attr("value", suggested_day);
+                        $("#dt").attr("data-date", suggested_day);
+                    }
+                    else
+                    {
+                        var val2 = getDateString();
+                        var split2 = val.split("/");
+                        for(var i = 0; i < split2.length; i++)
+                        {
+                            if(split2[i].length === 1)
+                            {
+                                split2[i] = "0" + split2[i];
+                            }
+                        }
+                        var switched_up2 = split[2] + "-" + split[0] + "-" + split[1];
+
+                        var today2 = moment(switched_up2);
+                        var new_str = today2.format("MM-DD-YYYY")
+                        $("#cust_appointment_date").attr("value", new_str);
+                        $("#dt").attr("data-date", new_str);
+
+                    }
+                    $("#cust_appointment_date").datepicker(
+                    {
+                        format: "mm-dd-yyyy",
+                        autoClose: true,
+                        datesDisabled: disabled_days
+                    }).on("change", function()
+                    {
+                        doAppointmentSlotSelector($("#cust_appointment_date").val());
+                    });
+                    if(first_run)
+                    {
+                        $("#cust_appointment_date").trigger("change");
+                        var init_slot_fn = function()
+                        {
+                            if($("#dropdownMenu3").size() > 0)
+                            {
+                                $("#dropdownMenu3").nextAll("ul").eq(0).find("li").each(function(i, e)
+                                {
+                                    if($(e).attr("class").replace("slot_", "") === suggested_slot_num)
+                                    {
+                                        $(e).click();
+                                        window.clearInterval(window.temp_init_interval);
+                                    }
+                                });
+                            }
+                        }
+                        window.temp_init_interval = setInterval(function()
+                        {
+                            init_slot_fn();
+                        }, 100);
+                    }
+
+
+                    $("#loading").css("display", "none");
+                    $("body").css("cursor", "auto");
+                });
+            }
+            function initKWHPrices()
+            {
+                $("body").css("cursor", "auto");
+            }
+            function doAppointmentSlotSelector(date)
+            {
+                $("#appt_slot_num").val("N/A").attr("value", "N/A");
+                $("#appt_slot_num").nextAll(".dropdown").each(function(i, e)
+                {
+                    $(e).remove();
+                });
+                $.post("/data", {"fn": "get_bookings", "date": date, "office": $("#rep_office").val(), "lead_id": $("#lead_id").val()}).done(function(resp)
+                {
+                    var dropdown_div = $("<div></div>").addClass("dropdown");
+                    var dropdown_btn = $("<button></button>").addClass("btn").addClass("btn-default").addClass("dropdown-toggle");
+                    dropdown_btn.attr("type", "button").attr("id", "dropdownMenu3").attr("data-toggle", "dropdown").attr("aria-expanded", "false");
+                    dropdown_btn.text("Select a Slot");
+                    $("<span></span>").addClass("caret").appendTo(dropdown_btn);
+                    var ul = $("<ul></ul>").addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "dropdownMenu3");
+                    for(var i = 0; i < resp.slot_reservations.length; i++)
+                    {
+                        var li = $("<li></li>").attr("role", "presentation");
+                        li.addClass("slot_" + ((i + 1) + ''));
+                        var a = $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text("Slot #" + ((i + 1) + ''));
+                        if(resp.slot_reservations[i])
+                        {
+                            a.css("text-decoration", "line-through");
+                            a.addClass("linethrough_anchor")
+                        }
+                        else
+                        {
+                            a.css("text-decoration", "none");
+                        }
+                        a.appendTo(li);
+                        li.appendTo(ul);
+                    }
+                    ul.find("li").each(function(i, e)
+                    {
+                        $(e).click(function()
+                        {
+                            if(! $(e).find("a").eq(0).hasClass("linethrough_anchor"))
+                            {
+                                var new_val = $(e).attr("class").replace("slot_", "");
+                                $("#appt_slot_num").attr("value", new_val).val(new_val);
+                                $.post("/data", {"fn": "reserve_slot", "date": date, "office": $("#rep_office").val(), "lead_id": $("#lead_id").val(), "slot": new_val}).done(function(resp)
+                                {
+                                    //
+                                });
+                                $("#dropdownMenu3").eq(0).text($(e).text());
+                                $("<span></span>").addClass("caret").appendTo($("#dropdownMenu3").eq(0));
+                            }
+                        });
+                    });
+
+                    dropdown_btn.appendTo(dropdown_div);
+                    ul.appendTo(dropdown_div);
+                    if($("#appt_slot_num").nextAll(".dropdown").size() === 0)
+                    {
+                        dropdown_div.appendTo($("#cust_appointment_date").parent().parent());
+                    }
+                });
+            }
+            window.last_date_picker_touch = new Date().getTime() * 2;
+            function datePickerTouchFixes()
+            {
+
+                /*setInterval(function()
+                {
+                    var pickers = [];
+                    $(".date").each(function(i, e)
+                    {
+                        pickers.push($(e).children("input").eq(0).data("datepicker"));
+                    });
+                    $(".date").each(function(i, e)
+                    {
+                        if(!$(e).children("input").eq(0).is(":focus"))
+                        {
+                            if(new Date().getTime() - window.last_date_picker_touch >= 500)
+                            {
+                                console.log(new Date().getTime() - window.last_date_picker_touch);
+                                pickers[i].hide();
+                            }
+                        }
+                        else
+                        {
+                            pickers[i].show();
+                        }
+                    });
+                }, 400);*/
+                $("html").delegate(".day, .prev, .next, .datepicker-switch, .month, .year, .datepicker-days, .datepicker-months, .datepicker-years", "touchstart", function(ev)
+                {
+                    window.last_date_picker_touch = new Date().getTime();
+                });
+                $("html").delegate(".day, .prev, .next, .datepicker-switch, .month, .year, .datepicker-days, .datepicker-months, .datepicker-years", "mouseup", function(ev)
+                {
+                    window.last_date_picker_touch = new Date().getTime();
+                });
+                $("html").delegate("body", "touchend", function(ev)
+                {
+                    var pickers = [];
+                    $(".date").each(function(i, e)
+                    {
+                        pickers.push($(e).children("input").eq(0).data("datepicker"));
+                    });
+                    $(".datepicker").each(function(i, e)
+                    {
+                        if($(e).css("display") !== "none")
+                        {
+                            if(new Date().getTime() - window.last_date_picker_touch >= 1000)
+                            {
+                                pickers[i].hide();
+                                $(".date").eq(i).children("input").eq(0).trigger("blur");
+                            }
+                        }
+                    });
+                });
+                setInterval(function()
+                {
+                    var active = $(document.activeElement);
+                    if(active.is("input"))
+                    {
+                        if(typeof(active.attr("id")) + '' !== "undefined" && typeof(active.attr("id") !== false) && active.attr("id") !== "")
+                        {
+                            var id = active.attr("id");
+                            $(".datepicker").each(function(i, e)
+                            {
+                                if($(e).css("display").toLowerCase() === "block")
+                                {
+                                    if(!$(e).hasClass("picker_for_" + id))
+                                    {
+                                        var cls = $(e).attr("class");
+                                        cls = cls.replace("picker_for_", "|||picker_for_");
+                                        var idx = cls.indexOf("|||");
+
+                                        var cls_extraction = "";
+                                        for(var k = idx + 3; k < cls.length; k++)
+                                        {
+                                            if(cls[k] === " ")
+                                            {
+                                                k = cls.length;
+                                            }
+                                            else
+                                            {
+                                                cls_extraction += cls[k];
+                                            }
+                                        }
+                                        cls_extraction = cls_extraction.replace("picker_for_", "");
+                                        window.datepickers[cls_extraction].hide();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }, 1000);
+            }
+            function resolveSelectElementValue(jqEl)
+            {
+                var idx = jqEl[0].selectedIndex;
+                if(idx >= 0)
+                {
+                    return jqEl.find("option").eq(idx).attr("value");
+                }
+                return null;
+            }
+           
+            
+            $(document).ready(function()
+            {
+                if("{{ user_type }}" === "solar_pro" || "{{ user_type }}" === "solar_pro_manager")
+                {
+                    $("#dt4").css("display", "none");
+                    $("#time_lbl").css("display", "none");
+                    $("#closer_lbl").css("display", "none");
+                }
+                setInterval(function()
+                {
+                    $.post("/data", {"fn": "grandfather_clock"}).done(function(clock_response)
+                    {
+                        var now = moment();
+                        var today = now.format("YYYY-MM-DD");
+                        if(clock_response.grandfathers_response !== today)
+                        {
+                            $("body").empty();
+                            $("<p></p>").css("text-align", "center").text("Your clock is out of sync with the server. If you feel this message is in error you should try reloading the page.").appendTo($("body"));
+                            $("body").find("p").first()[0].scrollIntoView();
+
+                        }
+                    });
+                }, 1000 * 15);
+                console.log("{{ cutoff_date }}");
+                window.readers = {{reader_data|safe}};
+                setInterval(function()
+                {
+                    $.post("/data", {"fn": "enumerate_readers_for_user", "identifier": "{{ user_identifier }}"}).done(function(r)
+                    {
+                        window.readers = r.readers;
+                    });
+                }, 1000 * 15);
+
+                setInterval(function()
+                {
+                    if($("#closer_input").val() !== "n/a")
+                    {
+                        var target_txt_1 = "Lead will go to " + window.CLOSERS_DICT[$("#closer_input").val()];
+                        if($("#closer_hint").text() !== target_txt_1)
+                        {
+                            $("#closer_hint").text(target_txt_1);
+                        }
+                        if($("#closer_hint").css("display") !== "inline")
+                        {
+                            $("#closer_hint").css("display", "inline");
+                        }
+                    }
+                    if($("#sp2_mom").val() !== "n/a")
+                    {
+                        var sp2_time = moment($("#sp2_mom").val(), "YYYY-MM-DD HH:mm:ss");
+                        var target_txt_2 = "Appointment is @ " + sp2_time.format("MM/DD/YYYY hh:mm A");
+                        if($("#time_hint").text() !== target_txt_2)
+                        {
+                            $("#time_hint").text(target_txt_2);
+                        }
+                        if($("#time_hint").css("display") !== "inline")
+                        {
+                            $("#time_hint").css("display", "inline");
+                        }
+                    }
+                }, 500);
+
+                window.dl_override_code = "{{ dl_override_code }}"
+                $("#override_lbl").click(function()
+                {
+                    var that = $(this);
+                    var pwd = window.prompt("Please specify the override code:");
+                    pwd += '';
+                    $.ajax
+                    (
+                        {
+                            "url": "/data",
+                            "async": true,
+                            "type": "POST",
+                            "method": "POST",
+                            "data": {"fn": "password_check", "password": pwd, "name": "Sales Form CARE override code"},
+                            "success": function(rr)
+                            {
+                                if(rr.success)
+                                {
+                                    that.css("display", "none");
+                                }
+                                else
+                                {
+                                    window.alert("The override code was incorrect, please try again.");
+                                }
+                            }
+                        }
+                    );
+                });
+                window.last_care_shown_alert = new Date().getTime();
+                var care_sniff = function()
+                {
+                    if($("#cust_utility_provider").val() !== "n/a")
+                    {
+                        var value = $("#real_or_estimated_value").val();
+                        if(value !== "n/a")
+                        {
+                            var a = null;
+                            var b = null;
+                            if(value === "real")
+                            {
+                                a = $.trim($("#twelve_months_total_kwhs").val());
+                                b = $.trim($("#twelve_months_total_dollars").val());
+                                
+                            }
+                            else
+                            {
+                                a = $.trim($("#less_than_twelve_months_avg_kwhs").val());
+                                b = $.trim($("#less_than_twelve_months_average_dollars").val());                            
+                            }
+                            while(a.indexOf("$") > -1)
+                            {
+                                a = a.replace("$", "");
+                            }    
+                            while(a.indexOf(",") > -1)
+                            {
+                                a = a.replace("$", "");
+                            }
+                            while(b.indexOf("$") > -1)
+                            {
+                                b = b.replace("$", "");
+                            }    
+                            while(b.indexOf(",") > -1)
+                            {
+                                b = b.replace("$", "");
+                            }
+
+                            var a_parsed = parseFloat(a);
+                            var b_parsed = parseFloat(b);
+                            if(!Number.isNaN(a_parsed))
+                            {
+                                if(!Number.isNaN(b_parsed))
+                                {
+                                    if(value !== "real")
+                                    {
+                                        a *= parseFloat("12");
+                                        b *= parseFloat("12");
+                                    }
+
+                                    var cost_per_kwh = parseFloat(b / a);
+                                    var code_required = false;
+                                    $.each(window.utility_providers, function(i, e)
+                                    {
+                                        if(e.value === $("#cust_utility_provider").val())
+                                        {
+                                            var num = e.care_threshold;
+                                            while(num.indexOf("$") > -1)
+                                            {
+                                                num = num.replace("$", "");
+                                            }
+                                            while(num.indexOf(",") > -1)
+                                            {
+                                                num = num.replace(",", "");
+                                            }
+                                            num = parseFloat(num);
+                                            if(cost_per_kwh <= num)
+                                            {
+                                                if($("#override_lbl").css("display").toLowerCase() !== "inline")
+                                                {
+                                                    $("#override_lbl").css("display", "inline");
+                                                    BootstrapDialog.alert("The customer is likely on a CARE/medical reduced price program. For this AB, you will need to provide an override code at the bottom of the page next to the submit button.");
+                                                }   $("#care_value").val("1");
+                                            }
+                                            else
+                                            {
+                                                $("#override_lbl").css("display", "none");
+                                                $("#care_value").val("0");
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                                                
+                    }
+                };
+
+                $("#minimum_kwhs_lbl").click(function()
+                {
+                    var that = $(this);
+                    var prompt = window.prompt("Please enter the override code:");
+                    prompt += '';
+
+                    $.ajax
+                    (
+                        {
+                            "url": "/data",
+                            "async": true,
+                            "type": "POST",
+                            "method": "POST",
+                            "data": {"fn": "password_check", "password": prompt, "name": "Minimum Annual KWHs Override Code"},
+                            "success": function(rr)
+                            {
+                                if(rr.success)
+                                {
+                                    that.css("display", "none");
+                                }
+                                else
+                                {
+                                    window.alert("The override code was incorrect, please try again.");
+                                }
+                            }
+                        }
+                    );
+
+                });
+
+                var threshold_sniff = function()
+                {
+                    var el = $("#twelve_months_total_kwhs");
+                    var multiplication_factor = parseFloat(1);
+                    if($("#real_or_estimated_value").val() === "estimated")
+                    {
+                        el = $("#less_than_twelve_months_avg_kwhs");
+                        multiplication_factor = parseFloat("12");
+                    }
+
+                    if($.trim(el.val()).length > 0)
+                    {
+                        var parsed = parseFloat(el.val());
+                        if(!Number.isNaN(parsed))
+                        {
+                            var total = parsed * multiplication_factor;
+                            $.each(window.utility_providers, function(i, provider)
+                            {
+                                if(provider.value === $("#cust_utility_provider").val())
+                                {
+                                    var parsed2 = parseFloat(provider.minimum_annual_kwhs)
+                                    {
+                                        if(total < parsed2)
+                                        {
+                                            if($("#minimum_kwhs_lbl").css("display").toLowerCase() !== "inline")
+                                            {
+                                                $("#minimum_kwhs_lbl").css("display", "inline");
+                                                window.alert("The annual KWHs is less than ideal. You will need to provide an override code to book this AB.");
+                                            }                                            
+                                        }
+                                        else
+                                        {
+                                            $("#minimum_kwhs_lbl").css("display", "none");
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                };
+
+                $.each(["#twelve_months_total_kwhs, #twelve_months_total_dollars", "#twelve_months_highest_bill", "#less_than_twelve_months_avg_kwhs", "#less_than_twelve_months_average_dollars", "#less_than_twelve_months_highest_bill"], function(i, e)
+                {
+                    $(e).blur(function()
+                    {
+                        care_sniff();
+                        threshold_sniff();
+                    });
+                });
+                setTimeout(function()
+                {
+                    $("#util_form_group").find("li").each(function(i, e)
+                    {
+                        $(e).on("click", function()
+                        {
+                            care_sniff();
+                        });
+                    });
+
+                    $("#real_or_estimated_real, #real_or_estimated_estimated").on("click", function()
+                    {
+                        care_sniff();
+                        threshold_sniff();
+                    });
+
+                    $("#util_form_group").find("li").each(function(i, e)
+                    {
+                        $(e).click(function()
+                        {
+                            threshold_sniff();
+                        });
+                    });
+
+                }, 1000);
+                
+                window.newbie = ("1" === "{{ newbie }}")                
+                if(newbie)
+                {
+                    var div = $("<div></div>").addClass("form-group");
+                    $("<label></label>").addClass("col-sm-2").addClass("control-label").attr("for", "foo")
+                    .text("Is this a friends and family deal?")
+                    .appendTo(div);
+
+                    $("<div></div>").addClass("col-sm-10")
+                    .append
+                    (
+                        $("<div></div>").addClass("dropdown")
+                        .append
+                        (
+                            $("<button></button>").addClass("btn").addClass("btn-default").addClass("dropdown-toggle").addClass("eightpoint5").attr("type", "button").attr("id", "amigo_button").attr("data-toggle", "dropdown").text("No")
+                            .append
+                            (
+                                $("<span></span>").addClass("caret")
+                            )
+                            
+                        )
+                        .append
+                        (
+                            $("<ul></ul>").addClass("dropdown-menu").attr("role", "menu")
+                            .append
+                            (
+                                $("<li></li>").attr("role", "presentation").attr("id", "amigo_0")
+                                .append
+                                (
+                                    $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text("No")
+                                )
+                            )
+                            .append
+                            (
+                                $("<li></li>").attr("role", "presentation").attr("id", "amigo_1")
+                                .append
+                                (
+                                    $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text("Yes")
+                                )
+                            )
+                        )
+                    )
+                    .appendTo(div);
+                    div.find("li").each(function(i, e)
+                    {
+                        $(e).click(function()
+                        {
+                            var val = $(e).attr("id").replace("amigo_", "");
+                            $("#amigo_input").val(val).attr("value", val);
+                            $(e).closest(".dropdown").find("button").first().text($(e).text());
+                            $("<span></span>").addClass("caret").appendTo($(e).closest(".dropdown").find("button").first());
+                            if(val === "0")
+                            {
+                                $("#data_logger_question").val("n/a").attr("value", "n/a");
+                                $("#data_logger_div").css("display", "block");
+                            }
+                            else
+                            {
+                                $("#data_logger_question").val("0").attr("value", "0");
+                                $("#data_logger_div").css("display", "none");
+                            }
+                        });                        
+                    });
+
+                    div.prependTo($("form").first());
+                }
+
+                $("#got_email_1").parent().find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        if($(this).attr("id").replace("got_email_", "") === "0")
+                        {
+                            $("#cust_email_wrapper").css("display", "none");
+                        }
+                        else
+                        {
+                            $("#cust_email_wrapper").css("display", "block");                            
+                            $("#cust_email").val("");
+                        }
+                        $(e).closest("ul").prevAll("button").first().text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($(e).closest("ul").prevAll("button").first());
+                    });                    
+                });
+
+                $(".appointment_type_div").find("li").each(function(i, e)
+                {
+                    $(e).on("click", function()
+                    {
+                        $("#closer_input").val("n/a");
+                        var typ = $(e).attr("id").replace("appointment_", "");
+                        var btn = $(".appointment_type_div").find("button").first();
+                        btn.text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo(btn);
+                        $("#appointment_type_input").val(typ);
+
+                        $("#sp2_mom").val("n/a");
+
+                        if(typ === "regular")
+                        {
+                            if("{{ user_type }}" !== "solar_pro" && "{{ user_type }}" !== "solar_pro_manager")
+                            {
+                                $("#dt4").css("display", "block");
+                            }                            
+                        }
+                        else
+                        {
+                            $("#dt4").css("display", "none");
+                        }
+
+                        if(typ === "same_day_later_on" || typ === "same_day_right_now")
+                        {
+                            $("#dt4").find("input").val(moment().format("MM-DD-YYYY"));                            
+                        }
+                        if(typ === "same_day_right_now")
+                        {
+                            var mom = moment();                            
+                            while(mom.minute() !== 0)
+                            {
+                                mom = mom.add(1, "minutes");
+                            }
+                            $("#sp2_mom").val(mom.format("YYYY-MM-DD HH:mm:ss"));
+                        }
+                        if(typ === "same_day_right_now")
+                        {
+                            $("#time_lbl").css("display", "none");
+                            $("#time_hint").css("display", "none");
+                        }
+                        else
+                        {
+                            /*if($("{{ user_type }}" !== "solar_pro_manager" && "{{ user_type }}" !== "solar_pro"))
+                            {
+                                $("#time_lbl").css("display", "inline");
+                                $("#time_hint").css("display", "none");
+                            } */                           
+                        }                        
+                    });
+                });
+
+                setInterval(function()
+                {
+                    var s_val = $("#cust_state").val();
+                    if(s_val.toLowerCase() === "tx")
+                    {
+                        $("#dropdownMenu33").parent().parent().css("display", "none");
+                        $("#cust_utility_provider").val("texas_utility").attr("value", "texas_utility");
+                    }
+                    else
+                    {
+                        $("#dropdownMenu33").parent().parent().css("display", "block");
+                        if($("#cust_utility_provider").val() === "texas_utility")
+                        {
+                            $("#cust_utility_provider").val("n/a").attr("value", "n/a");
+                        }
+                    }
+                }, 500);
+                if(window.location.protocol.toLowerCase().indexOf("https") === -1 && window.location.href.indexOf("localhost") === -1)
+                {
+                    $("body").html("");
+                    var url = window.location.href.toLowerCase();
+                    url = url.replace("http://", "https://");
+                    window.location.href = url;
+                    return;
+                }
+                try
+                {
+                    var hashids = new Hashids("abc902ielKKLLMM22", 8, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+                    var rand_int = Math.floor(Math.random() * 999) + 1;
+                    var lead_id = hashids.encode(new Date().getTime(), rand_int);
+                    $("#lead_id").val(lead_id).attr("value", lead_id).attr("disabled", "disabled");
+                    $("<input />").attr("type", "hidden").attr("name", "lead_id_real").attr("value", lead_id).val(lead_id).attr("id", "lead_id_real").insertAfter($("#lead_id"));
+                }
+                catch(e)
+                {
+
+                }
+                initKWHPrices();
+                $("#cust_city, #cust_state, #cust_county").each(function(i, e)
+                {
+                    $(e).keydown(function(ev)
+                    {
+                        ev.preventDefault();
+                    });
+                    $(e).keyup(function(ev)
+                    {
+                        ev.preventDefault();
+                    });
+                    $(e).on("keypress", function(ev)
+                    {
+                        ev.preventDefault();
+                    });
+                    $(e).focus(function()
+                    {
+                        $(e)[0].blur();
+                    });
+                });
+                $("#pic").change(function()
+                {
+                    if($("#pic").val().length > 0)
+                    {
+                        $("#file_sel_confirm").css("display", "block");
+                        $(".glyphicon-eye-close").addClass("special_fix2");
+                        $(".glyphicon-eye-open").addClass("special_fix2");
+                        $(".glyphicon-list-alt").addClass("special_fix");
+                    }
+                });
+                $("#spanish_cb").change(function()
+                {
+                    var value = ($(this)[0].checked * 1) + '';
+                    $("#spanish_input").val(value).attr("value", value);
+                });
+                /*$("#pic2").change(function()
+                {
+                    if($("#pic2").val().length > 0)
+                    {
+                        $("#file_sel_confirm2").css("display", "block");
+                    }
+                });*/
+
+                /*$(".dropdown-menu").eq(2).find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(e).attr("id").replace("tier_", "");
+                        $(e).parent().nextAll("input").first().val(val).attr("value", val);
+                        $(e).parent().parent().find("button").text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($(e).parent().parent().find("button"));
+                    });
+                });*/
+
+                $("#data_logger_div").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(e).attr("id").replace("data_logger_", "");
+                        $("#data_logger_question").val(val).attr("value", val);
+                        $(e).parent().parent().find("button").text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($(e).parent().parent().find("button"));
+                        if(val === "1")
+                        {
+                            $("#data_logger_warning, #data_logger_id_div, #data_logger_started_logging, #data_logger_location_div").css("display", "block");
+                            $("#data_logger_override_div").css("display", "none");
+                        }
+                        else
+                        {
+                            $("#data_logger_warning, #data_logger_id_div, #data_logger_started_logging, #data_logger_location_div").css("display", "none");
+                            $("#data_logger_override_div").css("display", "block");
+                        }
+                    });
+                });
+                $("#data_logger_started_logging").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(e).attr("id").replace("started_logging_", "");
+                        $("#started_logging").val(val).attr("value", val);
+                        $(e).parent().parent().find("button").text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($(e).parent().parent().find("button"));
+                    });
+                });
+
+                $("#dropdownMenuCare").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(e).attr("id").replace("care_", "");
+                        $("#care_value").val(val).attr("value", val);
+                        $(e).parent().parent().find("button").text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($(e).parent().parent().find("button"));
+                    });
+                });
+
+
+                var textarea = $("<textarea></textarea>");
+                textarea.attr("id", "temp_textarea");
+                textarea.css("padding", "1.5%").css("display", "block").css("min-height", "5em");
+                textarea.attr("placeholder", "Please input notes about this lead such as personal info and hot buttons...");
+                textarea.blur(function()
+                {
+                    $("#notes_for_surveyor").val($.trim(textarea.val()));
+                });
+                textarea.change(function()
+                {
+                    $("#notes_for_surveyor").val($.trim(textarea.val()));
+                });
+                textarea.keyup(function()
+                {
+                    $("#notes_for_surveyor").val($.trim(textarea.val()));
+                });
+                textarea.insertAfter($("#to_insert_ta"));                
+
+                $("#rep_office").val("N/A").attr("value", "N/A");
+
+                window.office_data = {{ offices|safe }};
+                $.each(office_data, function(i, office)
+                {
+                    var li = $("<li></li>").attr("role", "presentation");
+                    li.attr("id", "office_" + office.identifier);
+                    $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text(office.name).appendTo(li);
+                    li.appendTo($("#dropdownMenu2").nextAll(".dropdown-menu").eq(0));
+                });
+
+                $("#cust_postal").on("keyup", function()
+                {
+                    if($("#cust_postal").val().length === 5)
+                    {
+                        if($("#cust_postal").val().match(/\d/g).length === 5)
+                        {
+                            $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC1JStq4qg-S61Y1bAXLzAWlq3ToUIscZk&address=" + $("#cust_postal").val()).done(function(resp)
+                            {
+                                var city = resp.results[0].address_components[1].long_name;
+                                var state = ""
+
+                                var county = "n/a";
+                                if(resp.results.length > 0)
+                                {
+                                    for(var i = 0; i < resp.results[0].address_components.length; i++)
+                                    {
+                                        if(resp.results[0].address_components[i].types[0] === "administrative_area_level_1")
+                                        {
+                                            state = resp.results[0].address_components[i].short_name;
+                                        }
+                                        if(resp.results[0].address_components[i].types[0] === "administrative_area_level_2")
+                                        {
+                                            county = resp.results[0].address_components[i].long_name;
+                                        }
+                                    }
+                                }
+
+                                if($.trim($("#cust_postal").val()) === "81007")
+                                {
+                                    city = "Pueblo West"
+                                }
+                                $("#cust_city").val(city);
+                                $("#cust_state").val(state);
+
+                                if(county === "n/a")
+                                {
+                                    var qry = encodeURIComponent(city + "," + state);
+                                    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + qry).done(function(resp2)
+                                    {
+                                        var county = "n/a";
+                                        if(resp2.results.length > 0)
+                                        {
+                                            for(var i = 0; i < resp2.results[0].address_components.length; i++)
+                                            {
+                                                if(resp2.results[0].address_components[i].types[0] === "administrative_area_level_2")
+                                                {
+                                                    county = resp2.results[0].address_components[i].long_name;
+                                                }
+                                            }
+                                        }
+                                        $("#cust_county").val(county);
+                                    });
+                                }
+                                else
+                                {
+                                    $("#cust_county").val(county);
+                                }
+                            });
+                        }
+                    }
+                });
+                $("#cust_postal").on("change", function()
+                {
+                    $("#cust_postal").trigger("keyup");
+                });
+
+                $.each(window.utility_providers, function(i, provider)
+                {
+                    if(provider.active)
+                    {
+                        var li = $("<li></li>").attr("role", "presentation").attr("id", "provider_of_" + provider.value);
+                        var a = $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text(provider.value_friendly);
+
+                        a.appendTo(li);
+
+                        li.click(function()
+                        {
+                            $("#cust_utility_provider").val(provider.value).attr("value", provider.value);
+                            $("#dropdownMenu33").text(provider.value_friendly);
+                            $("<span></span>").addClass("caret").appendTo($("#dropdownMenu33"));
+                            if(provider.value === "san_diego_gas_&_electric")
+                            {
+                                //$("#meter_number_form_group").css("display", "block");
+                                //$("#meter_number_form_group").find("input").first().val("");
+                                //$("#meter_number_form_group").find("input").first()[0].focus();
+                            }
+                            else
+                            {
+                                //$("#meter_number_form_group").find("input").first().val("n/a");
+                                //$("#meter_number_form_group").css("display", "none");
+                            }
+                        }).appendTo($("#dropdownMenu33").nextAll("ul").eq(0));
+                    }
+                });
+
+                $("#dropdownMenuCash").nextAll("ul").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(this).attr("id").replace("cash_value_of_", "");
+                        $(this).parent().parent().nextAll("input").attr("value", val).val(val);
+                        var txt = $(this).text();
+                        $(this).parent().prevAll(".btn").first().text(txt);
+                        $("<span></span>").addClass("caret").appendTo($(this).parent().prevAll(".btn").first());
+                    });
+                });
+                /*$("#new_questions_0").click(function()
+                {
+                    $("#is_cash").val("1");
+                    $("#new_questions_btn").text("No");
+                    $("<span></span>").addClass("caret").appendTo($("#new_questions_btn"));
+                    $("#annual_income").val("0");
+                    $("#annaul_income_forgm_group").css("display", "none");
+                    $("#monthly_mortgage").val("0");
+                    $("#monthly_mortgage_form_group").css("display", "none");
+                    $("#last_four").val("1111");
+                    $("#last_four_ssn_form_group").css("display", "none");
+                    $("#ab_partial").val("1");
+                });
+                $("#new_questions_1").click(function()
+                {
+                    $("#is_cash").val("0");
+                    $("#new_questions_btn").text("Yes");
+                    $("<span></span>").addClass("caret").appendTo($("#new_questions_btn"));
+                    $("#annual_income").val("");
+                    $("#annaul_income_forgm_group").css("display", "block");
+                    $("#monthly_mortgage").val("");
+                    $("#monthly_mortgage_form_group").css("display", "block");
+                    $("#last_four").val("");
+                    $("#last_four_ssn_form_group").css("display", "block");
+                    
+                    if($("#real_or_estimated_value").val() === "real")
+                    {
+                        $("#ab_partial").val("0");
+                    }
+                });*/
+                $("#dropdownMenuSecondPerson").nextAll("ul").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(this).attr("id").replace("second_person_", "");
+                        $(this).parent().parent().nextAll("input").attr("value", val).val(val);
+                        var txt = $(this).text();
+                        $(this).parent().prevAll(".btn").first().text(txt);
+                        $("<span></span>").addClass("caret").appendTo($(this).parent().prevAll(".btn").first());
+
+                        if(val === "1")
+                        {
+                            $("#second_person_first_div, #second_person_last_div").each(function(ii, ee)
+                            //$("#second_person_first_div, #second_person_last_div, #second_person_email_div").each(function(ii, ee)
+                            {
+                                $(ee).css("display", "block");
+                            });
+                        }
+                        else
+                        {
+                            $("#second_person_first_div, #second_person_last_div").each(function(ii, ee)
+                            //$("#second_person_first_div, #second_person_last_div, #second_person_email_div").each(function(ii, ee)
+                            {
+                                $(ee).css("display", "none");
+                            });
+                        }
+                    });
+                });
+                
+                $("#dropdownMenuSecondPerson").nextAll("ul").first().find("li").eq(1).trigger("click");
+
+                $("#real_or_estimated").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var btn = $(this).parent().prevAll("button").first();
+                        btn.text($(this).text());
+                        $("<span></span>").addClass("caret").appendTo(btn);
+
+                        var input = $(this).closest(".dropdown").first().nextAll("input").first();
+                        var new_value = $(this).attr("id").replace("real_or_estimated_", "");
+                        input.val(new_value);
+
+                        if(new_value === "real")
+                        {
+                            $("#twelve_months_1").trigger("click");
+                            $("#ab_partial").val("0");
+                        }
+                        else
+                        {
+                            $("#twelve_months_0").trigger("click");
+                            $("#ab_partial").val("1");
+                        }
+                    });
+                });
+
+                $("#lead_div").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(this).attr("id").replace("lead_value_of_", "");
+                        var btn = $(e).closest("ul").prevAll("button").first();
+                        btn.text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo(btn);
+                        $("#lead_status").val(val).attr("value", val);
+                    });
+                });
+
+                var idx = 1;
+                if("{{user_type}}" === "solar_pro" || "{{user_type}}" === "solar_pro_manager")
+                {
+                    idx = 0;
+                }
+                $("#lead_div").css("display", "none");
+                $("#lead_div").find("li").eq(idx).trigger("click");
+
+                $("#dt4").find("input").first().change(function()
+                {
+                    $("#sp2_mom").val("n/a");
+                });
+                $("#time_lbl").click(function()
+                {                    
+                    $("#sp2_mom").val("n/a");
+                    var input = $("#dt4").find("input").first();
+                    input.css("opacity", "0.2");
+                    var office_identifier = $("#rep_office").val();
+                    var dt_vals = input.val().split("-");
+                    var dt = dt_vals[2] + "-" + dt_vals[0] + "-" + dt_vals[1];
+                    $.post("/data2", {"fn": "time_slots_for_office", "identifier": office_identifier, "dt": dt}).done(function(rrrrr)
+                    {
+                        var same_day = $("#appointment_type_input").val() === "same_day_right_now";
+                        if(("{{ user_type }}" !== "solar_pro" && "{{ user_type }}" !== "solar_pro_manager") || same_day)
+                        {
+                            rrrrr = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+                        }
+                        input.css("opacity", "1.0");
+                        var html = $("<div></div>");
+                        $("<p></p>").text("Choose a Time (just tap it)").appendTo(html);
+                        $.each(rrrrr, function(iii, eee)
+                        {
+                            var am_pm = "AM";
+                            if(eee >= 12)
+                            {
+                                am_pm = "PM";
+                            }
+                            var twelve_hour_format = eee + '';
+                            if(twelve_hour_format.length === 1)
+                            {
+                                twelve_hour_format = "0" + twelve_hour_format;
+                            }
+                            if(parseInt(twelve_hour_format) > 12)
+                            {
+                                twelve_hour_format = parseInt(twelve_hour_format) - 12;
+                                twelve_hour_format += '';
+                                if(twelve_hour_format.length === 1)
+                                {
+                                    twelve_hour_format = "0" + twelve_hour_format;
+                                }
+                            }
+                            $("<p></p>").css("background", "#009688").css("text-indent", "0.5em").attr("data-hour", (eee + '')).text(twelve_hour_format + ":00 " + am_pm).appendTo(html);
+                        });
+                        BootstrapDialog.show
+                        (
+                            {
+                                "title": "Choose an SP2 Time for " + input.val(),
+                                "message": html.html(),
+                                "buttons":
+                                [
+                                    {
+                                        "label": "Cancel",
+                                        "cssClass": "btn-danger",
+                                        "action": function(d)
+                                        {
+                                            d.close();
+                                        }
+                                    }
+                                ],
+                                "closable": false,
+                                "onshown": function(d)
+                                {
+                                    $(".bootstrap-dialog-body").find("p").each(function(iiii, eeee)
+                                    {
+                                        $(eeee).click(function()
+                                        {
+                                            var sp2_str = dt + " ";
+                                            var hr = $(eeee).data("hour") + '';
+                                            if (hr.length === 1)
+                                            {
+                                                hr = "0" + hr;
+                                            }
+                                            sp2_str += hr;
+                                            sp2_str += ":00"
+                                            $("#sp2_mom").val(sp2_str);
+                                            if("{{user_type}}" === "solar_pro" || "{{user_type}}" === "solar_pro_manager")
+                                            {
+                                                $("#closer_lbl").css("display", "inline");
+                                            }                                            
+                                            d.close();
+                                        });
+                                    });
+                                }
+                            }
+                        );
+                    });
+                });
+
+                if("{{user_type}}" !== "solar_pro" && "{{user_type}}" !== "solar_pro_manager")
+                {
+                    $(".appointment_type_div").find("li").first().trigger("click");
+                    var nums = [1, 2];
+                    $.each(nums, function(i, e)
+                    {
+                        $(".appointment_type_div").find("li").eq(e - i).remove();
+                    });
+                }
+
+                if("{{ user_type }}" === "solar_pro" || "{{ user_type }}" === "solar_pro_manager")
+                {
+                    $("#closers_peek_div").css("display", "block");
+                    setInterval(function()
+                    {
+                        if($("#sp2_mom").val() === "n/a")
+                        {
+                            if($("#closer_lbl").css("display").toLowerCase() !== "none")
+                            {
+                                $("#closer_lbl").css("display", "none");
+                                $("#closer_hint").text("").css("display", "none");
+                            }
+                            $("#closer_input").val("n/a");
+                        }                        
+                        var appt_type = $("#appointment_type_input").val();
+                        if(appt_type === "same_day_later_on" || appt_type === "same_day_right_now" || appt_type === "regular")
+                        {
+                            if($("#sp2_mom").val() !== "n/a")
+                            {
+                                var display = $("#closer_lbl").css("display").toLowerCase();
+                                if(display.indexOf("inline") === -1)
+                                {
+                                    if("{{ user_type }}" === "solar_pro" || "{{ user_type }}" === "solar_pro_manager")
+                                    {
+                                        //$("#closer_lbl").css("display", "inline");
+                                        //$("#closer_lbl").css("display", "inline");
+                                    }                                    
+                                }
+                            }                                                
+                        }
+                        
+                    }, 100);
+                }
+
+                $("#closer_lbl").click(function()
+                {
+                    var that = $(this);
+                    that.css("opacity", "0.1");
+                    var payload = {"fn": "closer_same_day_availability", "identifier": $("#rep_office").val(), "sp2": $("#sp2_mom").val()}
+                    if($("#appointment_type_input").val() === "same_day_later_on")
+                    {
+                        payload["override"] = "1";
+                    }
+                    if($("#appointment_type_input").val() === "regular")
+                    {
+                        payload["fn"] = "normal_availability";
+                    }
+
+                    $.post("/data", payload).done(function(r)
+                    {
+                        if(r.closers.length === 0)
+                        {
+                            that.css("opacity", "1.0");
+                            window.alert("No closers are available for same-days at the time specified. Please reschedule the appointment for a different date and time, ideally tomorrow.");
+                            return;
+                        }
+                        var html = $("<div></div>");
+                        $.each(r.closers, function(i, closer)
+                        {
+                            $("<p></p>").addClass("closer").attr("data-identifier", closer.identifier).text(closer.name).appendTo(html);
+                        });
+
+                        BootstrapDialog.show
+                        (
+                            {
+                                "title": "Choose a Closer",
+                                "message": html.html(),
+                                "buttons":
+                                [
+                                    {
+                                        "label": "Cancel",
+                                        "cssClass": "btn-danger",
+                                        "action": function(d)
+                                        {
+                                            that.css("opacity", "1.0");
+                                            d.close();
+                                        }
+                                    }
+                                ],
+                                "onshown": function(d)
+                                {
+                                    $(".closer").each(function(i, e)
+                                    {
+                                        $(e).click(function()
+                                        {
+                                            $("#closer_input").val($(e).data("identifier"));                                            
+                                            that.css("opacity", "1.0");
+                                            d.close();
+                                        });
+                                    });
+                                }
+                            }
+                        )
+                    });
+                });
+                $("#closer_schedule_lbl").click(function()
+                {
+                    var closers = {{ closers|safe }};
+                    var html = $("<div></div>");
+                    $("<p></p>")
+                    .append
+                    (
+                        $("<b></b>").text("Tap to view Schedule")
+                    )
+                    .appendTo(html);
+                    $.each(closers, function(i, closer)
+                    {
+                        $("<p></p>").attr("data-identifier", closer.identifier).addClass("closer_name_schedule").text(closer.name).appendTo(html);
+                    });
+
+                    BootstrapDialog.show
+                    (
+                        {
+                            "title": "Choose a Closer",
+                            "message": html.html(),
+                            "buttons":
+                            [
+                                {
+                                    "title": "Cancel",
+                                    "cssClass": "btn-danger",
+                                    "action": function(d)
+                                    {
+                                        d.close();
+                                    }
+                                }
+                            ],
+                            "onshown": function(d)
+                            {
+                                $(".closer_name_schedule").each(function(i, e)
+                                {
+                                    $(e).click(function()
+                                    {
+                                        d.close();
+                                        var new_div = $("<div></div>").addClass("closers_schedule_wrapper");
+                                        var form = $("form").first();
+                                        form.css("display", "none");
+                                        var today = moment();
+                                        var tomorrow = moment().add(1, "days");
+                                        var day_after_tomorrow = moment().add(2, "days");
+
+                                        var name_mapping = ["Today", "Tomorrow", day_after_tomorrow.format("MM/DD/YYYY")];
+
+                                        $.each([today, tomorrow, day_after_tomorrow], function(ii, ee)
+                                        {
+                                            $("<span></span>").addClass("label").addClass("label-warning").text(name_mapping[ii]).addClass("schedule_date_option")
+                                            .click(function()
+                                            {
+                                                var that9 = $(this);
+                                                var old_text = that9.text();
+                                                that9.css("opacity", "0.5").text("Loading...");
+                                                $("#temp_fcal").remove();
+                                                $("<div></div>").attr("id", "temp_fcal").appendTo(new_div);
+                                                var that = $(this);
+                                                $.post("/data2", {"fn": "get_sp2_events_for_rep", "identifier": $(e).data("identifier"), "start_dt": ee.format("YYYY-MM-DD"), "end_dt": ee.format("YYYY-MM-DD")}).done(function(response)
+                                                {
+                                                    that9.text(old_text);
+                                                    that9.css("opacity", "1.0");
+                                                    var events_data = [];
+                                                    $.each(response.events, function(iii, appointment)
+                                                    {
+                                                        var obj = {};
+                                                        obj["title"] = appointment.name;
+                                                        obj["repeated"] = false;
+                                                        obj["start"] = appointment.start_dt.replace(" ", "T");
+                                                        obj["end"] = appointment.end_dt.replace(" ", "T");
+                                                        obj["allDay"] = false;
+                                                        obj["name"] = appointment.name;
+                                                        events_data.push(obj);
+                                                    });
+                                                    $.each(response.repeated_events, function(iii, appointment)
+                                                    {
+                                                        var weekday = ee.weekday();
+                                                        var dow_parsed = $.parseJSON(appointment.dow);
+                                                        if(dow_parsed.indexOf(weekday) > -1)
+                                                        {
+                                                            var obj = {};
+                                                            obj["title"] = appointment.name;
+                                                            obj["repeated"] = false;
+                                                            obj["start"] = ee.format("YYYY-MM-DD") + "T" + appointment.start_dt
+                                                            obj["end"] = ee.format("YYYY-MM-DD") + "T" + appointment.end_dt
+                                                            obj["allDay"] = false;
+                                                            obj["name"] = appointment.name;
+                                                            events_data.push(obj);
+                                                        }
+                                                    });
+                                                    $("#temp_fcal")
+                                                    .fullCalendar
+                                                    (
+                                                        {
+                                                            "events": events_data,
+                                                            "height": "auto",
+                                                            "minTime": "07:00:00",
+                                                            "maxTime": "22:00:00",
+                                                            "defaultView": "agendaDay"
+                                                        }
+                                                    );
+                                                    $(".fc-corner-left").remove();
+                                                    for(var i = 0; i < ii; i++)
+                                                    {
+                                                        var timeout = 500 * i;
+                                                        setTimeout(function()
+                                                        {
+                                                            $(".fc-icon-right-single-arrow").trigger("click");
+                                                        }, timeout);
+                                                        setTimeout(function()
+                                                        {
+
+                                                        }, 1250);
+                                                    }
+                                                });
+                                            }).appendTo(new_div);
+                                        });
+                                        $("<span></span>").addClass("label").addClass("label-danger").addClass("schedule_date_option").text("Back")
+                                        .click(function()
+                                        {
+                                            new_div.remove();
+                                            $("form").first().css("display", "block");
+                                            $("#closers_peek_div").first()[0].scrollIntoView();
+                                        })
+                                        .insertAfter(new_div.find(".schedule_date_option").last());                                        
+                                        new_div.insertAfter(form);
+
+                                    });
+                                });
+                            }
+                        }
+                    )
+                });
+
+                $("form").eq(0).submit(function()
+                {
+
+                    $("#sub_btn").css("display", "none");                    
+                    if($("#minimum_kwhs_lbl").css("display").toLowerCase() !== "none")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("There is an outstanding override code.");
+                        return false;
+                    }
+                    if($("#override_lbl").css("display").toLowerCase() !== "none")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You have not provided the override code");
+                        return false;
+                    }
+                    if($("#pic")[0].files.length > 0)
+                    {
+                        $("#has_qual_card").val("1");
+                    }
+
+                    if($("#data_logger_question").val() === "n/a" && $("#amigo_input").val() === "0")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("Please specify whether you placed a data logger at this location.");
+                        return false;
+                    }
+
+                    var appt_type = $("#appointment_type_input").val();
+
+                    if("{{ user_type }}" === "solar_pro" || "{{ user_type }}" === "solar_pro_manager")
+                    {
+                        if(appt_type === "same_day_later_on" || appt_type === "same_day_right_now" || appt_type === "regular")
+                        {
+                        }
+                    }
+
+                    if($("#appointment_type_input").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must choose the appoitnment type.");
+                        return false;
+                    }
+                    if(false)/*$("#rep_office").val() === "b9878e9d5d74dbaceb7b7d9c1be74fa5ccd87d6100cad5496d2306366bbcfadafca3d2ae5dcfc3a82c2525650a88e4332cfc11183f8a0fd39071f13614e5806f" || $("#rep_office").val() === "fe9e899054a591a55f02e6aa138c278c0d9fa4829892ea11d7e390780a3bafd25728b2b775a35c32b0bc6c76f892824dd5c8a1f57a833f725a354d9ce3e5f8d9")*/
+                    {
+                        if($("#data_logger_question").val() !== "1")
+                        {
+                            if($("#amigo_input").val() !== "1")
+                            {
+                                var value = $.trim($("#data_logger_override_code").val());
+                                if(value !== window.dl_override_code)
+                                {
+                                    $("#sub_btn").css("display", "inline-block");
+                                    window.alert("Riverside and San Diego North ABs must have data loggers placed. If you have provided an override code, that code is incorrect.");
+                                    return false;
+                                }
+                            }                            
+                        }
+                    }
+                    if($("#data_logger_question").val() === "1")
+                    {
+                        var id_val = $.trim($("#data_logger_id").val()).toUpperCase();
+                        if(id_val.length === 0)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please specify the data logger's hash.");
+                            return false;
+                        }
+                        if($("#started_logging").val() === "n/a")
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please specify whether you have started logging or not.");
+                            return false;
+                        }
+                        var location_val = $.trim($("#data_logger_location").val());
+                        if(location_val.length === 0)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please specify the data logger's location in the home.");
+                            return false;
+                        }
+
+                        
+                        if(window.readers.indexOf(id_val.toUpperCase()) === -1)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("The device hash has either been mistyped or is not currently checked out to you.");
+                            return false;
+                        }
+                    }
+                    
+
+                    $("#cust_first, #cust_last, #cust_email, #second_person_first, #second_person_last, #second_person_email, #cust_address, #cust_city, #cust_state, #cust_county").each(function(i, e)
+                    {
+                        $(e).val($.trim($(e).val()));
+                    });
+
+                    var cont_with_req_checking = true;
+                    var missing_field_name = null;
+                    $("form").eq(0).find("input").each(function(i, e)
+                    {
+                        if(cont_with_req_checking)
+                        {
+                            if($(e).attr("required") + '' === "required")
+                            {
+                                if($.trim($(e).val()) === "")
+                                {
+                                    missing_field_name = $.trim($(e).closest(".col-sm-10").prevAll("label").eq(0).text().replace(":", "").replace("\n", ""));
+                                    cont_width_req_checking = false;
+                                }
+                            }
+                        }
+                    });
+                    if(missing_field_name !== null)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert(missing_field_name + " is required.");
+                        return false;
+                    }
+                    if($("#cust_email_wrapper").css("display").toLowerCase() !== "none")
+                    {
+                        if($("#cust_email").val().indexOf("@") === -1)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please provide a valid email address. If the customer does not want to provide the email, please change the dropdown menu choice");
+                            return false;
+                        }
+                    }                   
+                    if($("#sp2_mom").val() === "n/a")
+                    {
+                        if("{{ user_type }}" === "energy_expert" || "{{ user_type }}" === "sales_manager")
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("You must choose an SP2 Time");
+                            return false;
+                        }
+                    }
+
+                    var current_sp2_mom = moment($("#sp2_mom").val(), "YYYY-MM-DD HH:mm");
+                    var right_now = moment();
+                    if(current_sp2_mom.isBefore(right_now) && $("#appointment_type_input").val() !== "same_day_right_now")
+                    {
+                        if("{{ user_type }}" === "energy_expert" || "{{ user_type }}" === "sales_manager")
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("The SP2 time cannot be in the past");
+                            return false;
+                        }                        
+                    }
+
+                    /*if($.trim($("#pic2").val()) === "")
+                    {
+                        window.alert("You must upload an image of the customer's utility bill");
+                        return false;
+                    }*/
+
+
+                    var cust_email = $("#cust_email").val();
+                    var rep_email = $("#rep_email").val();
+                    var email_pattern = /\S+@\S+\.\S+/;
+
+                    //if(email_pattern.test(cust_email) !== true)
+                    //{
+                    //    $("#sub_btn").css("display", "inline-block");
+                    //    window.alert("The customer email address must be valid");
+                    //    return false;
+                    //}
+                    if(email_pattern.test(rep_email) !== true)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("The rep email address must be valid");
+                        return false;
+                    }
+                    if($("#cust_utility_provider").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must specify the customer's utility provider");
+                        return false;
+                    }
+                    if($("#is_cash").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must specify whether the deal is a cash deal or financed deal");
+                        return false;
+                    }
+                    if($("#lead_status").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must specifiy whether this is a lead or not");
+                        return false;
+                    }
+                    if($("#has_second_person").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must specify whether there is a second homeowner.");
+                        return false;
+                    }
+
+                    if($("#has_second_person").val() === "1")
+                    {
+                        var second_email = $.trim($("#second_person_email").val());
+                        if(second_email.length > 0)
+                        {
+                            if(second_email.indexOf("@") === -1)
+                            {
+                                window.alert("The second homeowner's email was invalid. If the customer does not wish to provide this information, please leave the field blank.");
+                                $("#sub_btn").css("display", "inline-block");
+                                return false;
+                            }
+                        }
+
+                        /*if(email_pattern.test(second_email) !== true)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("The 2nd Homeowner's email address must be valid.");
+                            return false;
+                        }*/
+                        /*if(second_email === cust_email)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("The emails for the customer and second homeowner must be unique");
+                            return false;
+                        }*/
+                        if($("#second_person_first").val().length === 0)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("You must specify the 2nd Homeowner's first name.");
+                            return false;
+                        }
+                        if($("#second_person_last").val().length === 0)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("You must specify the 2nd Homeowner's last name.");
+                            return false;
+                        }
+                        var second_last_four = "3333";
+                        if(second_last_four === null || second_last_four.length !== 4)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please provide a valid last-four-digits of the 2nd Homeowner's social-security number.");
+                            return false;
+                        }
+                        if(second_last_four === "0000" || second_last_four === "1111" || second_last_four == "1234")
+                        {
+                            $("#is_cash").val("1");
+                        }
+                    }
+
+                    /*if($("#cust_utility_provider").val() === "san_diego_gas_&_electric" && false)
+                    {
+                        if($.trim($("#meter_number").val()).length === 0 || $("#meter_number").val() === "n/a")
+                        {
+                            window.alert("You must provide the SDGE meter number.");
+                            return false;
+                        }
+                    }*/
+                    if($("#got_usage").val().toLowerCase() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("You must specify whether you obtained utility usage information from the customer.");
+                        return false;
+                    }
+                    if($("#got_usage").val().toLowerCase() === "0" && ($("#cust_state").val().toLowerCase() === "tx" || $("#cust_state").val().toLowerCase() === "co"))
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("Texas customers must have their usage information submitted.");
+                        return false;
+                    }
+
+                    // check for last 4 of sosh
+                    /*var last_four = $("#last_four").val().digits();
+                    if(last_four === null)
+                    {
+                        window.alert("Please provide a valid last-four-digits of the customer's social-security number.");
+                        return false;
+                    }
+                    if(last_four.length !== 4)
+                    {
+                        window.alert("Please provide a valid last-four-digits of the customer's social-security number.");
+                        return false;
+                    }
+                    if(last_four === "0000" || last_four === "1111" || last_four == "1234")
+                    {
+                        $("#is_cash").val("1");
+                    }*/
+
+                    // require annual income and monthly mortgage
+
+                    if($("#real_or_estimated_value").val() === "n/a")
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("Please specify whether the electrical usage information gathered was real or estimated.");
+                        return false;
+                    }
+
+                    /*var annual_income = $("#annual_income").val().replace("K", "000").replace("k", "000");
+                    while(annual_income.indexOf(",") > -1)
+                    {
+                        annual_income = annual_income.replace(",", "");
+                    }
+                    var income_parsed = parseFloat(annual_income);
+                    if(income_parsed === null || Number.isNaN(income_parsed))
+                    {
+                        window.alert("The annual income is required. Please provide a valid numeric value.");
+                        return false;
+                    }
+                    $("#annual_income").val(income_parsed.toFixed(2));*/
+
+
+
+                    /*var monthly_mortgage = $("#monthly_mortgage").val().replace("K", "000").replace("k", "000");
+                    while(monthly_mortgage.indexOf(",") > -1)
+                    {
+                        monthly_mortgage = monthly_mortgage.replace(",", "");
+                    }
+                    var mortgage_parsed = parseFloat(monthly_mortgage);
+                    if(mortgage_parsed === null || Number.isNaN(mortgage_parsed))
+                    {
+                        window.alert("The monthly mortgage is required. Please provide a valid numeric value.");
+                        return false;
+                    }
+                    $("#monthly_mortgage").val(mortgage_parsed.toFixed(2));*/
+
+
+                    /*if($("#tier_option").val().toLowerCase() === "n/a")
+                    {
+                        window.alert("You must first select a CPW tier option");
+                        return false;
+                    }*/
+
+                    if($("#got_usage").val() === "0")
+                    {
+
+                    }
+                    else
+                    {
+
+                        var ret_early_part2 = false;;
+                        var ret_early_msg = "kk";
+                        var u_data = {};
+                        var total_k = parseFloat(0);
+                        var total_d = parseFloat(0);
+                        var highest = parseFloat(0);
+
+                        if($("#has_twelve_months_of_usage").val() === "-1")
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("Please specify whether the customer has lived in their home for 12 months");
+                            return false;
+                        }
+                        var ret_early_bc_of_usage_items = false;
+                        var bad_usage_items_id = "";
+                        $.each(["twelve_months_total_kwhs", "twelve_months_total_dollars", "twelve_months_highest_bill", "less_than_twelve_months_avg_kwhs", "less_than_twelve_months_average_dollars", "less_than_twelve_months_highest_bill"], function(iii, id)
+                        {
+                            if($("#" + id).parent().parent().css("display").toLowerCase() === "none")
+                            {
+                                return;
+                            }
+                            if(ret_early_bc_of_usage_items)
+                            {
+
+                                return;
+                            }
+                            $("#" + id).val($.trim($("#" + id).val()));
+                            var value = $("#" + id).val();
+                            while(value.indexOf("$") > -1)
+                            {
+                                value = value.replace("$", "");
+                            }
+                            while(value.indexOf(",") > -1)
+                            {
+                                value = value.replace(",", "");
+                            }
+                            if(value === "")
+                            {
+                                ret_early_bc_of_usage_items = true;
+                                bad_usage_items_id = id;
+                            }
+                            else
+                            {
+                                var parsed = parseFloat(value);
+                                if(Number.isNaN(parsed))
+                                {
+                                    ret_early_bc_of_usage_items = true;
+                                    bad_usage_items_id = id;
+                                }
+                            }
+                            if(!ret_early_bc_of_usage_items)
+                            {
+                                $("#" + id).val(value);
+                            }
+                        });
+
+                        if(ret_early_bc_of_usage_items)
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("The following field could not be understood: \n" + $("#" + bad_usage_items_id).parent().prevAll("label").first().text());
+                            return false;
+                        }
+
+                        if($("#has_twelve_months_of_usage").val() === "0")
+                        {
+                            total_k = parseFloat($("#less_than_twelve_months_avg_kwhs").val()) * parseFloat("12");
+                            total_d = parseFloat($("#less_than_twelve_months_average_dollars").val()) * parseFloat("12");
+                            highest = parseFloat($("#less_than_twelve_months_highest_bill").val());
+                        }
+                        else
+                        {
+                            total_k = parseFloat($("#twelve_months_total_kwhs").val());
+                            total_d = parseFloat($("#twelve_months_total_dollars").val());
+                            highest = parseFloat($("#twelve_months_highest_bill").val());
+                        }
+
+                        if($("#care_value").val() === "n/a")
+                        {
+                            $("#sub_btn").css("display", "inline-block");
+                            window.alert("You must specify whether this customer is on a CARE (discount) program.");
+                            return false;
+                        }
+
+
+                        $("<input />").attr("type", "hidden").attr("value", JSON.stringify({})).attr("name", "usage_data").appendTo($("form").first());
+
+                        $("#usage_months").val("12");
+                        $("#total_kwhs").val(total_k.toString());
+                        $("#total_dollars").val(total_d.toString());
+                        $("#highest_bill").val(highest.toString());
+                    }
+                    if($.trim($("#cust_utility_account_no").val()).length === 0)
+                    {
+                        $("#cust_utility_account_no").val("Not Available");
+                    }
+                    /*$("#cust_dob").val($.trim($("#cust_dob").val()));
+                    var bday_val = $("#cust_dob").val();
+                    var bday_error_msg = "The birthday field must be in a format such as 11-31-1988";
+                    if(bday_val.replace("-", "").replace("-", "").length - bday_val.length !== -2)
+                    {
+                        window.alert(bday_error_msg);
+                        return false;
+                    }
+                    var bday_vals = bday_val.split("-");
+                    if(bday_vals[0].length !== 2 || bday_vals[1].length !== 2 || bday_vals[2].length !== 4)
+                    {
+                        window.alert(bday_error_msg);
+                        return false;
+                    }
+                    var month_check = (parseInt(bday_vals[0]) >= 1 && parseInt(bday_vals[0]) <= 12);
+                    var day_check = (parseInt(bday_vals[1]) >= 1 && parseInt(bday_vals[1]) <= 31);
+                    var year_check = (parseInt(bday_vals[2]) >= 1850 && parseInt(bday_vals[2]) <= new Date().getFullYear() * 1);
+                    if(!month_check || !day_check || !year_check)
+                    {
+                        window.alert(bday_error_msg);
+                        return false;
+                    }*/
+
+                    $("#rep_id").val($("#rep_id").val().toUpperCase());
+
+                    var rep_phone_val = $.trim($("#rep_phone").val());
+                    if(rep_phone_val.match(/\d/g) === null || rep_phone_val.match(/\d/g).length !== 10)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("Your phone number (rep) must contain exactly ten digits");
+                        return false;
+                    }
+                    else
+                    {
+                        var new_val = $.trim($("#rep_phone").val()).match(/\d/g).join("");
+                        $("#rep_phone").val(new_val);
+                    }
+                    var ret_false = false;
+                    $("#cust_address, #cust_city, #cust_state, #cust_county").each(function(i, e)
+                    {
+                        if($.trim($(e).val()).length < 2 && !ret_false)
+                        {
+                            window.alert("All address components are required");
+                            ret_false = true;
+                        }
+                    });
+                    if(ret_false)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        return false;
+                    }
+                    if($.trim($("#cust_first").val()).length < 2)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("A customer first name is required");
+                        return false;
+                    }
+                    if($.trim($("#cust_last").val()).length < 2)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("A customer last name is required");
+                        return false;
+                    }
+
+                    var cust_phone_val = $.trim($("#cust_phone").val());
+                    if(cust_phone_val.match(/\d/g) === null ||cust_phone_val.match(/\d/g).length !== 10)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("The phone number (customer) must contain exactly ten digits");
+                        return false;
+                    }
+                    else
+                    {
+                        var new_val2 = $.trim($("#cust_phone").val()).match(/\d/g).join("");
+                        $("#cust_phone").val(new_val2);
+                    }
+
+                    if($("#cust_postal").val().length !== 5)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("The postal code must be exactly 5 digits");
+                        return false;
+                    }
+                    var postal_val = $.trim($("#cust_postal").val());
+                    if(postal_val.match(/\d/g)=== null || postal_val.match(/\d/g).length !== 5)
+                    {
+                        $("#sub_btn").css("display", "inline-block");
+                        window.alert("The postal code must be exactly 5 digits");
+                        return false;
+                    }
+
+
+                    if(!$("form").eq(0).hasClass("returnfalse"))
+                    {
+                        if(confirmAvailability())
+                        {
+                            $("#sub_btn").remove();
+                            if("{{ user_type }}" === "energy_expert" || "{{ user_type }}" === "sales_manager")
+                            {
+                                showSubmitScreen();
+                                doHeartBeat = function() {};
+                                return true;
+                            }
+                            fancySP2Select();
+                            return false;
+                        }
+                    }
+
+                    if(confirmAvailability())
+                    {
+                        killReservations(true);
+                    }
+                    return false;
+                });
+                $(".glyphicon-camera").click(function()
+                {
+                    $(this).nextAll("input").eq(0).click();
+                });
+                var val = getDateString();
+                var split = val.split("/");
+                for(var i = 0; i < split.length; i++)
+                {
+                    if(split[i].length === 1)
+                    {
+                        split[i] = "0" + split[i];
+                    }
+                }
+                $("#cust_dob").attr("placeholder", split.join("-"));
+                $("#cust_signature_date").attr("value", split.join("-"));
+                $("#cust_appointment_date").attr("value", "01-01-2012");
+
+                var tom = moment(split.join("-"), "MM-DD-YYYY");
+                tom = tom.add(2, "days");
+
+                $("#sp2_date").attr("value", tom.format("MM-DD-YYYY"));
+                //$("#dt").attr("data-date", split.join("-"));
+                $("#dt2").attr("data-date", split.join("-"));
+                $("#dt4").attr("data-date", split.join("-"));
+                $("#dt3").attr("data-date", "01-01-2012");
+                /*$("#cust_dob").datepicker(
+                {
+                    format: "mm-dd-yyyy",
+                    autoClose: true
+                });*/
+                $("#cust_signature_date").datepicker(
+                {
+                    format: "mm-dd-yyyy",
+                    autoClose: true
+                });
+                var mombefore = moment();
+                var momafter = moment().add(7, "days");
+
+                var disabled_sp2_days = [];
+
+                for(var i = 0; i < 365; i++)
+                {
+                    mombefore = mombefore.subtract(1, "days");
+                    disabled_sp2_days.push(mombefore.format("MM-DD-YYYY"));
+                }
+                for(var i = 0; i < 365; i++)
+                {
+                    momafter = momafter.add(1, "days");
+                    disabled_sp2_days.push(momafter.format("MM-DD-YYYY"));
+                }
+                if("{{ user_type }}" !== "energy_expert" && "{{ user_type }}" !== "sales_manager" && "{{ user_type }}" !== "super")
+                {
+                    disabled_sp2_days.push(moment().format("MM-DD-YYYY"));
+
+                    var cutoff_date = moment("{{ cutoff_date }}", "YYYY-MM-DD");
+                    for(var i = 0; i < 180; i++)
+                    {
+                        disabled_sp2_days.push(cutoff_date.format("MM-DD-YYYY"));
+                        cutoff_date = cutoff_date.add(1, "days");
+                    }
+                }
+
+
+                $("#sp2_date").datepicker(
+                {
+                    format: "mm-dd-yyyy",
+                    autClose: true,
+                    datesDisabled: disabled_sp2_days
+                });
+                $("#sp2_date").change(function()
+                {
+                    $("#sp2_mom").val("n/a");
+                    $("#closer_input").val("n/a");
+                    $("#time_lbl").css("display", "inline");
+                    $("#time_hint").css("display", "none");
+                    $("#closer_lbl").css("display", "none");
+                    $("#closer_hint").css("display", "none");
+                });
+
+                $("#dropdownMenu2").nextAll(".dropdown-menu").first().find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        $("#rep_office").val($(e).attr("id").replace("office_", ""));
+                        $("#rep_office").attr("value", $(e).attr("id").replace("office_", ""));
+
+                        var html = $.trim($(e).text()) + "<span class='caret'></span>";
+                        $(e).parent().prevAll("button").eq(0).html(html);
+                        initSurveyDateWidget();
+                    });
+                });
+                $("#twelve_months").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        $(".twelve_months_div_1").css("display", "none");
+                        $(".twelve_months_div_0").css("display", "none");
+                        $(".twelve_months_div_" + $(e).attr("id").replace("twelve_months_", "")).css("display", "block");
+                        var btn = $(this).closest(".dropdown").find("button").first();
+                        btn.text($(this).text());
+                        $("<span></span>").addClass("caret").appendTo(btn);
+                        $("#has_twelve_months_of_usage").val($(e).attr("id").replace("twelve_months_", ""));
+                    });                    
+                });
+                $("#dropdownMenu2").nextAll(".dropdown-menu").first().find("li").each(function(i, e)
+                {
+                    if($(e).attr("id") === "office_{{ rep_office }}")
+                    {
+                        $(e).click();
+                    }
+                });
+                $("#cust_signature_date, #cust_appointment_date, #sp2_date").each(function(i, e)
+                {
+                    $(e).keydown(function(ev)
+                    {
+                        ev.preventDefault();
+                    }).keyup(function(ev)
+                    {
+                        ev.preventDefault();
+                    });
+                });
+                setInterval(function()
+                {
+                    checkDatePickerWidget();
+                }, 200);
+                setInterval(function()
+                {
+                    doHeartBeat();
+                }, 5000);
+                setTimeout(function()
+                {
+                    confirmAvailability();
+                }, 2000);
+
+                $("#sub_btn").click(function()
+                {
+                    
+                });
+                datePickerTouchFixes();
+
+                $("#got_usage_div").find("ul").find("li").each(function(i, e)
+                {
+                    $(e).click(function()
+                    {
+                        var val = $(this).attr("id").replace("got_usage_value_of_", "");
+                        $("#got_usage").val(val);
+                        $("#got_usage_div").find("button").text($(e).text());
+                        $("<span></span>").addClass("caret").appendTo($("#got_usage_div").find("button"));
+                    });
+                });
+
+                $("#total_kwhs, #total_dollars, #highest_bill").each(function(i, e)
+                {
+                    $(e).blur(function()
+                    {
+                        var found_period = false;
+                        var allowed_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+                        var val = $(e).val();
+                        var new_val = "";
+                        if(val.length > 0)
+                        {
+                            for(var k = 0; k < val.length; k++)
+                            {
+                                if(allowed_chars.indexOf(val[k]) > -1)
+                                {
+                                    if(val[k] === "." && !found_period)
+                                    {
+                                        new_val += val[k];
+                                        found_period = true;
+                                    }
+                                    else if(val[k] !== ".")
+                                    {
+                                        new_val += val[k];
+                                    }
+                                }
+                            }
+                        }
+                        if(new_val.indexOf(".") > -1)
+                        {
+                            var period_idx = new_val.indexOf(".");
+                            period_idx += 2;
+
+                            var new_val2 = "";
+                            for(var k = 0; k <= period_idx; k++)
+                            {
+                                new_val2 += new_val[k];
+                            }
+
+                            new_val = new_val2;
+                        }
+                        $(e).val(new_val);
+                    });
+                });
+
+                setInterval(function()
+                {
+                    updateUtilityQuestions();
+                }, 100);
+
+                var info = pre_populated_info;
+                var mapping = {"first": "cust_first", "last": "cust_last", "address": "cust_address", "city": "cust_city", "state": "cust_state", "postal": "cust_postal"};
+                $.each(["first", "last", "address", "city", "state", "postal"], function(iii, field)
+                {
+                    var el = $("#" + mapping[field]);
+                    if((typeof(info[field]) + '').toLowerCase() !== "undefined")
+                    {
+                        if(info[field].toLowerCase() !== "n/a")
+                        {
+                            if(info[field].toLowerCase() !== "na")
+                            {
+                                if($.trim(info[field]) !== "")
+                                {
+                                    if($.trim(info[field]).toLowerCase() !== "none")
+                                    {
+                                        el.val(info[field]);
+                                    }                                    
+                                }
+                            }
+                        }
+                    }
+                });
+                setTimeout(function()
+                {
+                    $("#cust_postal").trigger("keyup");
+                    $("#cust_postal").trigger("change");
+                    if($("#cust_city").val() === "n/a")
+                    {
+                        $("#cust_city").val("");
+                    }
+                }, 3000);
+            });
+            window.last_known_got_usage_state = "n/a";
+            function updateUtilityQuestions()
+            {
+                if($("#got_usage").val().toLowerCase() === "1")
+                {
+                    $.each(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], function(i, e)
+                    {
+                        $("#usage_data_" + e).css("display", "block");
+                    });
+                    //$("#usage_months_div").css("display", "block");
+                    //$("#total_kwhs_div").css("display", "block");
+                    //$("#total_dollars_div").css("display", "block");
+                    //$("#highest_bill_div").css("display", "block");
+                }
+                else if($("#got_usage").val().toLowerCase() === "0")
+                {
+                    $("#usage_months_div").css("display", "none");
+                    $("#total_kwhs_div").css("display", "none");
+                    $("#total_dollars_div").css("display", "none");
+                    $("#highest_bill_div").css("display", "none");
+
+                    $.each(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], function(i, e)
+                    {
+                        $("#usage_data_" + e).css("display", "none");
+                    });
+                }
+
+                if($("#got_usage").val() !== window.last_known_got_usage_state)
+                {
+                   // $("#usage_months").val("n/a");
+                   // $("#usage_months")[0].selectedIndex = 0;
+                   // $("#total_kwhs").val("");
+                   // $("#total_dollars").val("");
+                   // $("#highest_bill").val("");
+                }
+                window.last_known_got_usage_state = $("#got_usage").val().toLowerCase();
+            }
+            function confirmAvailability()
+            {
+                return true;
+                var cont = true;
+                var date_val = $("#cust_appointment_date").val();
+                var split = date_val.split("-");
+                if(split[0].match(/\d/g) === null)
+                {
+                    cont = false;
+                }
+                else if(split[0].match(/\d/g).join("").length !== 2)
+                {
+                    cont = false;
+                }
+
+                if(split[1].match(/\d/g) === null)
+                {
+                    cont = false;
+                }
+                else if(split[1].match(/\d/g).join("").length !== 2)
+                {
+                    cont = false;
+                }
+
+                if(split[2].match(/\d/g) === null)
+                {
+                    cont = false;
+                }
+                else if(split[2].match(/\d/g).join("").length !== 4)
+                {
+                    cont = false;
+                }
+
+                if($("#appt_slot_num").val().toLowerCase() === "n/a")
+                {
+                    cont = false;
+                }
+
+                if(cont)
+                {
+                    $("#sub_btn").css("display", "none");                    
+                    return cont;
+                }
+                return false;
+            }
+            function fail_fn()
+            {
+                if($(".container").size() === 1)
+                {
+                    $("<div class='container'><center><h3>An error occured while establishing a connection to the server. <br />Your internet connection may have timed out.</h3></center></div>").insertAfter($(".container").eq(0));
+                    $(".container").eq(0).css("display", "none");
+                }
+            }
+            function doHeartBeat()
+            {
+                return;
+                $.getJSON("https://www.telize.com/jsonip?callback=").done(function(resp)
+                {
+                    if(typeof(resp) + '' !== "object")
+                    {
+                        fail_fn();
+                        return;
+                    }
+                    if($(".container").size() == 2)
+                    {
+                        $(".container").eq(1).detach();
+                        $(".container").eq(0).css("display", "block");
+                    }
+                }).fail(function()
+                {
+                    fail_fn();
+                });
+            }
+            function checkDatePickerWidget()
+            {
+                if(typeof(window.datepickers) + '' !== "undefined")
+                {
+                    if(typeof(window.datepickers["cust_appointment_date"]) + '' !== "undefined")
+                    {
+                        if(typeof(window.datepickers["cust_appointment_date"].picker) + '' !== "undefined")
+                        {
+                            var curr_year = getDateString().split("/")[2];
+                            if(window.datepickers["cust_appointment_date"].picker.find(".datepicker-days").find(".datepicker-switch").text().indexOf(curr_year) === -1)
+                            {
+                                var last_year = (((curr_year * 1) - 1) + '');
+                                var next_year = (((curr_year * 1) + 1) + '');
+
+                                var el = window.datepickers["cust_appointment_date"].picker.find(".datepicker-days").find(".datepicker-switch");
+                                var bad = false;
+                                if(el.text().indexOf(last_year) !== -1 && el.text().toLowerCase().indexOf("dec") === -1)
+                                {
+                                    bad = true;
+                                }
+                                if(el.text().indexOf(next_year) !== -1 && el.text().toLowerCase().indexOf("jan") === -1)
+                                {
+                                    bad = true;
+                                }
+                                if(bad)
+                                {
+                                    $("html").html("");
+                                    checkDatePickerWidget = function()
+                                    {
+                                    };
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            window.ellipsis_count = 0;
+            function showSubmitScreen()
+            {
+                if($("#loading").find("#temp_submitting").size() === 0)
+                {
+                    $("#loading").css("display", "block").children("h3").html("<span id='temp_submitting'>Submitting&nbsp;&nbsp;&nbsp;</span><br><br><span id='submission_disclaimer'>(This process can take several minutes)</span>");
+                    setTimeout(function()
+                    {
+                        showSubmitScreen();
+                    }, 400);
+                    return;
+                }
+                var submitting = $("#temp_submitting").eq(0);
+                if(submitting.text().indexOf("...") !== -1)
+                {
+                    ellipsis_count++;
+                    submitting.html("Submitting&nbsp;&nbsp;&nbsp;");
+                    if(ellipsis_count % 3 === 0)
+                    {
+                        if($("#submission_disclaimer").text().indexOf("can take") > -1)
+                        {
+                            $("#submission_disclaimer").text("(Please do not close the browser tab)");
+                        }
+                        else
+                        {
+                            $("#submission_disclaimer").text("(This process can take several minutes)");
+                        }
+                    }
+                }
+                else if(submitting.text().indexOf("..") !== -1)
+                {
+                    submitting.html("Submitting...");
+                }
+                else if(submitting.text().indexOf(".") !== -1)
+                {
+                    submitting.html("Submitting..&nbsp;");
+                }
+                else
+                {
+                    submitting.html("Submitting.&nbsp;&nbsp;");
+                }
+                setTimeout(function()
+                {
+                    showSubmitScreen();
+                }, 400);
+            }
+            function fancySP2Select()
+            {
+                
+                $("#form_container").css("opacity", "0.1");
+                $("#form_container").css("display", "none");
+                
+                    var sp2_mom = moment().format("YYYY-MM-DD HH:mm:ss")
+                    var payload = {"fn": "closer_same_day_availability", "identifier": $("#rep_office").val(), "sp2": $("#sp2_mom").val()}
+                    $.post("/data", payload).done(function(r)
+                    {
+                        console.log(r);
+                    });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="loading">
+            <h3>Please wait while content is loading...</h3>
+        </div>
+        <div class="container" id="form_container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="signout">
+                    ({{ user_name }}) | <a id="href_change_pass" href="javascript:void(0);">Change Password</a> | <a href="/logout">SignOut</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Sales Form
+                </div>
+            </div>
+            <h3 style="color: #f27421;">You may only book an AB with the HOMEOWNER. No friends, relatives, tenants, etc</h3>
+            <button class="btn btn-primary" style="float: right; position: relative; top: -1em;" onclick="javascript:window.location.href='/rep';">Back to Rep Portal</button>
+            <form class="form-horizontal" role="form" action="./sales" method="POST" enctype="multipart/form-data" style="clear: both;">
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="lead_id">
+                        Lead ID:
+                    </label>
+                    <div class="col-sm-10">
+                        <input autocomplete="off" type="text" class="form-control" id="lead_id" name="lead_id" required="required" />
+                    </div>
+                </div>
+                <div class="form-group" id="cash_div">
+                    <label class="control-label col-sm-2" for="is_cash">
+                        Is this a cash deal?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuCash" data-toggle="dropdown" aria-expanded="true">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation" id="cash_value_of_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="cash_value_of_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="is_cash" name="is_cash" value="0" />
+                    </div>
+                </div>
+                <div class="form-group" id="lead_div">
+                    <label class="control-label col-sm-2">
+                        Is this a lead?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownBtnLead" data-toggle="dropdown">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="lead_value_of_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="lead_value_of_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>                                
+                            </ul>
+                            <input type="hidden" name="lead_status" id="lead_status" value="n/a" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_first">
+                        Customer First Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input autocomplete="off" type="text" class="form-control" id="cust_first" placeholder="John" name="cust_first" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_last">
+                        Customer Last Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_last" placeholder="Doe" name="cust_last" required="required" />
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="spouse_name">
+                        Spouse Name (Optional)
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="spouse_name" name="spouse_name" placeholder="Spouse's Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_phone">
+                        Cell Phone:
+                    </label>
+                    <div class="col-sm-10">
+                        <!-- span class="label label-primary">Please let the customer know that someone will text them</!-- span>
+                        <br />
+                        <br / -->
+                        <input type="text" autocomplete="off" class="form-control" id="cust_phone" placeholder="(123) 456-7890" name="cust_phone" required="required" />
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="n">
+                        Did you get the email?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuGptEmail" data-toggle="dropdown" aria-expanded="true">
+                                No
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSecondPerson">
+                                <li role="presentation" id="got_email_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="got_email_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;" id="cust_email_wrapper">
+                    <label class="control-label col-sm-2" for="cust_email">
+                        Customer Email:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_email" placeholder="example@gmail.com" name="cust_email" />
+                    </div>
+                </div>                
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="has_second_person">
+                        Add Additional Homeowner?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuSecondPerson" data-toggle="dropdown" aria-expanded="true">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuSecondPerson">
+                                <li role="presentation" id="second_person_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="second_person_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="has_second_person" name="has_second_person" value="0" />
+                    </div>
+                </div>
+                <div class="form-group" id="second_person_first_div">
+                    <label class="control-label col-sm-2" for="second_person_first">
+                        2nd Homeowner First Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="second_person_first" placeholder="Jane" name="second_person_first" />
+                    </div>
+                </div>
+                <div class="form-group" id="second_person_last_div">
+                    <label class="control-label col-sm-2" for="second_person_last">
+                        2nd Homeowner Last Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="second_person_last" placeholder="Doe" name="second_person_last" />
+                    </div>
+                </div>
+                <div class="form-group" id="second_person_email_div" style="display: none;">
+                    <label class="control-label col-sm-2" for="second_person_email">
+                        2nd Homeowner Email (Optional):
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="second_person_email" placeholder="example@gmail.com" name="second_person_email" />
+                    </div>
+                </div>
+                <div class="form-group" id="second_person_last_four_div" style="display: none !important;">
+                    <label class="control-label col-sm-2" for="second_person_last_four">
+                        2nd Homeowner Last 4 of SS#
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="second_person_last_four" placeholder="XXXX" name="second_person_last_four" maxlength="4" value="3333" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr />
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="cust_dob">
+                        Customer DOB:
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" size="16" type="text" placeholder="11-31-2011" name="cust_dob" id="cust_dob" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_postal">
+                        Customer Postal Code:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_postal" placeholder="12345" name="cust_postal" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_address">
+                        Customer Address:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_address" placeholder="342 Willow St" name="cust_address" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_city">
+                        Customer City:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_city" placeholder="Escondido" name="cust_city" required="required" value="n/a" />
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="cust_county">
+                        Customer County:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_county" name="cust_county" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_state">
+                        Customer State:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_state" placeholder="CA" name="cust_state" required="required" maxlength="2" />
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group" id="got_usage_div" style="display: none;">
+                    <label class="control-label col-sm-2" for="got_usage">
+                        Did you get Usage?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuUsage" data-toggle="dropdown" aria-expanded="true">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation" id="got_usage_value_of_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="got_usage_value_of_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="got_usage" name="got_usage" value="1" />
+                    </div>
+                </div>
+                <div class="form-group" id="util_form_group">
+                    <label class="control-label col-sm-2" for="cust_utility_provider">
+                        Customer Utility Provider
+                    </label>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenu33" data-toggle="dropdown" aria-expanded="true">
+                            Select One
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu33">
+
+                        </ul>
+                    </div>
+                    <input type="hidden" name="cust_utility_provider" value="n/a" id="cust_utility_provider">
+                </div>
+                <div class="form-group" id="real_or_estimated">
+                    <label class="control-label col-sm-2" for="real_or_estimated_value">
+                            Did you get real or estimated electrical usage?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="realOrEstimatedUsage" data-toggle="dropdown" aria-expanded="true">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="">
+                                <li role="presentation" id="real_or_estimated_real">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Real
+                                    </a>
+                                </li>
+                                <li role="presentation" id="real_or_estimated_estimated">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Estimated
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="real_or_estimated_value" name="real_or_estimated_value" value="n/a" />
+                    </div>                   
+                </div>
+                <div class="form-group" id="twelve_months">
+                    <label class="control-label col-sm-2" for="twelve_months">
+                        Has the customer lived in home for 12 months?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuTwelveMonths" data-toggle="dropdown" aria-expanded="true">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuTwelveMonths">
+                                <li role="presentation" id="twelve_months_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="twelve_months_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="hidden" id="has_twelve_months_of_usage" value="-1" />
+                </div>
+                <div class="form-group twelve_months_div_1">
+                    <label class="control-label col-sm-2">
+                        Total Kwhs Used in Last 12 Months
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="3420.59" id="twelve_months_total_kwhs" />
+                    </div>
+                </div>
+                <div class="form-group twelve_months_div_1">
+                    <label class="control-label col-sm-2">
+                        Total $ Spent in Last 12 Months
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="$3600.00" id="twelve_months_total_dollars" />
+                    </div>
+                </div>
+                <div class="form-group twelve_months_div_1">
+                    <label class="control-label col-sm-2">
+                        Highest Single Bill $ Amount
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="$542.00" id="twelve_months_highest_bill" />
+                    </div>
+                </div>
+                <div class="form-group twelve_months_div_0">
+                    <label class="control-label col-sm-2">
+                        Avg Kwhs <b>Per Month</b>
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="342.11" id="less_than_twelve_months_avg_kwhs" />
+                    </div>
+                </div>
+                <div class="form-group twelve_months_div_0">
+                    <label class="control-label col-sm-2">
+                        Avg $ Amount <b>Per Month</b>
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="200.52" id="less_than_twelve_months_average_dollars" />
+                    </div>
+                </div>
+                <div class="form-group twelve_months_div_0">
+                    <label class="control-label col-sm-2">
+                        Anticipated Highest Bill $ Amount
+                    </label>
+                    <div class="col-cm-10">
+                        <input type="text" placeholder="422.50" id="less_than_twelve_months_highest_bill" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="label label-primary" id="minimum_kwhs_lbl" style="display: none;">Provide Override Code</span>
+                </div>
+                <div class="form-group" id="usage_months_div">
+                    <label class="control-label col-sm-2" for="usage_months">
+                        Total Months of Usage Data:
+                    </label>
+                    <div class="col-sm-10">
+                        <select id="usage_months" name="usage_months">
+                            <option value="n/a">Choose One</option>
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="4">04</option>
+                            <option value="5">05</option>
+                            <option value="6">06</option>
+                            <option value="7">07</option>
+                            <option value="8">08</option>
+                            <option value="9">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12" selected="selected" >12</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="total_kwhs_div">
+                    <label class="control-label col-sm-2" for="total_kwhs">
+                        Total KW Hrs:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" id="total_kwhs" name="total_kwhs" placeholder="522.25" />
+                    </div>
+                </div>
+                <div class="form-group" id="total_dollars_div">
+                    <label class="control-label col-sm-2" for="total_dollars">
+                        Total $:
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="dolla_hint">$</span>
+                        <input type="text" id="total_dollars" name="total_dollars" placeholder="1244.50" />
+                    </div>
+                </div>
+                <div class="form-group" id="highest_bill_div">
+                    <label class="control-label col-sm-2" for="highest_bill">
+                        Highest Monthly Bill:
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="dolla_hint">$</span>
+                        <input type="text" id="highest_bill" name="highest_bill" placeholder="475.50" />
+                    </div>
+                </div>
+                <div class="form-group" id="utility_number_div" style="display: none;">
+                    <label class="control-label col-sm-2" for="cust_utility_account_no">
+                        Customer Utility Account #:
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="label label-primary" style="display: inline-block; margin-bottom: 1em;">Optional</span>
+                        <input type="text" autocomplete="off" class="form-control" id="cust_utility_account_no" placeholder="2369877139" name="cust_utility_account_no" value="" />
+                    </div>
+                </div>
+                <div class="form-group" id="care_div" style="display: none;">
+                    <label class="control-label col-sm-2" for="foo">
+                        Please ask this customer if they are on the CARE discount or Medical Baseline Discount plan with the utility company. Do they have this discount?                       
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenuTwelveCareIYeaha-toggle="dropdown" aria-expanded="true">
+                                    Choose One
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuCare" id="dropdownMenuCare">
+                                    <li role="presentation" id="care_1">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Yes
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="care_0">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            No
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" id="care_value" name="care_value" value="n/a" />
+                    </div>
+                </div>
+                <!-- div class="form-group">
+                    <label class="control-label col-sm-2" for="pic2">
+                        Image of Utility Bill
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <p id="file_sel_confirm2">File selected &#10004;</p>
+                        <input type="file" id="pic2" name="pic2" style="display: none;" accept="image/*" />
+                    </div>
+                </div -->
+                
+                <div class="form-group" id="rep_id_div">
+                    <label class="control-label col-sm-2" for="rep_id">
+                        Rep ID:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="rep_id" placeholder="SHA265" name="rep_id" required="required" value="{{ rep_id }}" />
+                    </div>
+                </div>
+                <div class="form-group" id="rep_email_div">
+                    <label class="control-label col-sm-2" for="rep_email">
+                        Rep Email:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="email" autocomplete="off" class="form-control" id="rep_email" placeholder="example@thepower.co" name="rep_email" required="required" value="{{ rep_email }}" />
+                    </div>
+                </div>
+                <div class="form-group" id="rep_phone_div">
+                    <label class="control-label col-sm-2" for="rep_phone">
+                        Rep Phone:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="rep_phone" placeholder="(123) 456-7890" name="rep_phone" required="required" value="{{ rep_phone }}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr />
+                </div>
+                <div class="form-group" id="survey_area_div_group">
+                    <label class="control-label col-sm-2" for="rep_office">
+                        Survey Area:
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                            Select an office
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <!-- li role="presentation" id="office_1">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    Escondido
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_2">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                Murrieta
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_3">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    OC
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_4">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    Valencia
+                                </a>
+                            </li -->
+                          </ul>
+                        </div>
+                        <input type="text" id="rep_office" name="rep_office" value="N/A" autocomplete="off" style="display: none;"/>
+                    </div>
+                </div>
+                <!-- div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_kw_price">
+                        Price per kWh:
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle eightpoint5" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Select a price
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+                          </ul>
+                        </div>
+                        <input type="text" id="cust_kw_price" name="cust_kw_price" value="N/A" autocomplete="off" style="display: none;"/>
+                    </div>
+                </div -->
+                <!-- div class="form-group">
+                    <label class="control-label col-sm-2" for="tier_option">
+                        CPW:
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Select an option
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="tier_A">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Normal Pay
+                                    </a>
+                                </li>
+                                <li role="presentation" id="tier_B">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        -$50/kw
+                                    </a>
+                                </li>
+                                <li role="presentation" id="tier_C">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        -$100/kw
+                                    </a>
+                                </li>
+                                <li role="presentation" id="tier_D">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        -$150/kw
+                                    </a>
+                                </li>
+                                <li role="presentation" id="tier_E">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        -$200/kw
+                                    </a>
+                                </li>
+                            </ul>
+                            <input name="tier_option" id="tier_option" type="hidden" value="n/a" />
+                        </div>
+                    </div>
+                </div -->
+                <div id="to_insert_ta"></div>
+                <hr />
+                <div class="form-group" id="data_logger_div" style="display: none;">
+                    <label class="control-label col-sm-2">
+                        Did you place a data logger at this location?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="data_logger_yn_dropdown">
+                                Choose One <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="data_logger_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="data_logger_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="data_logger_question" id="data_logger_question" value="0" />
+                    </div>
+                </div>
+                <p id="data_logger_warning" class="thomas_warning_2">Please ensure the data logger is NOT on the front of the home!  You may be liable if it is placed on the front of the home and lost or stolen.</p>
+                <div class="form-group" id="data_logger_id_div">
+                    <label class="control-label col-sm-2">
+                        What is the data logger hash?
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="data_logger_id" name="data_logger_id" placeholder="0123456789" value="" />
+                    </div>
+                </div>
+                <div class="form-group" id="data_logger_override_div">
+                    <label class="control-label col-sm-2">
+                        If you are ordinarily required to deploy a data logger, but have been given an override code to bypass this requirement, specify the code here:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="data_logger_override_code" name="data_logger_override_code" value="" />
+                    </div>
+                </div>
+                <div class="form-group" id="data_logger_started_logging">
+                    <label class="control-label col-sm-2">
+                        Did you start logging?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="data_logger_started_yn_dropdown">
+                                Choose One <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="started_logging_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="started_logging_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="started_logging" id="started_logging" value="n/a" />
+                    </div>
+                </div>
+                <div class="form-group" id="data_logger_location_div">
+                    <label class="control-label col-sm-2">
+                        Please describe the location of the data logger in the home (example: Back Window)
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="data_logger_location" name="data_logger_location" placeholder="..." value="" />
+                    </div>
+                </div>
+                <!-- div class="form-group" id="new_questions_div">
+                    <label class="control-label col-sm-2" for="new_questions">
+                        Did you get the last 4 of SSN, income, and mortgage?
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="new_questions_btn">
+                                Choose One
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="new_questions_1">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Yes
+                                    </a>
+                                </li>
+                                <li role="presentation" id="new_questions_0">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        No
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div -->                
+                <!-- div class="form-group" id="meter_number_form_group">
+                    <label class="control-label col-sm-2" for="meter_number">
+                        SDGE Meter #
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="meter_number" name="meter_number" placeholder="0123456789" value="n/a" />                  
+                    </div>
+                </div-->
+                <!-- div class="form-group" id="annaul_income_forgm_group">
+                    <label class="control-label col-sm-2" for="annual_income">
+                        Annual Income
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="dollar_note">$</span>
+                        <input type="text" id="annual_income" name="annual_income" placeholder="75,000" />
+                    </div>
+                </div>
+                <div class="form-group" id="monthly_mortgage_form_group">
+                    <label class="control-label col-sm-2" for="monthly_mortgage">
+                        Monthly Mortgage
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="dollar_note">$</span>
+                        <input type="text" id="monthly_mortgage" name="monthly_mortgage" placeholder="3,000" />
+                    </div>
+                </div>
+                <div class="form-group" id="last_four_ssn_form_group">
+                    <label class="control-label col-sm-2" for="last_four">
+                        Last 4 of SS#
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="last_four" placeholder="XXXX" name="last_four" maxlength="4" />
+                    </div>
+                </div -->
+                <div class="form-group" id="cust_sig_div">
+                    <label class="control-label col-sm-2" for="cust_signature_date">
+                        Date of Customer Signature:
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt2" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2 eightpoint5" size="16" type="text" value="12-02-2012" name="cust_signature_date" id="cust_signature_date" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_appointement_date">
+                        Appointment Time for Survey
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt3" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2 eightpoint5" size="16" type="text" value="12-02-2012" name="cust_appointment_date" id="cust_appointment_date" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <input type="hidden" name="appt_slot_num" id="appt_slot_num" value="N/A" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr />
+                </div -->
+                <hr />
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="foo">
+                        Spanish speaker requested for this appointment
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" id="spanish_cb" />
+                        <input type="hidden" name="spanish" id="spanish_input" value="0" />
+                    </div>
+                </div>
+                <div class="form-group" id="closers_peek_div" style="display: none;">
+                    <label class="control-label col-sm-2">
+                        Check Schedules
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="label label-primary" id="closer_schedule_lbl">View Closers' Schedules</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="foo">
+                        Appointment Type
+                    </label>
+                    <div class="col-sm-10 appointment_type_div">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="appointment_type_dropdown">
+                                Choose One <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" id="appointment_regular">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Regular
+                                    </a>
+                                </li>
+                                <li role="presentation" id="appointment_same_day_later_on">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Same Day (Today) - Sometime Later
+                                    </a>
+                                </li>
+                                <li role="presentation" id="appointment_same_day_right_now">
+                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Same Day (Today) - Right Now
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="appointment_type" id="appointment_type_input" value="n/a" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- p class="thomas_warning_2">Next day appointments are twice as likely to actually happen.</p> -->
+                    <label class="control-label col-sm-2" for="sp2_date">                        
+                        Date and Time For SP2:
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt4" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2" size="16" type="text" value="12-02-2012" name="sp2_date" id="sp2_date" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <span class="label label-primary" id="time_lbl">Choose a Time</span>
+                        <br />
+                        <span class="info_hints" id="time_hint"></span>
+                        <br />
+                        <span class="label label-primary" id="closer_lbl" style="display: none;">Choose a Closer</span>
+                        <br />
+                        <span class="info_hints" id="closer_hint"></span>
+                        <br />
+                        <span class="label label-primary" id="override_lbl" style="display: none;">Provide override code</span>
+                    </div>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label class="control-label col-sm-2" for="sp2_hours">
+                        &nbsp;
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="sel_grouper">
+                            <select name="sp2_hours" id="sp2_hours">
+                                <option value="N/A">Select One</option>
+                            </select>
+                            <select name="sp2_mins" id="sp2_mins">
+                                <option value="N/A">Select One</option>
+                            </select>
+                            <select name="sp2_ampm" id="sp2_ampm">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <hr />
+                </div>
+                <div style="display: none;" class="form-group">
+                    <label class="control-label col-sm-2" for="pic" style="position: relative; top: -1.5em;">
+                        Tap to upload an image and (optionally) a note:
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <p id="file_sel_confirm">File selected &#10004;</p>
+                        <input type="file" id="pic" name="pic" style="display: none;" accept="image/*" />
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        <span class="glyphicon glyphicon-eye-close"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="hidden" name="notes_for_surveyor" id="notes_for_surveyor" value="" />
+                        <input type="hidden" name="has_qual_card" id="has_qual_card" value="0" />
+                        <button type="submit" id="sub_btn" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            <input type="hidden" name="source" id="source" value="{{ source }}" />
+            <input type="hidden" name="user_type" value="{{ user_type }}" />
+            <input type="hidden" name="user_identifier" value="{{ user_identifier }}" />
+            <input type="hidden" name="ab_partial" id="ab_partial" value="0" />
+            <input type="hidden" name="sp2_mom" id="sp2_mom" value="n/a" />
+            <input type="hidden" name="amigo" id="amigo_input" value="0" />
+            <input type="hidden" name="closer" id="closer_input" value="n/a" />
+            </form>
+        </div>
+    </body>
+</html>

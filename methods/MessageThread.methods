@@ -1,0 +1,25 @@
+
+def prepare_for_client(self):
+    epoch = datetime.utcfromtimestamp(0)
+    ret_dict = {}
+
+    base_atts = ["identifier", "original_sender_identifier", "original_recipient_identifier"]
+    for att in base_atts:
+        ret_dict[att] = getattr(self, att, None)
+
+    ret_dict["latest_activity"] = int((self.latest_activity - epoch).total_seconds() * 1000)
+    ret_dict["messages"] = []
+    for msg in self.messages:
+        msg_dict = {}
+
+        base_atts2 = ["identifier", "sender_identifier", "recipient_identifier", "content", "read_by_recipient", "blob_count"]
+        for att2 in base_atts2:
+            msg_dict[att2] = getattr(msg, att2, None)
+
+        for json_att in ["blob_names", "blob_mimes"]:
+            msg_dict[json_att] = json.loads(getattr(msg, json_att, []))
+        msg_dict["send_time"] = int((msg.send_time - epoch).total_seconds() * 1000)
+
+        ret_dict["messages"].append(msg_dict)
+
+    return ret_dict

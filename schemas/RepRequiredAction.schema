@@ -1,0 +1,7 @@
+identifier=ndb.StringProperty(required=True)
+rep_identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+action_key=ndb.StringProperty(required=True)
+message=ndb.TextProperty(required=True)
+created=ndb.DateTimeProperty(required=True)
+completed=ndb.DateTimeProperty(required=True)

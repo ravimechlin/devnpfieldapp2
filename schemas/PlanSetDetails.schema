@@ -1,0 +1,6 @@
+identifier=ndb.StringProperty(required=True)
+field_app_identifier=ndb.StringProperty(required=True)
+data=ndb.TextProperty(required=True)
+key_ordering=ndb.TextProperty(required=True)
+created=ndb.DateTimeProperty(required=True)
+active=ndb.BooleanProperty(required=True)

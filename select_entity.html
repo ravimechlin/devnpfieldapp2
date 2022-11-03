@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Choose an Entity</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                var sel = $("<select></select>");
+                $("<option></option>").text("Select an Entity").appendTo(sel);
+                $.each("{{ entities }}".split(","), function(i, entity)
+                {
+                    $("<option></option>").attr("value", entity).text(entity).appendTo(sel);
+                });
+                sel.change(function()
+                {
+                    var fn = "update_schema";
+                    if({{ include_field_name }})
+                    {
+                        fn = "drop_column";
+                    }
+                    var form = $("<form></form>");
+                    $("<input />").attr("type", "hidden").attr("name", "fn").attr("value", fn).appendTo(form);
+                    $("<input />").attr("type", "hidden").attr("name", "entity").attr("value", sel.val()).appendTo(form);
+                    $("<input />").attr("type", "hidden").attr("name", "field_name").attr("value", $("#cpy_me").val()).appendTo(form);
+                    form.attr("action", "/data").attr("method", "GET");
+                    form.appendTo($("body"));
+                    document.forms[0].submit();
+                });
+                $("<center></center>").append(sel).appendTo($("body"));
+                if({{ include_field_name }})
+                {
+		    $("<div></div>").appendTo($("center"));
+                    var input = $("<input id='cpy_me' size='16' type='text' name='field_name' value='' placeholder='Property Name...' />");
+                    $("<div></div>").appendTo($("center"));
+                    input.prependTo($("center"));
+                }
+            });
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

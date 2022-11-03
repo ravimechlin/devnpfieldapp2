@@ -1,0 +1,5 @@
+
+def average_utility_bill(self):
+    return self.total_dollars / (float(self.usage_months))
+
+    

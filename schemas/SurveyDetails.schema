@@ -1,0 +1,4 @@
+identifier = ndb.StringProperty(required=True)
+field_app_identifier = ndb.StringProperty(required=True)
+created = ndb.DateTimeProperty(required=True)
+info = ndb.TextProperty(required=True)

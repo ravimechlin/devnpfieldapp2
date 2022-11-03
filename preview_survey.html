@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="57x57" href="/bootstrap/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/bootstrap/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/bootstrap/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/bootstrap/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/bootstrap/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/bootstrap/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/bootstrap/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/bootstrap/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/bootstrap/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/bootstrap/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/bootstrap/images/favicon-16x16.png">
+        <link rel="manifest" href="/bootstrap/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/bootstrap/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <title>New Power Company - Field Application</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+        <link rel="stylesheet" href="./bootstrap/css/changepass_v12.css" />
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/hashids.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/changepass_v12.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script>
+        <style type="text/css">
+            #loading
+            {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2000px;
+                opacity: 0.9;
+                z-index: 100;
+                background: #000;
+            }
+            #loading h3
+            {
+                text-align: center;
+                top: 200px;
+                position: relative;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+            body
+            {
+                cursor: wait;
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+                position: relative;
+                z-index: 2;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            .modal-header
+            {
+                background-color: #D19F28 !important;
+                text-align: center;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            .modal-body
+            {
+                background: #353030;
+            }
+            .bootstrap-dialog-message
+            {
+                color: #C6C2C2;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            input[type=text], input[type='text'], input[type="text"], input[type=email], input[type='email'], input[type="email"], select
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+            }
+            .dropdown > button, .open > button
+            {
+                background: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:hover, .open > button:hover
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:focus, .open > button:focus
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .glyphicon-camera
+            {
+                color: #FB8A0B;
+                font-size: 5em;
+                cursor: pointer;
+                float: left;
+            }
+            #file_sel_confirm
+            {
+                top: -1.25em;
+                position: relative;
+                display: block;
+                left: -5em;
+                color: #FFF;
+                display: none;
+                float: left;
+            }
+            .modal-footer
+            {
+                background: #353030;
+                border-top: 0px solid #000;
+            }
+            ::-webkit-input-placeholder
+            {
+                color: #000000;
+            }
+            :-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            ::-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            :-ms-input-placeholder
+            {
+                color: #909;
+            }
+            #signout
+            {
+                text-align: right;
+                line-height: 2em;
+            }
+            input[disabled]
+            {
+                background: #AAAAAA !important;
+                color: #000000 !important;
+                border: 1px solid #ff0000;
+            }
+            #lead_id
+            {
+                font-family: monospace, "MonoSpace";
+            }
+            .datepicker
+            {
+                color: #000000;
+            }
+            #cust_signature_date, #cust_appointment_date, #sp2_date
+            {
+                text-indent: 1em;
+                position: relative;
+                top: 0.5em;
+            }
+            .glyphicon-list-alt
+            {
+                  font-size: 3.25em;
+                  cursor: pointer;
+                  color: #FB8A0B;
+                  text-indent: 0.5em;
+                  top: 0.35em;
+                  left: 0.5em;
+                  float: left;
+            }
+            #temp_textarea
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+                padding: 1.5%;
+                display: block;
+                width: 50%;
+                height: 200px;
+                margin-bottom: 1.5em;
+            }
+            .glyphicon-eye-open, .glyphicon-eye-close
+            {
+                  color: #FB8A0B;
+                  font-size: 1em;
+                  left: -0.4em;
+                  top: -0.5em;
+            }
+            .eightpoint5, #dropdownMenu3
+            {
+                width: 8.5em;
+            }
+            hr
+            {
+                opacity: 0;
+            }
+            form hr
+            {
+                opacity: 0.2;
+            }
+            .special_fix
+            {
+                left: -1.5em;
+            }
+            .special_fix2
+            {
+                  left: -6.8em;
+                  top:
+            }
+            select, option
+            {
+                -webkit-appearance:none;
+            }
+            .survey_textarea
+            {
+                display: block;
+                width: 50%;
+                margin-top: 1em;
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+                padding-left: 0.5em;
+                min-height: 8em;
+            }
+            .form-group
+            {
+                -webkit-transition: all 0.3s ease-out;
+                transition: all 0.3s ease-out;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                if(window.location.protocol.toLowerCase().indexOf("https") === -1 && window.location.href.indexOf("localhost") === -1)
+                {
+                    $("body").html("");
+                    var url = window.location.href.toLowerCase();
+                    url = url.replace("http://", "https://");
+                    window.location.href = url;
+                    return;
+                }
+                init();
+            });
+            function init()
+            {
+                if({{ has_booking }} && typeof(window.booking_info) + '' === "undefined")
+                {
+                    $.post("./data", {"fn": "get_survey_booking_info", "identifier": "{{ booking_identifier }}"}).done(function(resp)
+                    {
+                        window.booking_info = resp.result;
+                        init();
+                    });
+                    return;
+                }
+
+                if(typeof(window.survey_info) + '' === "undefined")
+                {
+                    $.post("./data", {"fn": "get_questions_for_survey", "identifier": "{{ survey_identifier }}"}).done(function(resp)
+                    {
+                        window.survey_info = resp;
+                        init();
+                    });
+                    return;
+                }
+
+                renderSurvey();
+                $("#preview_form").submit(function()
+                {
+                    return false;
+                });
+            }
+            function renderSurvey()
+            {
+                console.log(window.survey_info);
+
+                $.each(survey_info.questions, function(i, question)
+                {
+                    var question_div = $("<div></div>").addClass("form-group").attr("id", "question_" + question.identifier).addClass("q_container");
+                    var label = $("<label></label>").addClass("control-label").addClass("col-sm-2").attr("for", "who_cares");
+                    label.text(question.question_text);
+                    label.appendTo(question_div);
+
+                    var item_div = $("<div></div>").addClass("col-sm-10");
+                    switch(question.question_type)
+                    {
+                        case "yes_or_no":
+                            var dropdown_div = $("<div></div>").addClass("dropdown");
+                            var dropdown_btn = $("<button></button>").attr("type", "button").addClass("btn-default").addClass("btn").addClass("dropdown-toggle").attr("data-toggle", "dropdown").attr("id", "q_btn_" + question.identifier).text("Choose a value");
+                            $("<span></span>").addClass("caret").appendTo(dropdown_btn);
+                            var dropdown_ul = $("<ul></ul>").attr("role", "menu").attr("aria-labelledby", "q_btn_" + question.identifier).addClass("dropdown-menu");
+
+                            var checkbox_opts = ["1", "0"];
+                            var checkbox_opts_friendly = ["Yes", "No"]
+
+                            $.each(checkbox_opts, function(i, checkbox_opt)
+                            {
+                                var li = $("<li></li>").attr("role", "presentation");
+                                li.attr("id", "value_of_" + checkbox_opt);
+
+                                var a = $("<a></a>").attr("href", "javascript:void(0);").attr("role", "menuitem").attr("tabindex", "-1");
+                                a.text(checkbox_opts_friendly[i]);
+
+                                a.appendTo(li);
+                                li.appendTo(dropdown_ul);
+                            });
+
+                            dropdown_ul.find("li").each(function(i, e)
+                            {
+                                $(e).click(function()
+                                {
+                                    var val = $(e).attr("id").replace("value_of_", "");
+                                    $("#q_btn_" + question.identifier).text($(e).text());
+                                    $("<span></span>").addClass("caret").appendTo($("#q_btn_" + question.identifier));
+
+                                    $("#hidden_value_for_" + question.identifier).attr("value", val).val(val);
+                                });
+                            });
+                            dropdown_btn.appendTo(dropdown_div);
+                            dropdown_ul.appendTo(dropdown_div);
+                            $("<input />").attr("type", "hidden").addClass("true_question_value").attr("value", "unanswered").val("unanswered").attr("id", "hidden_value_for_" + question.identifier).appendTo(dropdown_div);
+
+                            dropdown_div.appendTo(item_div);
+                            break;
+
+                        case "mult_choice":
+                            var dropdown_div = $("<div></div>").addClass("dropdown");
+                            var dropdown_btn = $("<button></button>").attr("type", "button").addClass("btn-default").addClass("btn").addClass("dropdown-toggle").attr("data-toggle", "dropdown").attr("id", "q_btn_" + question.identifier).text("Choose a value");
+                            $("<span></span>").addClass("caret").appendTo(dropdown_btn);
+                            var dropdown_ul = $("<ul></ul>").attr("role", "menu").attr("aria-labelledby", "q_btn_" + question.identifier).addClass("dropdown-menu");
+                            $.each(question.question_options["multi_choices"], function(i, choice_item)
+                            {
+                                var li = $("<li></li>").attr("role", "presentation");
+                                li.attr("id", "value_of_" + choice_item.choice.split(" ").join("_____"));
+
+                                var a = $("<a></a>").attr("href", "javascript:void(0);").attr("role", "menuitem").attr("tabindex", "-1");
+                                a.text(choice_item.choice);
+
+                                a.appendTo(li);
+                                li.appendTo(dropdown_ul);
+                            });
+
+                            dropdown_ul.find("li").each(function(i, e)
+                            {
+                                $(e).click(function()
+                                {
+                                    var val = $(e).attr("id").replace("value_of_", "").split("_____").join(" ");
+                                    $("#q_btn_" + question.identifier).text($(e).text());
+                                    $("<span></span>").addClass("caret").appendTo($("#q_btn_" + question.identifier));
+
+                                    $("#hidden_value_for_" + question.identifier).attr("value", val).val(val);
+                                });
+                            });
+                            dropdown_btn.appendTo(dropdown_div);
+                            dropdown_ul.appendTo(dropdown_div);
+                            $("<input />").attr("type", "hidden").addClass("true_question_value").attr("value", "unanswered").val("unanswered").attr("id", "hidden_value_for_" + question.identifier).appendTo(dropdown_div);
+                            dropdown_div.appendTo(item_div);
+                            break;
+
+                        case "text":
+                            switch(question.question_layout)
+                            {
+                                case "multiple":
+                                    var textarea = $("<textarea></textarea>").addClass("form-control").addClass("survey_textarea");
+
+                                    textarea
+                                    .on("keydown", function()
+                                    {
+                                        $("#hidden_value_for_" + question.identifier).attr("value", textarea.val()).val(textarea.val());
+                                    })
+                                    .on("keyup", function()
+                                    {
+                                        $("#hidden_value_for_" + question.identifier).attr("value", textarea.val()).val(textarea.val());
+                                    })
+                                    .on("change", function()
+                                    {
+                                        $("#hidden_value_for_" + question.identifier).attr("value", textarea.val()).val(textarea.val());
+                                    })
+                                    .on("blur", function()
+                                    {
+                                        $("#hidden_value_for_" + question.identifier).attr("value", textarea.val()).val(textarea.val());
+                                    })
+                                    .appendTo(item_div);
+
+                                    $("<input />").attr("type", "hidden").addClass("true_question_value").attr("value", "unanswered").val("unanswered").attr("id", "hidden_value_for_" + question.identifier).appendTo(item_div);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                    if(question.dependent_value !== "n/a")
+                    {
+                        question_div.css("display", "none");
+                        $("#hidden_value_for_" + question.identifier).attr("value", "n/a").val("n/a");
+                    }
+
+                    item_div.appendTo(question_div);
+                    question_div.appendTo($("#preview_form"));
+                });
+
+                $("<div></div>").addClass("form-group").append
+                (
+                    $("<center></center>").append
+                    (
+                        $("<button></button>")
+                        .addClass("btn")
+                        .addClass("btn-success")
+                        .text("Submit")
+                        .click(function()
+                        {
+                            submitForm();
+                        })
+                    )
+                ).appendTo($("#preview_form"));
+
+                doBookingBasedDependencies();
+                setInterval(function()
+                {
+                    checkPreviousValueBasedDependencies();
+                    checkValueBasedPopupAlerts();
+                }, 500);
+
+                $("#loading").css("display", "none");
+                $("body").css("cursor", "auto");
+            }
+            function doBookingBasedDependencies()
+            {
+                $.each(survey_info.questions, function(i, question)
+                {
+                    if(question.dependency_type === "entity_info")
+                    {
+                        var field = question.dependency_value_type.split("|")[1];
+
+                        var predicate_fn = function(val)
+                        {
+                            return true;
+                        };
+                        if(question.dependency_value_comp_mode === "equal")
+                        {
+                            predicate_fn = function(val, vals)
+                            {
+                                return vals.indexOf(val) > -1;
+                            };
+                        }
+                        if(question.dependency_value_comp_mode === "not_equal")
+                        {
+                            predicate_fn = function(val, vals)
+                            {
+                                return vals.indexOf(val) === -1;
+                            };
+                        }
+                        var vals = question.dependent_value.split("|||||");
+                        var first_arg = null;
+
+                        first_arg = booking_info[field];
+
+                        if(predicate_fn(first_arg, vals))
+                        {
+                            $("#question_" + question.identifier).css("display", "block");
+                        }
+                        else
+                        {
+                            $("#question_" + question.identifier).css("display", "none").find(".true_question_value").val("n/a").attr("value", "n/a");
+                        }
+                    }
+                });
+            }
+
+            function checkPreviousValueBasedDependencies()
+            {
+                $.each(survey_info.questions, function(i, question)
+                {
+                    if(question.dependency_type === "prev_q")
+                    {
+                        switch(question.dependency_value_type)
+                        {
+                            case "yes_or_no":
+                                var this_idx = question.question_idx;
+                                var prev_idx = this_idx - 1;
+
+                                switch(question.dependency_value_comp_mode)
+                                {
+                                    case "equal":
+                                        if($(".true_question_value").eq(prev_idx).val() === question.dependent_value)
+                                        {
+                                            if($(".q_container").eq(this_idx).css("display").toLowerCase() !== "block")
+                                            {
+                                                $(".true_question_value").eq(this_idx).val("unanswered").attr("value", "unanswered");
+                                                $(".q_container").eq(this_idx).css("display", "block");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $(".true_question_value").eq(this_idx).val("n/a").attr("value", "n/a");
+                                            $(".q_container").eq(this_idx).css("display", "none");
+                                        }
+                                        break;
+
+                                    case "not_equal":
+                                        if($(".true_question_value").eq(prev_idx).val() !== question.dependent_value)
+                                        {
+                                            $(".true_question_value").eq(this_idx).val("unanswered").attr("value", "unanswered");
+                                            $(".q_container").eq(this_idx).css("display", "block");
+                                        }
+                                        else
+                                        {
+                                            $(".true_question_value").eq(this_idx).val("n/a").attr("value", "n/a");
+                                            $(".q_container").eq(this_idx).css("display", "none");
+                                        }
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                                break;
+
+                            case "mult_choice":
+                                var this_idx = question.question_idx;
+                                var prev_idx = this_idx - 1;
+
+                                switch(question.dependency_value_comp_mode)
+                                {
+                                    case "equal":
+                                        if($(".true_question_value").eq(prev_idx).val() === question.dependent_value)
+                                        {
+                                            if($(".q_container").eq(this_idx).css("display").toLowerCase() !== "block")
+                                            {
+                                                $(".true_question_value").eq(this_idx).val("unanswered").attr("value", "unanswered");
+                                                $(".q_container").eq(this_idx).css("display", "block");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $(".true_question_value").eq(this_idx).val("n/a").attr("value", "n/a");
+                                            $(".q_container").eq(this_idx).css("display", "none");
+                                        }
+                                        break;
+
+                                    case "not_equal":
+                                        if($(".true_question_value").eq(prev_idx).val() !== question.dependent_value)
+                                        {
+                                            $(".q_container").eq(this_idx).css("display", "block");
+                                        }
+                                        else
+                                        {
+                                            $(".true_question_value").eq(this_idx).val("n/a").attr("value", "n/a");
+                                            $(".q_container").eq(this_idx).css("display", "none");
+                                        }
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+
+                            default:
+                                break;
+                        }
+                    }
+            });
+        }
+        window.value_based_popups_opened = {};
+        function checkValueBasedPopupAlerts()
+        {
+            $.each(survey_info.questions, function(i, question)
+            {
+                var opts = question.question_options;
+                if(typeof(opts["popup_info"]) + '' !== "undefined")
+                {
+                    switch(question.question_type)
+                    {
+                        case "yes_or_no":
+                            $.each(opts.popup_info, function(k, popup_item)
+                            {
+                                var dep_val = popup_item.dependent_value;
+                                if($("#hidden_value_for_" + question.identifier).val() === dep_val)
+                                {
+                                    if(typeof(window.value_based_popups_opened[question.identifier + "_" + (k + '')]) + '' === "undefined")
+                                    {
+                                        window.value_based_popups_opened[question.identifier + "_" + (k + '')] = question.identifier;
+                                        BootstrapDialog.show
+                                        (
+                                            {
+                                                "title": "Alert!",
+                                                "message": popup_item.message
+                                            }
+                                        );
+                                    }
+                                }
+                            });
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            });
+        }
+        function submitForm()
+        {
+            $(".true_question_value").each(function(i, e)
+            {
+                if($(e).val().toLowerCase() === "unanswered")
+                {
+                    $(e).closest(".form-group")
+                    .css("border", "1px solid red")
+                    .css("background", "#C31919")
+                    .css("padding-top", "1em")
+                    .css("padding-bottom", "1em");
+
+
+                    setTimeout(function()
+                    {
+                        $(e).closest(".form-group")
+                        .css("border", "0px solid red")
+                        .css("background", "transparent")
+                        .css("padding-top", "0em")
+                        .css("padding-bottom", "0em");
+                    }, 5000);
+
+                    $(e).closest(".form-group")[0].scrollIntoView();
+                }
+            });
+        }
+        </script>
+    </head>
+    <body>
+        <div id="loading">
+            <h3>Please wait while content is loading...</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="signout" style="display: none;">
+                    ({{ user_name }}) | <a id="href_change_pass" href="javascript:void(0);">Change Password</a> | <a href="/logout">SignOut</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Preview Checklist
+                </div>
+                <hr />
+                <h2>Checklist Preview</h2>
+            </div>
+            <hr />
+            <form class="form-horizontal" role="form" action="./sales" method="POST" enctype="multipart/form-data" id="preview_form">
+
+            </form>
+        </div>
+    </body>
+</html>

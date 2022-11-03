@@ -1,0 +1,4 @@
+identifier=ndb.StringProperty(required=True)
+recipient=ndb.StringProperty(required=True)
+check_number=ndb.IntegerProperty(required=True)
+check_date=ndb.DateProperty(required=True)

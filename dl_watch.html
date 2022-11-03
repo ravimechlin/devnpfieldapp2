@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Watching Data Loggers</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+        .rep_img
+        {
+            display: block;
+            max-width: 100px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .creep_cw
+        {
+            min-height: 400px;
+            min-width: 400px;
+        }
+        </style>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="/bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            window.field_app_identifier_location_map = {};
+            window.info_windows = [];
+            window.markers = [];
+            window.app_bucket = "{{ app_bucket }}";
+            window.app_data = [];
+            $(document).ready(function()
+            {
+                $("body").trigger("click");
+            });
+            function cycle(data, idx)
+            {
+                console.log(data);
+                console.log(idx);
+
+                if(idx === -1)
+                {
+                    $.each(window.markers, function(i, marker)
+                    {
+                        marker.setMap(null);
+                    });
+                    window.markers = [];
+                    $.each(window.info_windows, function(i, window)
+                    {
+                        window.setMap(null);
+                    });
+                    window.info_windows = [];
+
+                    var callbacks_required = data.length;
+                    var callback_count = 0;
+
+                    $.each(data, function(i, obj)
+                    {
+                        var keys = Object.keys(window.field_app_identifier_location_map);
+                        if(keys.indexOf(obj.field_app_identifier) > -1)
+                        {
+                            callbacks_required--; 
+                        }
+                    });
+
+                    $.each(data, function(i, obj)
+                    {
+                        if(Object.keys(window.field_app_identifier_location_map).indexOf(obj.field_app_identifier) === -1)
+                        {
+                            $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC1JStq4qg-S61Y1bAXLzAWlq3ToUIscZk&address=" + encodeURIComponent(obj.address + " " + obj.city + ", " + obj.state + " " + obj.postal)).done(function(resp)
+                            {
+                                var lat = resp.results[0].geometry.location.lat;
+                                var long = resp.results[0].geometry.location.lng;
+                                field_app_identifier_location_map[obj.field_app_identifier] = {"lat": lat, "lng": long};
+                                callback_count++;
+                            });
+                        }
+                    });
+
+
+                    window.callback_check_interval = setInterval(function()
+                    {
+                        if(callbacks_required === callback_count)
+                        {
+                            var icon_mapping = 
+                            {
+                                "data_logger_deployed": "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                "data_logger_retrieved": "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                            };
+                            var text_mapping = 
+                            {
+                                "data_logger_deployed": "deployed a data logger",
+                                "data_logger_retrieved": "retrieved a data logger" 
+                            }
+                            clearInterval(window.callback_check_interval);
+
+                            $.each(data, function(i, obj)
+                            {  
+                                var marker = new google.maps.Marker
+                                (
+                                    {
+                                        "map": window.main_map,
+                                        "position": window.field_app_identifier_location_map[obj.field_app_identifier],
+                                        "icon":
+                                        {
+                                            "url": icon_mapping[obj.metric_key]
+                                        }
+                                    }
+                                );
+
+                                window.markers.push(marker);
+
+                                var info_window = new google.maps.InfoWindow
+                                (
+                                    {
+                                        "content": "<div class='creep_cw'><h3><span class='utc_ts'>" + moment(obj.dt, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm:ss a") + "</span></h3><p>" + obj.address + "</p><p>" + obj.city + ", " + obj.state + "</p><p>" + obj.postal + "</p><hr /><b>" + obj.rep_name + " " + text_mapping[obj.metric_key] + " in " + obj.customer_name + "'s home.</b><img class='rep_img' src='//storage.googleapis.com/" + window.app_bucket + "/Images/ProfilePictures/Thumb/" + obj.rep_identifier + ".jpg' /></div>"
+                                    }
+                                );
+                                window.info_windows.push(info_window);
+
+                            });
+                            cycle(data, 0);
+                        }
+                    }, 250);
+                }
+                else
+                {
+                    if(data.length === 0 || idx === data.length)
+                    {
+                        setTimeout(function()
+                        {
+                            window.location.reload();
+                        }, 1000 * 10);
+                        return;
+                    }
+
+                    if(idx === 0)
+                    {
+                        window.main_map.panTo(window.field_app_identifier_location_map[data[0]["field_app_identifier"]]);
+                    }
+                    
+                    if((window.main_map.zoom * 1) === 4)
+                    {
+                        window.main_map.setZoom(8);
+                        setTimeout(function()
+                        {
+                            cycle(data, idx);
+                        }, 1000);
+                        return;
+                    }
+                    if((window.main_map.zoom * 1) === 8)
+                    {
+                        window.main_map.setZoom(12);
+                        setTimeout(function()
+                        {
+                            cycle(data, idx);
+                        }, 1000);
+                        return;
+                    }
+                    if((window.main_map.zoom * 1) === 12)
+                    {
+                        window.main_map.setZoom(16);
+                        setTimeout(function()
+                        {
+                            cycle(data, idx);
+                        }, 1000);
+                        return;
+                    }
+                    if((window.main_map.zoom * 1) === 16)
+                    {
+                        window.main_map.setZoom(20);
+                        setTimeout(function()
+                        {
+                            cycle(data, idx);
+                        }, 1000);
+                        return;
+                    }
+
+                    if($(".gm-style-iw").length === 0)
+                    {
+                        var cw = window.info_windows[window.current_idx];
+                        //var tmp_div = $("<div></div>").html(cw.getContent());
+                        //cw.setContent(tmp_div.html());
+                        window.info_windows[idx].open(window.main_map, window.markers[idx]);
+                        setTimeout(function()
+                        {
+                            cycle(data, idx);
+                        }, 5000);
+                        return;
+                    }
+                    if($(".gm-style-iw").length === 1)
+                    {
+                        window.info_windows[idx].close();
+                        //$(".gm-style-iw").first().next().trigger("click");
+                        window.main_map.setZoom(4);                                
+                        var next_idx = idx + 1;
+                        if(next_idx < data.length)
+                        {
+                            window.main_map.panTo(window.field_app_identifier_location_map[data[next_idx]["field_app_identifier"]]);    
+                        }
+                        setTimeout(function()
+                        {
+                            cycle(data, idx + 1);
+                        }, 1000);
+                        return;
+                    }
+                }
+            }
+            function initMap()
+            {
+                $.post("/DLWatch").done(function(data)
+                {
+                    window.main_map = new google.maps.Map(document.getElementById('map'), 
+                    {
+                        zoom: 4,
+                        center: {"lat": 33.9979486, "lng": -117.3327293}
+                    });
+                    cycle(data.data, -1);
+                })
+                .fail(function()
+                {
+                    setTimeout(function()
+                    {
+                        window.location.reload();
+                    }, 60000);
+                });
+            }
+        </script>
+    </head>
+    <body>
+    <div id="map">
+
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAhhS3ugue4F0ZFstIOrAFA0z5D5NSV3mc&callback=initMap&language=en&region=US" async defer></script>
+    </body>
+</html>

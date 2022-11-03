@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Street View Test
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            var customers = [];
+            customers.push({"name": "Thomas Shaffer", "address": "22886 Montanya Pl Murrieta, CA 92562", "phone": "8179953266", "phone_formatted": "(817) 995-3266"});
+            window.current_idx = -1;
+
+            $(document).ready(function()
+            {
+                if(customers.length > 0)
+                {
+                    showCustomer(customers[0], true);
+                }
+                else
+                {
+                    $("body").text("No action is required at this time");
+                    $("body").css("text-align", "center");
+                }
+                
+            });
+            $(window).resize(function()
+            {
+                $("body").html("");
+                showCustomer(customers[window.current_idx], false);
+            });
+            function showCustomer(customer, increment)
+            {
+                if(increment)
+                {
+                    window.current_idx++;
+                }
+                var phone = "8312750754";
+                var phone_formatted = "(831) 275-0754";
+                var width = parseInt($(window).width());
+                var height = parseInt($(window).height());
+                width += 'px';
+                height += 'px';
+
+                var img = $("<img />");
+                img.attr("src", "https://maps.googleapis.com/maps/api/streetview?size=" + width.replace("px", "") + "x" + height.replace("px", "") + "&location=" + encodeURIComponent(customer.address) + "&fov=90&pitch=10&key=AIzaSyC1JStq4qg-S61Y1bAXLzAWlq3ToUIscZk");
+                img.css("width", width);
+                img.css("height", height);
+                img.css("position", "relative");
+                img.css("z-index", "1");
+                img.on("load", function()
+                {
+                    var overlay_div = $("<div></div>");
+                    overlay_div.css("opacity", "0.0");
+                    overlay_div.css("background-color", "#174f83");
+                    overlay_div.css("position", "absolute");
+                    overlay_div.css("top", "0px");
+                    overlay_div.css("left", "0px");
+                    overlay_div.css("z-index", "2");
+                    overlay_div.css("width", width);
+                    overlay_div.css("height", height);
+                    overlay_div.appendTo($("body"));
+                    overlay_div.animate
+                    (
+                        {
+                            "opacity": "0.8"
+                        },
+                        1000,
+                        function()
+                        {
+                            overlay_div.animate({"opacity": "0.0"}, 1000, function()
+                            {
+                                overlay_div.css("background-color", "#f89a19;")
+                                overlay_div.animate({"opacity": "0.8"}, 1000, function()
+                                {
+                                    overlay_div.remove();
+                                });
+                                setTimeout(function()
+                                {
+                                    img.animate({"opacity": "0.0"}, 1000, function()
+                                    {
+                                        img.remove();
+                                        $("body").animate({"background-color": "#174f83"}, 1000, function()
+                                        {
+                                            var questions_div = $("<div></div>");
+                                            questions_div.css("display", "table");
+                                            questions_div.css("height", height);
+                                            questions_div.css("overflow", "hidden");
+                                            questions_div.css("top", "0px");
+                                            questions_div.css("left", "0px");
+                                            questions_div.css("opacity", "0.0");
+                                            questions_div.css("width", width);
+
+                                            var inner_div = $("<div></div>");
+                                            inner_div.css("display", "table-cell");
+                                            inner_div.css("vertical-align", "middle");
+
+                                            inner_div.css("text-align", "center");
+                                            $("<p></p>").css("text-align", "center").text("What happened with " + customer.name).appendTo(inner_div);
+                                            $("<b></b>").text(customer.address).appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            $("<a></a>").attr("href", "tel:" + customer.phone).text(customer.phone_formatted).appendTo(inner_div);
+                                            $("<br />").appendTo(inner_div);
+                                            inner_div.appendTo(questions_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("AK (CARE/Medical)").attr("id", "response_option_0").appendTo(inner_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("AK (Not CARE/Medical)").attr("id", "response_option_1").appendTo(inner_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("Reschedule").attr("id", "response_option_2").appendTo(inner_div);
+                                            $("<span></span>").css("opacity", "1.0").addClass("response_option").text("Lead Cancelled").attr("id", "response_option_3").appendTo(inner_div);
+                                            questions_div.appendTo($("body"));
+
+                                            questions_div.find(".response_option").each(function(i, e)
+                                            {
+                                                $(e).click(function()
+                                                {
+                                                    var that = $(this);
+                                                    var min_opacity = parseFloat(500);
+                                                    var max_opacity = parseFloat(-500);
+                                                    
+                                                    $(".response_option").each(function(ii, ee)
+                                                    {
+                                                        var parsed = parseFloat($(ee).css("opacity"));
+                                                        if(parsed < min_opacity)
+                                                        {
+                                                            min_opacity = parsed;
+                                                        }
+                                                        if(parsed > max_opacity)
+                                                        {
+                                                            max_opacity = parsed;
+                                                        }
+                                                    });
+
+                                                    var parsed = that.css("opacity");
+                                                    if(parseFloat(that.css("opacity")) !== max_opacity)
+                                                    {
+                                                        $(".response_option").css("opacity", "1.0");                                                        
+                                                    }
+                                                    else
+                                                    {
+                                                        var new_opacity = 0;
+                                                        if(min_opacity === parseFloat(1))
+                                                        {
+                                                            new_opacity = 0.5;
+                                                        }
+                                                        if(min_opacity === parseFloat(0.5))
+                                                        {
+                                                            new_opacity = 0.25;
+                                                        }
+                                                        if(min_opacity === parseFloat(0))
+                                                        {
+                                                            new_opacity = 0;
+                                                        }
+
+                                                        $(".response_option").each(function(ii, ee)
+                                                        {
+                                                            if($(ee).attr("id") !== that.attr("id"))
+                                                            {
+                                                                $(ee).css("opacity", new_opacity.toFixed(2));
+                                                            }
+                                                        });
+                                                        if(new_opacity === 0)
+                                                        {
+                                                            window.alert("To Be Continued, The choice has been recognized");
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                            
+                                            
+                                            
+                                            questions_div.animate({"opacity": "1.0"}, 2000, function()
+                                            {
+
+                                            });
+
+                                        });
+                                    });
+                                }, 1000);
+                            });
+                        }
+                    );
+                });
+                img.appendTo($("body"));
+            }
+        </script>
+        <style type="text/css">
+            .response_option
+            {
+                background:#f89a19;
+                font-size: 1.25em;
+                width: 47%;
+                float: left;
+                margin-left: 1%;
+                margin-right: 1%;
+                color: #FFFFFF;
+                font-weight: bold;
+                text-shadow: 0px 0px 0.1em #000;
+                margin-bottom: 2em;
+                margin-top: 1em;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            body, img
+            {
+                margin: 0px;
+                padding: 0px;
+                background: #FFFFFF;
+                border: 0px solid #000;                
+            }
+            p
+            {
+                color: #FFFFFF;
+            }
+            a, a:visited, a:hover
+            {
+                color: #FFFFFF;
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>

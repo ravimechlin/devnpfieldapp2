@@ -1,0 +1,5 @@
+identifier = ndb.StringProperty(required=True)
+rep_identifier = ndb.StringProperty(required=True)
+start_date = ndb.DateProperty(required=True)
+end_date = ndb.DateProperty(required=True)
+goal_info = ndb.TextProperty(required=True)

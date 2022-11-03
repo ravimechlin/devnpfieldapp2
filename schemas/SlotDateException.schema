@@ -1,0 +1,6 @@
+identifier = ndb.StringProperty(required=True)
+office_identifier = ndb.StringProperty(required=True)
+exception_day = ndb.IntegerProperty(required=True)
+exception_month = ndb.IntegerProperty(required=True)
+exception_year = ndb.IntegerProperty(required=True)
+slots = ndb.StructuredProperty(SurveySlotBlock)

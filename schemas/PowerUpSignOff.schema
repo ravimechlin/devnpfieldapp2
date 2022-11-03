@@ -1,0 +1,6 @@
+identifier=ndb.StringProperty(required=True)
+rep_identifier=ndb.StringProperty(required=True)
+approved=ndb.BooleanProperty(required=True)
+denied=ndb.BooleanProperty(required=True)
+created_dt=ndb.DateTimeProperty(required=True)
+approved_dt=ndb.DateTimeProperty(required=True)

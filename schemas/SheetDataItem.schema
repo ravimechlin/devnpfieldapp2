@@ -1,0 +1,6 @@
+identifier = ndb.StringProperty(required=True)
+entity_identifier = ndb.StringProperty(required=True)
+entity_identifier_type = ndb.StringProperty(required=True)
+cell_key = ndb.StringProperty(required=True)
+cell_value = ndb.TextProperty(required=True)
+sheet_key = ndb.StringProperty(required=True)

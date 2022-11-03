@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Watching lead acquisition in real-time</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style type="text/css">
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background: #fff;
+                color: #000;
+            }
+            #map {
+                width: 800px;
+                height: 500px;
+            }
+        </style>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="/bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function initMap()
+            {
+                if(window.parent.location.href.indexOf("/rep") > -1)
+                {
+                    document.getElementById('map').style.width = "300px";
+                    document.getElementById('map').style.height = "300px";
+                }
+                var breadcrumbs = {{breadcrumbs|safe}};
+                if(breadcrumbs.length === 0)
+                {
+                    $("<h2></h2>").text("   No locations could be found").appendTo($("#map"));    
+                }
+                else
+                {
+                    window.main_map = new google.maps.Map(document.getElementById('map'), 
+                    {
+                        zoom: 14,
+                        center: {"lat": parseFloat(breadcrumbs[0].lat), "lng": parseFloat(breadcrumbs[0].lng)}
+                    });
+                    
+                    window.info_windows = 
+                    [
+                        /*new google.maps.InfoWindow
+                        (
+                            {
+                                "content": "<div class='creep_cw'><h3><span class='utc_ts'>" + moment.utc(latest_post.utc).fromNow() + "</span></h3><p>" + latest_post.street + "</p><p>" + latest_post.city + ", " + latest_post.state + "</p><p>" + latest_post.postal + "</p><hr /><b>" + latest_post.rep_name + "</b><img class='rep_img' src='//storage.googleapis.com/" + window.app_bucket + "/Images/ProfilePictures/Thumb/" + latest_post.rep_identifier + ".jpg' /></div>"
+                            }
+                        )*/
+                    ];
+                    window.user_location_markers = [];
+                    window.house_location_markers = [];
+                    window.breadcrumbs = breadcrumbs;
+                    var found_first_crumb = false;
+                    $.each(breadcrumbs, function(i, breadcrumb)
+                    {
+                        var location_color = "0000FF";
+                        if(i === breadcrumbs.length - 1)
+                        {
+                            location_color = "D1B712";
+                        }
+                        if(!found_first_crumb)
+                        {
+                            if(breadcrumb.pin_lat !== "-500.0")
+                            {
+                                location_color = "F4DC42";
+                                found_first_crumb = true;
+                            }
+                        }
+                        var user_location_pin_image = new google.maps.MarkerImage
+                        (
+                            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + location_color,
+                            new google.maps.Size(21, 34),
+                            new google.maps.Point(0,0),
+                            new google.maps.Point(10, 34)
+                        );
+                        var user_location_marker = new google.maps.Marker
+                        (
+                            {
+                                "map": window.main_map,
+                                "position": {"lat": parseFloat(breadcrumb.lat), "lng": parseFloat(breadcrumb.lng)},
+                                "icon": user_location_pin_image
+                            }
+                        ); 
+                        window.user_location_markers.push(user_location_marker);
+
+                        var color = "00FF00";
+                        if(!breadcrumb.in_bounds)
+                        {
+                            color = "FF0000";
+                        }
+
+                        var house_pin_image = new google.maps.MarkerImage
+                        (
+                            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,
+                            new google.maps.Size(21, 34),
+                            new google.maps.Point(0,0),
+                            new google.maps.Point(10, 34)
+                        );
+
+                        var house_marker = new google.maps.Marker
+                        (
+                            {
+                                "map": window.main_map,
+                                "position": {"lat": parseFloat(breadcrumb.pin_lat), "lng": parseFloat(breadcrumb.pin_lng)},
+                                "icon": house_pin_image
+                            }
+                        )
+                        if(parseFloat(breadcrumb.pin_lat) > -200 && parseFloat(breadcrumb.pin_lng) > -200)
+                        {
+                            window.house_location_markers.push(house_marker);
+                        }
+                        house_marker.addListener("click", function()
+                        {
+                            var info_window = new google.maps.InfoWindow
+                            (
+                                {
+                                    "content": "This is the house location"
+                                }
+                            );
+                            info_window.open(window.main_map, house_marker); 
+                        });
+                        user_location_marker.addListener("click", function()
+                        {
+                            var info_window = new google.maps.InfoWindow
+                            (
+                                {
+                                    "content": "<b>Timestamp: </b>" + moment(breadcrumb.dt, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YYYY hh:mm:ss a")
+                                }
+                            );
+                            info_window.open(window.main_map, user_location_marker);   
+                        });
+                    });
+
+                    //window.markers[0].addListener("click", function()
+                    //{
+                        //window.info_windows[0].open(window.main_map, window.markers[0]);
+                    //});
+
+                    
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="map">
+            
+        </div>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAhhS3ugue4F0ZFstIOrAFA0z5D5NSV3mc&callback=initMap&language=en&region=US" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+{
+	"SR_DIR": "sales50",
+	"OFFICE_URL": "departments/officeList.php",
+	"NEW_USER_URL": "departments/employee.php?id="
+}

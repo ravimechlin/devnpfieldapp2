@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="57x57" href="/bootstrap/images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/bootstrap/images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/bootstrap/images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/bootstrap/images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/bootstrap/images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/bootstrap/images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/bootstrap/images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/bootstrap/images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/bootstrap/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/bootstrap/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/bootstrap/images/favicon-16x16.png">
+    <link rel="manifest" href="/bootstrap/images/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/bootstrap/images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>New Power Company - Self Registration</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+    <link href='//fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+    <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+    <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script charset="utf-8" type="text/javascript" src="/bootstrap/js/hacks.js"></script>
+    <style type="text/css">
+        .datepicker
+        {
+            background: #000;
+        }
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2000px;
+            opacity: 0.9;
+            z-index: 100;
+            background: #000;
+        }
+        body {
+            font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background: #353030;
+        }
+        @media(max-width:767px) {
+            body > .container > .row > .col-xs-12 > h2 {
+                margin-top: 0em;
+                text-align: center;
+            }
+        }
+        @media(min-width:768px) {
+            body > .container > .row > .col-xs-12 > h2 {
+                margin-top: 0em;
+                text-align: center;
+            }
+        }
+        @media(min-width:992px) {
+            body > .container > .row > .col-xs-12 > h2 {
+                margin-top: 1.75em;
+                text-align: right;
+            }
+        }
+        @media(min-width:1200px) {
+            body > .container > .row > .col-xs-12 > h2 {
+                margin-top: 1.75em;
+                text-align: right;
+            }
+        }
+        .modal-header {
+            background-color: #D19F28 !important;
+            text-align: center;
+            text-shadow: 0px 0px 0.05em #000000;
+        }
+        .modal-body {
+            background: #353030;
+        }
+        .bootstrap-dialog-message {
+            color: #C6C2C2;
+            text-shadow: 0px 0px 0.05em #000000;
+        }
+        input[type=text],
+        input[type='text'],
+        input[type="text"],
+        input[type=email],
+        input[type='email'],
+        input[type="email"],
+        input[type=password],
+        input[type='password'],
+        input[type="password"] {
+            background-color: #575757;
+            border: 0;
+            color: #D8D1D1;
+        }
+        .dropdown > button,
+        .open > button {
+            background: #1F6FBD !important;
+            color: #ffffff !important;
+            text-shadow: 0px 0px 0.05em #000 !important;
+        }
+        .dropdown > button:hover,
+        .open > button:hover {
+            /*background: #1F6FBD !important;*/
+
+            background-color: #1F6FBD !important;
+            color: #ffffff !important;
+            text-shadow: 0px 0px 0.05em #000 !important;
+        }
+        .dropdown > button:focus,
+        .open > button:focus {
+            /*background: #1F6FBD !important;*/
+
+            background-color: #1F6FBD !important;
+            color: #ffffff !important;
+            text-shadow: 0px 0px 0.05em #000 !important;
+        }
+        .glyphicon-camera {
+            color: #FB8A0B;
+            font-size: 5em;
+            cursor: pointer;
+        }
+        ::-webkit-input-placeholder {
+            color: #000000;
+        }
+        :-moz-placeholder {
+            color: #000000;
+            opacity: 1;
+        }
+        ::-moz-placeholder {
+            color: #000000;
+            opacity: 1;
+        }
+        :-ms-input-placeholder {
+            color: #909;
+        }
+        .step-2 {
+            display: none;
+        }
+        .step-3 {
+            display: none;
+        }
+        .mgr-div {
+            display: none;
+        }
+        .status-div {
+            display: none;
+        }
+        .tax-div {
+            display: none;
+        }
+        .m-signature-pad {
+            position: absolute;
+            font-size: 10px;
+            width: 700px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin-left: -350px;
+            margin-top: -150px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
+            border-radius: 4px;
+        }
+        .m-signature-pad:before,
+        .m-signature-pad:after {
+            position: absolute;
+            z-index: -1;
+            content: "";
+            width: 40%;
+            height: 10px;
+            left: 20px;
+            bottom: 10px;
+            background: transparent;
+            -webkit-transform: skew(-3deg) rotate(-3deg);
+            -moz-transform: skew(-3deg) rotate(-3deg);
+            -ms-transform: skew(-3deg) rotate(-3deg);
+            -o-transform: skew(-3deg) rotate(-3deg);
+            transform: skew(-3deg) rotate(-3deg);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+        .m-signature-pad:after {
+            left: auto;
+            right: 20px;
+            -webkit-transform: skew(3deg) rotate(3deg);
+            -moz-transform: skew(3deg) rotate(3deg);
+            -ms-transform: skew(3deg) rotate(3deg);
+            -o-transform: skew(3deg) rotate(3deg);
+            transform: skew(3deg) rotate(3deg);
+        }
+        .m-signature-pad--body {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            top: 20px;
+            bottom: 60px;
+            border: 1px solid #696969;
+        }
+        .m-signature-pad--body canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
+        }
+        .m-signature-pad--footer {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            height: 40px;
+        }
+        .m-signature-pad--footer .description {
+            color: #000000;
+            font-size: 1.2em;
+            margin-top: 1.8em;
+        }
+        .m-signature-pad--footer span {
+            margin-left: 15%;
+        }
+        .m-signature-pad--footer .button {
+            position: absolute;
+            bottom: 0;
+        }
+        .m-signature-pad--footer .button.clear {
+            left: 0;
+        }
+        .m-signature-pad--footer .button.save {
+            right: 0;
+        }
+        @media screen and (max-width: 1024px) {
+            .m-signature-pad {
+                top: 250px;
+                left: 100px;
+                right: 0;
+                bottom: 0;
+                min-width: 250px;
+                min-height: 140px;
+                margin: 5%;
+            }
+        }
+        @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            .m-signature-pad {
+                margin: 10%;
+            }
+        }
+        @media screen and (max-height: 320px) {
+            .m-signature-pad--body {
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 32px;
+            }
+            .m-signature-pad--footer {
+                left: 20px;
+                right: 20px;
+                bottom: 4px;
+                height: 28px;
+            }
+            .m-signature-pad--footer .description {
+                font-size: 1em;
+                margin-top: 1em;
+            }
+        }
+        #comp_frame {
+            width: 100%;
+            display: block;
+            position: relative;
+            height: 30em;
+        }
+        #viewer_js_screen_btns_row {
+            margin-top: 1.5em;
+        }
+        .step-1 {
+            padding-bottom: 5em;
+        }
+        #loading h3 {
+            text-align: center;
+            margin-top: 15em;
+        }
+        #dl_state_div
+        {
+            display: none;
+        }
+        .whiteborder
+        {
+            border: 1px solid #fff;
+            padding: 0.5em;
+        }
+        .w2 input
+        {
+            margin-top: 1em;
+            text-indent: 0.5em;
+        }
+        .w2
+        {
+            display: none;
+        }
+        .prior_inventions_table
+        {
+            width: 100%;
+        }
+        .prior_inventions_table td, .prior_inventions_table th
+        {
+            border: 1px solid #496987;
+            padding: 0.5em;
+        }
+        .prior_inventsion_table input
+        {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            padding: 0.5em;
+        }
+        .prior_inventions_table textarea
+        {
+            background: rgb(87, 87, 87);
+            border: 0px solid #0000;
+            padding: 0.5em;
+            min-height: 3em;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onunload = function() {};
+
+        function showSubmitScreen() {
+            if ($("#loading").find("#temp_submitting").size() === 0) {
+                $("#loading").css("display", "block").children("h3").html("<span id='temp_submitting'>Registering and generating docs&nbsp;&nbsp;&nbsp;</span><br><br><span id='submission_disclaimer'>(This process can take several minutes)</span>");
+                setTimeout(function() {
+                    showSubmitScreen();
+                }, 400);
+                return;
+            }
+
+            var submitting = $("#temp_submitting").eq(0);
+            var ellipsis_count = 0;
+            for (var i = 0; i < submitting.length; i++) {
+                ellipsis_count += ((submitting[i] === ".") * 1);
+            }
+            if (submitting.text().indexOf("...") !== -1) {
+                ellipsis_count++;
+                submitting.html("Registering and generating docs&nbsp;&nbsp;&nbsp;");
+                if (ellipsis_count % 3 === 0) {
+                    if ($("#submission_disclaimer").text().indexOf("can take") > -1) {
+                        $("#submission_disclaimer").text("(Please do not close the browser tab)");
+                    } else {
+                        $("#submission_disclaimer").text("(This process can take several minutes)");
+                    }
+                }
+            } else if (submitting.text().indexOf("..") !== -1) {
+                submitting.html("Registering and generating docs...");
+            } else if (submitting.text().indexOf(".") !== -1) {
+                submitting.html("Registering and generating docs..&nbsp;");
+            } else {
+                submitting.html("Registering and generating docs.&nbsp;&nbsp;");
+            }
+            setTimeout(function() {
+                showSubmitScreen();
+            }, 400);
+        }
+
+        function populateRepID() {
+            var cont =
+                $.trim($("#user_last").val()).length > 1 &&
+                $.trim($("#user_dob").val()).length === 10 &&
+                $.trim($("#user_dob").val()).split("-").length === 3;
+
+            if(!cont)
+            {
+                cont =
+                $.trim($("#user_last").val()).length > 1 &&
+                $.trim($("#user_dob").val()).length === 10 &&
+                $.trim($("#user_dob").val()).split("/").length === 3;
+            }
+
+            if (cont)
+            {
+                var dob_vals = $.trim($("#user_dob").val()).split("-")
+                if(dob_vals.length === 0)
+                {
+                    dob_vals = $.trim($("#user_dob").val()).split("/")
+                }
+
+                var lname = $.trim($("#user_last").val()).toUpperCase();
+                if (lname.split(" ").length > 1) {
+                    lname = lname.split(" ")[0];
+                }
+
+                if(lname.length === 2)
+                {
+                    $("#user_rep_id").val(lname + "NP" + dob_vals[0] + dob_vals[1]);
+                }
+                else if(lname.length === 3)
+                {
+                    $("#user_rep_id").val(lname + "N" + dob_vals[0] + dob_vals[1]);
+                }
+                else
+                {
+                    $("#user_rep_id").val(lname[0] + lname[1] + lname[2] + lname[3] + dob_vals[0] + dob_vals[1]);
+                }
+            }
+            else
+            {
+                $("#user_rep_id").val("");
+            }
+        }
+        $(document).ready(function() {
+
+            setInterval(function()
+            {
+                var val = $("#user_dob").val();
+                var trigger_keyup = false;
+                while(val.indexOf("/") > -1)
+                {
+                    val = val.replace("/", "-");
+                    trigger_keyup = true;
+                }
+                $("#user_dob").val(val);
+                if(trigger_keyup)
+                {
+                    $("#user_dob").val(val);
+                }
+            }, 50);
+            //$("body").text("Registration is currently down.");
+            //return;
+            if (window.location.protocol.toLowerCase().indexOf("https") === -1 && window.location.href.indexOf("localhost") === -1) {
+                $("body").html("");
+                var url = window.location.href.toLowerCase();
+                url = url.replace("http://", "https://");
+                window.location.href = url;
+                return;
+            }
+            // initialize the states
+            var states =
+            [
+                {
+                    "name": "Alabama",
+                    "abbreviation": "AL"
+                },
+                {
+                    "name": "Alaska",
+                    "abbreviation": "AK"
+                },
+                {
+                    "name": "Arizona",
+                    "abbreviation": "AZ"
+                },
+                {
+                    "name": "Arkansas",
+                    "abbreviation": "AR"
+                },
+                {
+                    "name": "California",
+                    "abbreviation": "CA"
+                },
+                {
+                    "name": "Colorado",
+                    "abbreviation": "CO"
+                },
+                {
+                    "name": "Connecticut",
+                    "abbreviation": "CO"
+                },
+                {
+                    "name": "Delaware",
+                    "abbreviation": "DE"
+                },
+                {
+                    "name": "Florida",
+                    "abbreviation": "FL"
+                },
+                {
+                    "name": "Georgia",
+                    "abbreviation": "GA"
+                },
+                {
+                    "name": "Hawaii",
+                    "abbreviation": "HI"
+                },
+                {
+                    "name": "Idaho",
+                    "abbreviation": "ID"
+                },
+                {
+                    "name": "Illinois",
+                    "abbreviation": "IL"
+                },
+                {
+                    "name": "Indiana",
+                    "abbreviation": "IN"
+                },
+                {
+                    "name": "Iowa",
+                    "abbreviation": "IA"
+                },
+                {
+                    "name": "Kansas",
+                    "abbreviation": "KS"
+                },
+                {
+                    "name": "Kentucky",
+                    "abbreviation": "KY"
+                },
+                {
+                    "name": "Lousiana",
+                    "abbreviation": "LA"
+                },
+                {
+                    "name": "Maine",
+                    "abbreviation": "ME"
+                },
+                {
+                    "name": "Maryland",
+                    "abbreviation": "MD"
+                },
+                {
+                    "name": "Massachusetts",
+                    "abbreviation": "MA"
+                },
+                {
+                    "name": "Michigan",
+                    "abbreviation": "MI"
+                },
+                {
+                    "name": "Minnestoa",
+                    "abbreviation": "MN"
+                },
+                {
+                    "name": "Mississippi",
+                    "abbreviation": "MS"
+                },
+                {
+                    "name": "Missouri",
+                    "abbreviation": "MO"
+                },
+                {
+                    "name": "Montana",
+                    "abbreviation": "MT"
+                },
+                {
+                    "name": "Nebraska",
+                    "abbreviation": "NE"
+                },
+                {
+                    "name": "Nevada",
+                    "abbreviation": "NV"
+                },
+                {
+                    "name": "New Hampshire",
+                    "abbreviation": "NH"
+                },
+                {
+                    "name": "New Jersey",
+                    "abbreviation": "NJ"
+                },
+                {
+                    "name": "New Mexico",
+                    "abbreviation": "NM"
+                },
+                {
+                    "name": "New York",
+                    "abbreviation": "NY"
+                },
+                {
+                    "name": "North Carolina",
+                    "abbreviation": "NC"
+                },
+                {
+                    "name": "North Dakota",
+                    "abbreviation": "ND"
+                },
+                {
+                    "name": "Ohio",
+                    "abbreviation": "OH"
+                },
+                {
+                    "name": "Oklahoma",
+                    "abbreviation": "OK"
+                },
+                {
+                    "name": "Oregon",
+                    "abbreviation": "OR"
+                },
+                {
+                    "name": "Pennsylvania",
+                    "abbreviation": "PA"
+                },
+                {
+                    "name": "Rhode Island",
+                    "abbreviation": "RI"
+                },
+                {
+                    "name": "South Carolina",
+                    "abbreviation": "SC"
+                },
+                {
+                    "name": "South Dakota",
+                    "abbreviation": "SD"
+                },
+                {
+                    "name": "Tennessee",
+                    "abbreviation": "TN"
+                },
+                {
+                    "name": "Texas",
+                    "abbreviation": "TX"
+                },
+                {
+                    "name": "Utah",
+                    "abbreviation": "UT"
+                },
+                {
+                    "name": "Vermont",
+                    "abbreviation": "VT"
+                },
+                {
+                    "name": "Virginia",
+                    "abbreviation": "VA"
+                },
+                {
+                    "name": "Washington",
+                    "abbreviation": "WA"
+                },
+                {
+                    "name": "West Virginia",
+                    "abbreviation": "WV"
+                },
+                {
+                    "name": "Wisconsin",
+                    "abbreviation": "WI"
+                },
+                {
+                    "name": "Wyoming",
+                    "abbreviation": "WY"
+                }
+            ]
+            $("#user_primary_state").val("N/A").attr("value", "N/A");
+            $("#user_office").val("N/A").attr("value", "N/A");
+            $("#user_type").val("N/A").attr("value", "N/A");
+            setTimeout(function() {
+                $("#user_primary_state").val("N/A").attr("value", "N/A");
+                $("#user_office").val("N/A").attr("value", "N/A");
+                $("#user_type").val("N/A").attr("value", "N/A");
+            }, 500);
+
+            var office_data = {{ offices|safe }};
+            var market_data = {{ markets|safe }};
+
+            $.each(office_data, function(i, office) {
+                var li = $("<li></li>").attr("role", "presentation");
+                li.attr("id", "office_" + office.identifier);
+                li.attr("data-parent", office.parent);
+                $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text(office.name).appendTo(li);
+                li.appendTo($("#dropdownMenu4").nextAll("ul").eq(0));
+            });
+            $.each(market_data, function(i, office)
+            {
+                var li = $("<li></li>").attr("role", "presentation");
+                li.attr("id", "office_" + office.identifier);
+                $("<a></a>").attr("role", "menuitem").attr("tabindex", "-1").attr("href", "javascript:void(0);").text(office.name).appendTo(li);
+                li.appendTo($("#dropdownMenu9496269185").nextAll("ul").eq(0));
+            });
+
+            $("#primary_state_dropdown").find("li").each(function(i, e) {
+                $(e).click(function() {
+                    $("#user_primary_state").val($(e).attr("id").replace("userprimarystate_", ""));
+                    $("#user_primary_state").attr("value", $(e).attr("id").replace("userprimarystate_", ""));
+
+                    var html = $.trim($(e).text()) + "<span class='caret'></span>";
+                    $(e).parent().prevAll("button").eq(0).html(html);
+                });
+
+            });
+            $("#user_market_dropdown").find("li").each(function(i, e)
+            {
+                $(e).click(function()
+                {
+                    $("#user_market").val($(e).attr("id").replace("office_", ""));
+                    $("#user_market").attr("value", $(e).attr("id").replace("office_", ""));
+
+                    var html = $.trim($(e).text()) + "<span class='caret'></span>";
+                    $(e).parent().prevAll("button").eq(0).html(html);
+
+                    $("#location_group_div").css("display", "block");
+
+                    var parent = $("#user_market").val();
+                    $("#user_office_dropdown").find("li").css("display", "none");
+                    $("#user_office_dropdown").find("li").each(function(ii, ee)
+                    {
+                        if($(ee).data("parent") === parent)
+                        {
+                            $(ee).css("display", "list-item");
+                        }
+                    });             
+                });
+            });
+            $("#user_office_dropdown").find("li").each(function(i, e) {
+                $(e).click(function() {
+
+                    $("#user_office").val($(e).attr("id").replace("office_", ""));
+                    $("#user_office").attr("value", $(e).attr("id").replace("office_", ""));
+
+                    var html = $.trim($(e).text()) + "<span class='caret'></span>";
+                    $(e).parent().prevAll("button").eq(0).html(html);
+                });
+            });
+            $("#original_author_dropdown").find("li").each(function(i, e)
+            {
+                $(e).click(function()
+                {
+                    var btn = $(e).closest(".form-group").find("button");
+                    btn.text($(e).text());
+                    $("<span></span>").addClass("caret").appendTo(btn);
+                    var value = $(e).attr("id").replace("prior_author_", "");
+                    if(value === "n")
+                    {
+                        $(".prior_inventions_div").remove();
+                    }
+                    else
+                    {
+                        var html = $("<div></div>");
+                        $("<p></p>").text("Would you like to attach additional sheets to this form to describe your prior inventions or original works of authorship?").appendTo(html);
+
+                        BootstrapDialog.show
+                        (
+                            {
+                                "title": "Question",
+                                "message": html.html(),
+                                "buttons":
+                                [
+                                    {
+                                        "label": "No",
+                                        "cssClass": "btn-danger",
+                                        "action": function(d)
+                                        {
+                                            d.close();
+                                        }
+                                    },
+                                    {
+                                        "label": "Yes",
+                                        "cssClass": "btn-primary",
+                                        "action": function(d)
+                                        {
+                                            d.close();
+                                            var html2 = $("<div></div>");
+                                            $("<p></p>").text("Please email these additional sheets to thomas@newpower.net subject line: Inventions").appendTo(html2);
+
+                                            BootstrapDialog.show
+                                            (
+                                                {
+                                                    "title": "Email Them",
+                                                    "message": html2.html(),
+                                                    "buttons":
+                                                    [
+                                                        {
+                                                            "label": "OK",
+                                                            "cssClass": "btn-primary",
+                                                            "action": function(d2)
+                                                            {
+                                                                d2.close();
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            );
+                                        }
+                                    }
+                                ],
+                                "onhidden": function()
+                                {
+                                    var questions_div = $("<div></div>").addClass("form-group").addClass("prior_inventions_div");
+                                    $("<label></label>").addClass("col-sm-2").text("Prior Inventions").appendTo(questions_div);
+                                    var main_div = $("<div></div>").addClass("col-sm-10");
+                                    var tbl = $("<table></table>").addClass("prior_inventions_table");
+                                    var tbody = $("<tbody></tbody>");
+                                    $("<tr></tr>")
+                                    .append
+                                    (
+                                        $("<th></th>").text("Title")
+                                    )
+                                    .append
+                                    (
+                                        $("<th></th>").text("Date")
+                                    )
+                                    .append
+                                    (
+                                        $("<th></th>").text("Description")
+                                    )
+                                    .append
+                                    (
+                                        $("<th></th>").text("Remove")
+                                    )
+                                    .appendTo(tbody);
+
+                                    $("<tr></tr>")
+                                    .append
+                                    (
+                                        $("<td></td>").attr("colspan", "4")
+                                        .append
+                                        (
+                                            $("<button></button>").addClass("btn").addClass("btn-primary").attr("type", "button").text("Add Item")
+                                            .click(function()
+                                            {
+                                                var new_tr = $("<tr></tr>");
+                                                $("<td></td>")
+                                                .append
+                                                (
+                                                    $("<input />").attr("type", "text").addClass("prior_invention_title").attr("placeholder", "Title of Prior Work")
+                                                )
+                                                .appendTo(new_tr);
+
+                                                var second_td = $("<td></td>");
+                                                
+                                                var temp_id = "temp_" + (new Date().getTime() + '');
+
+                                                $("<div></div>").attr("id", temp_id).addClass("prior_invention_date_wrapper").addClass("input-append").addClass("date").attr("data-date", moment().format("MM-DD-YYYY")).attr("data-date-format", "mm-dd-yyyy")
+                                                .append
+                                                (
+                                                    $("<input />").addClass("span2").attr("type", "text").attr("size", "16").attr("data-date", moment().format("MM-DD-YYYY")).attr("data-date-format", "mm-dd-yyyy").attr("value", moment().format("MM-DD-YYYY"))   
+                                                )
+                                                .append
+                                                (
+                                                    $("<span></span>").addClass("add-on")
+                                                    .append
+                                                    (
+                                                        $("<i></i>").addClass("icon-th")
+                                                    )
+                                                )
+                                                .appendTo(second_td);
+
+                                                second_td.appendTo(new_tr);
+                                                
+                                                $("<td></td>")
+                                                .append
+                                                (
+                                                    $("<textarea></textarea>").attr("placeholder", "Describe the prior work/invention...")
+                                                )
+                                                .appendTo(new_tr);
+
+                                                $("<td></td>")
+                                                .append
+                                                (
+                                                    $("<button></button>").addClass("btn").addClass("btn-danger").attr("type", "button").text("Remove")
+                                                    .click(function()
+                                                    {
+                                                        new_tr.remove();
+                                                    })
+                                                )
+                                                .appendTo(new_tr);
+
+                                                new_tr.appendTo(tbody);
+                                                
+                                                new_tr.find(".date")
+                                                .datepicker
+                                                (
+                                                    {
+                                                        "format": "mm-dd-yyyy",
+                                                        "autoClose": true,
+                                                    }
+                                                );
+
+                                                new_tr.find(".date").find("input").each(function(ii, ee)
+                                                {
+                                                    $.each(["keydown", "keyup", "keypress"], function(iii, eee)
+                                                    {
+                                                        $(ee).on(eee, function(orig_event)
+                                                        {
+                                                            orig_event.preventDefault();
+                                                        });
+                                                    });
+                                                });
+
+
+                                            })
+                                        )
+                                    )   
+                                    .appendTo(tbody);
+
+                                    tbody.appendTo(tbl);
+
+                                    tbl.appendTo(main_div);
+
+                                    main_div.appendTo(questions_div);
+                                    questions_div.insertAfter($(e).closest(".form-group"));
+
+
+                                }
+                            }
+                        );
+                    }
+                });                
+            });
+            $("#user_type_dropdown").find("li").each(function(i, e) {
+                $(e).click(function()
+                {
+                    $("body").css("opacity", "0.5");
+                    var v = $(e).attr("id").replace("usertype_", "");
+                    var mapping = {"super": "W2 Employee Registration", "solar_pro": "Solar Pro Registration", "solar_pro_manager": "Solar Pro Manager Registration", "energy_expert": "Energy Expert Registration", "sales_manager": "Sales Manager Registration"};
+                    var pwd = window.prompt("Please enter the passcode:") + '';
+                    $.ajax
+                    (
+                        {
+                            "url": "/data",
+                            "async": true,
+                            "type": "POST",
+                            "method": "POST",
+                            "data": {"fn": "password_check", "password": pwd, "name": mapping[v]},
+                            "success": function(rr)
+                            {
+                                if(rr.success)
+                                {
+                                    $("#user_type").val($(e).attr("id").replace("usertype_", ""));
+                                    $("#user_type").attr("value", $(e).attr("id").replace("usertype_", ""));
+
+                                    var html = $.trim($(e).text()) + "<span class='caret'></span>";
+                                    $(e).parent().prevAll("button").eq(0).html(html);
+                                }
+                                else
+                                {
+                                    window.alert("The password was incorrect, please try again.");
+                                }
+                                $("body").css("opacity", "1.0");
+                            }
+                        }
+                    );
+                });
+
+            });
+
+            $.each(["keydown", "keyup", "keypress"], function(i, ev_name) {
+                $("#user_city, #user_state").each(function(k, el) {
+                    $(this.el).on(ev_name, function(ev) {
+                        ev.preventDefault();
+                    });
+                });
+            });
+
+            $("#user_postal").on("change", function(ev) {
+                $("#user_postal").trigger("keyup");
+            });
+
+            $("#user_postal").on("keyup", function(ev) {
+                if ($("#user_postal").val().length === 5) {
+                    if ($("#user_postal").val().match(/\d/g).length === 5) {
+                        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC1JStq4qg-S61Y1bAXLzAWlq3ToUIscZk&address=" + $("#user_postal").val()).done(function(resp) {
+                            var city = resp.results[0].address_components[1].long_name;
+                            var state = ""
+                            if (resp.results.length > 0) {
+                                for (var i = 0; i < resp.results[0].address_components.length; i++) {
+                                    if (resp.results[0].address_components[i].types[0] === "administrative_area_level_1") {
+                                        state = resp.results[0].address_components[i].short_name;
+                                    }
+                                }
+                            }
+
+                            $("#user_city").val(city);
+                            $("#user_state").val(state);
+                        });
+                    }
+                }
+            });
+
+
+            $.each(["keyup", "keydown", "keypress"], function(i, ev_name) {
+                $("#user_rep_id").on(ev_name, function(ev) {
+                    ev.preventDefault();
+                });
+            });
+
+            $("#user_first, #user_last, #user_dob").each(function(i, e) {
+                $.each(["keyup", "keydown", "blur", "change", "keypress"], function(k, ev_name) {
+                    $(e).on(ev_name, function() {
+                        populateRepID();
+                    });
+                });
+            });
+
+
+            setInterval(function()
+            {
+                for(var i = 1; i < 9; i++)
+                {
+                    var count = i + '';
+                    $("#prior_work_title_" + count).attr("value", "").val("");
+                    $("#prior_work_date_" + count).attr("value", "").val("");
+                    $("#prior_work_description_" + count).attr("value", "").val("");
+                }
+                $(".prior_inventions_table").find("tr").each(function(i, e)
+                {
+                    if(i < 2)
+                    {
+                        return;
+                    }
+
+                    var count = (i - 1) + '';
+                    var title_value = $.trim($(e).find("input").first().val());
+                    var date_value = $(e).find("input").eq(1).val();
+                    var description_value = $.trim($(e).find("textarea").val());
+                    $("#prior_work_title_" + count).attr("value", title_value).val(title_value);
+                    $("#prior_work_date_" + count).attr("value", date_value).val(date_value);
+                    $("#prior_work_description_" + count).attr("value", description_value).val(description_value);
+                });
+            }, 250);            
+
+            $('#next-1').click(function() {
+                var that = $(this);
+                var show_button = function()
+                {
+                    that.css("display", "inline-block");
+                };
+                that.css("display", "none");
+                var user_exists_alreadyyy = false;
+                // RepID required
+                if ($.trim($("#user_rep_id").val()) === "")
+                {
+                    window.alert("You must enter a rep id");
+                    show_button();
+                    return;
+                }
+                $.ajax
+                (
+                    {
+                        "type": "POST",
+                        "url": "/data",
+                        "method": "POST",
+                        "async": true,
+                        "data": {"fn": "registration_existing_user_check", "rep_id": $("#user_rep_id").val(), "rep_email": $.trim($("#user_email").val()).toLowerCase()},
+                        "success": function(respons)
+                        {  
+                            user_exists_alreadyyy = respons.found;
+                            if(user_exists_alreadyyy)
+                            {
+                                window.alert("A user with the same Rep ID or email address already exists.");
+                                show_button();
+                                return;
+                            }
+                            
+                            // First required
+                            if($("#user_first").val() === "")
+                            {
+                                window.alert("Please enter a first name");
+                                show_button();
+                                return;
+                            }
+                            // Last required
+                            if ($("#user_last").val() === "")
+                            {
+                                window.alert("Please enter a last name");
+                                show_button();
+                                return;
+                            }
+                            // middle required
+                            if ($("#user_middle").val() === "")
+                            {
+                                window.alert("Please enter a middle name");
+                                show_button();
+                                return;
+                            }
+                            // DOB required
+                            $("#user_dob").val($.trim($("#user_dob").val()));
+
+                            // emergency info required
+                            if($.trim($("#user_emergency_name").val()).length === 0)
+                            {
+                                window.alert("Please enter a name for an emergency contact.");
+                                show_button();
+                                return;
+                            }
+                            if($.trim($("#user_emergency_phone").val()).length < 10)
+                            {
+                                window.alert("Please enter a 10-digit phone number for your emergency contact.");
+                                show_button();
+                                return;
+                            }
+
+                            var bday_val = $("#user_dob").val();
+                            var bday_error_msg = "The birthday field must be in a format such as 11-31-1988";
+
+                            if (bday_val.replace("-", "").replace("-", "").length - bday_val.length !== -2)
+                            {
+                                window.alert(bday_error_msg);
+                                show_button();
+                                return;
+                            }
+                            var bday_vals = bday_val.split("-");
+                            if (bday_vals[0].length !== 2 || bday_vals[1].length !== 2 || bday_vals[2].length !== 4)
+                            {
+                                window.alert(bday_error_msg);
+                                show_button();
+                                return;
+                            }
+
+                            var month_check = (parseInt(bday_vals[0]) >= 1 && parseInt(bday_vals[0]) <= 12);
+                            var day_check = (parseInt(bday_vals[1]) >= 1 && parseInt(bday_vals[1]) <= 31);
+                            var year_check = (parseInt(bday_vals[2]) >= 1850 && parseInt(bday_vals[2]) <= new Date().getFullYear() * 1);
+
+                            if (!month_check || !day_check || !year_check) {
+                                window.alert(bday_error_msg);
+                                show_button();
+                                return;
+                            }
+
+                            var ret_false = false;
+                            
+                            $("#user_rep_id").val($("#user_rep_id").val().toUpperCase());
+                            // Email required
+                            if ($("#user_email").val() == "") {
+                                window.alert("You must enter an email address");
+                                show_button();
+                                return;
+                            } else {
+                                $("#user_email").val($("#user_email").val().toLowerCase());
+                                // Regex based on http://www.regular-expressions.info/email.html
+                                if ($("#user_email").val().match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/) === null) {
+                                    window.alert("You must enter a valid email address");
+                                    show_button();
+                                    return;
+                                }
+                            }
+                            // Phone required
+                            var phone = $.trim($("#user_phone").val()).match(/\d/g);
+
+                            if (phone === null || phone.length !== 10) {
+                                window.alert("Your phone number must contain exactly ten digits");
+                                show_button();
+                                return;
+                            }
+
+                            $("#user_phone").val(phone.join(""));
+                            // Postal required
+                            if ($("#user_postal").val().length !== 5) {
+                                window.alert("The postal code must be exactly 5 digits");
+                                show_button();
+                                return;
+                            }
+                            var postal_val = $.trim($("#user_postal").val());
+                            if (postal_val.match(/\d/g) === null || postal_val.match(/\d/g).length !== 5) {
+                                window.alert("The postal code must be exactly 5 digits");
+                                show_button();
+                                return;
+                            }
+                            // Address required
+                            $("#user_address, #user_city, #user_state").each(function(i, e) {
+                                if ($.trim($(e).val()).length < 2 && !ret_false) {
+                                    window.alert("All address components are required");
+                                    show_button();
+                                    ret_false = true;
+                                }
+                            });
+
+                            
+
+                            if (ret_false) {
+                                return;
+                            }
+                            // Pasword requried
+                            // check password
+                            var pass = $("#user_password").val();
+                            var confirm = $("#user_password_confirm").val();
+                            if (pass !== confirm) {
+                                window.alert("Your passwords must match");
+                                show_button();
+                                return;
+                            }
+                            var found_upper = false;
+                            var found_lower = false;
+                            var found_number = false;
+                            for (var i = 0; i < 10; i++) {
+                                var str = i + '';
+                                if (pass.indexOf(str) > -1) {
+                                    found_number = true;
+                                    i = 9;
+                                }
+                            }
+
+                            for (var i = 65; i < (65 + 26); i++) {
+                                var str = String.fromCharCode(i);
+                                if (pass.indexOf(str) > -1) {
+                                    found_upper = true;
+                                    i = 65 + 25;
+                                }
+                            }
+
+                            for (var i = 97; i < (97 + 26); i++) {
+                                var str = String.fromCharCode(i);
+                                if (pass.indexOf(str) > -1) {
+                                    found_lower = true;
+                                    i = 97 + 25;
+                                }
+                            }
+                            if (!found_upper || !found_lower || !found_number) {
+                                window.alert("Your password must contain at least one uppercase letter, one lowercase letter, and one digit.")
+                                show_button();
+                                return;
+                            }
+                            // User primary state required
+                            if ($("#user_primary_state").val() === "N/A") {
+                                window.alert("You must first select your primary working state");
+                                show_button();
+                                return;
+                            }                
+
+                            // Market required
+                            if($("#user_market").val() === "N/A")
+                            {
+                                window.alert("You must choose a market.");
+                                show_button();
+                                return;
+                            }
+                            // Office required
+                            if ($("#user_office").val() === "N/A") {
+                                window.alert("You must first select an office location");
+                                show_button();
+                                return;
+                            }
+                            // User type required
+                            if ($("#user_type").val() === "N/A") {
+                                window.alert("You must first select your user type");
+                                show_button();
+                                return;
+                            }
+                            if($("#pay_card")[0].files.length === 0)
+                            {
+                                window.alert("You must provide a photo of your pay card");
+                                show_button();
+                                return;
+                            }
+
+                            $("#user_emergency_phone").val($("#user_emergency_phone").val().digits() + '');
+                            var get_compensation = function()
+                            {
+
+                                var user_type = $("#user_type").val().toUpperCase();
+
+                                showSubmitScreen();                                
+                                document.forms[0].submit();
+                            }
+                            get_compensation();   
+                        }
+                    }
+                );                               
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <h2>
+                    New Power Company &therefore; Self Registration
+                </div>
+            </div>
+            <form class="form-horizontal" role="form" action="./registration" method="POST" enctype="multipart/form-data">
+                <div class="step-1">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_first">
+                        First Name:
+                        </label>
+                        <div class="col-sm-10">
+                            <input autocomplete="off" type="text" class="form-control" id="user_first" placeholder="John" name="user_first" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_last">
+                        Last Name:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_last" placeholder="Doe" name="user_last" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_last">
+                        Middle Name:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_middle" placeholder="Doe" name="user_middle" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_dob">
+                        DOB:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_dob" placeholder="01-01-1969" name="user_dob" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_rep_id">
+                        Rep. ID:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_rep_id" placeholder="SHB562" name="user_rep_id" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_emergency_name">Emergency Contact Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_emergency_name" name="user_emergency_name" placeholder="John Doe" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_emergency_name">Emergency Contact Phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_emergency_phone" name="user_emergency_phone" placeholder="(909) 621-9286" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_email">
+                        Email Address:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="email" autocomplete="off" class="form-control" id="user_email" placeholder="example@thepower.co" name="user_email" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_phone">
+                        Phone:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_phone" placeholder="(123) 456-7890" name="user_phone" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_postal">
+                        Postal Code:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_postal" placeholder="12345" name="user_postal" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_address">
+                        Address:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_address" placeholder="342 Willow St" name="user_address" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_city">
+                        City:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_city" placeholder="Escondido" name="user_city" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_state">
+                        State:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" autocomplete="off" class="form-control" id="user_state" placeholder="CA" name="user_state" required="required" maxlength="2" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_password">
+                        Password:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="password" autocomplete="off" class="form-control" id="user_password" placeholder="******" name="user_password" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_password_confirm">
+                        Confirm Password:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="password" autocomplete="off" class="form-control" id="user_password_confirm" placeholder="******" name="user_password_confirm" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_primary_state">
+                        Primary Working State:
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu0" data-toggle="dropdown" aria-expanded="true">
+                                Select a state
+                                <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu0" id="primary_state_dropdown">
+                                    <li role="presentation" id="userprimarystate_ca" class="userprimarystate">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        California
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="userprimarystate_co" class="userprimarystate">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Colorado
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="userprimarystate_pa" class="userprimarystate">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Pennsylvania
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="userprimarystate_tx" class="userprimarystate">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Texas
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="userprimarystate_ut" class="userprimarystate">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Utah
+                                        </a>
+                                    </li>                                    
+                                </ul>
+                            </div>
+                            <input type="text" id="user_primary_state" name="user_primary_state" value="N/A" autocomplete="off" style="display: none;"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_market">
+                            Market:
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu9496269185" data-toggle="dropdown" aria-expanded="true">
+                                    Choose a Market <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu9496269185" id="user_market_dropdown">
+                                </ul>
+                            </div>
+                            <input type="text" id="user_market" name="user_market" value="N/A" autocomplete="off" style="display: none;"/>
+                        </div>
+                    </div>
+                    <div class="form-group" id="location_group_div" style="display: none;">
+                        <label class="control-label col-sm-2" for="user_office">
+                        Location:
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-expanded="true">
+                                Select a survey area
+                                <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4" id="user_office_dropdown">
+                                </ul>
+                            </div>
+                            <input type="text" id="user_office" name="user_office" value="N/A" autocomplete="off" style="display: none;"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_type">
+                        User Type:
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-expanded="true">
+                                Select a role
+                                <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5" id="user_type_dropdown">
+                                    <li role="presentation" id="usertype_super" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            W2 Employee
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_solar_pro" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Solar Pro
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_solar_pro_manager" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Solar Pro Manager
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_energy_expert" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Energy Expert
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_sales_manager" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Sales Manager
+                                        </a>
+                                    </li>
+
+                                    <!-- li role="presentation" id="usertype_asst_mgr" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Assistant Manager
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_co_mgr" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Co-Manager
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_sales_dist_mgr" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Sales/District Manager
+                                        </a>
+                                    </li>
+                                    <li role="presentation" id="usertype_rg_mgr" class="usertype">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                        Regional Manager
+                                        </a>
+                                    </li -->
+                                </ul>
+                            </div>
+                            <input type="text" id="user_type" name="user_type" value="N/A" autocomplete="off" style="display: none;"/>
+                        </div>
+                    </div>    
+                </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="user_type">
+                        Photo of pay card:
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="file" name="pay_card" id="pay_card" />
+                        </div>
+                    </div> 
+                    <div class="form-group prior_inventions_yn">
+                        <label class="control-label col-sm-2">Do you have any prior inventions or original works of authorship to declare?</label>
+                        <div class="col-sm-10">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCopyrightYN" data-toggle="dropdown" aria-expanded="true">
+                                    Choose One
+                                    <span class="caret"></span>
+                                </button>                            
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5" id="original_author_dropdown">
+                                    <li role="presentation" id="prior_author_y">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            Yes
+                                        </a>                                        
+                                    </li>
+                                    <li role="presentation" id="prior_author_n">
+                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                            No
+                                        </a>                                        
+                                    </li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </div>               
+                    <div class="form-group w2">
+                        <hr />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10 action-btns-1">
+                            <button type="button" id="next-1" class="btn btn-warning">Next</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-2">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <p>Please review your compensation agreement...</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                            <iframe id="comp_frame" src = "" width="400" height="300" seamless="seamless" allowfullscreen webkitallowfullscreen></iframe>
+                            <input type="hidden" id="comp_path" name="comp_path" value="">
+                        </div>
+                    </div>
+                    <div class="row" id="viewer_js_screen_btns_row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <button class="btn btn-danger back-2">Back</button>
+                            <button type="button" id="next-2" class="btn btn-info">I Agree to the terms</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-3">
+                    <center>
+                        <p style="width: 75%; font-size: 0.9em;">
+                            By signing, you agree to the terms set forth in the compensation agreement and affirm that you are legally eligible to work in the United States.
+                        </p>
+                    </center>
+                    <div id="signature-pad" class="m-signature-pad">
+                        <div class="m-signature-pad--body">
+                            <canvas></canvas>
+                        </div>
+                        <div class="m-signature-pad--footer">
+                            <div class="description">
+                                <input type="hidden" id="user-signature" name="user-signature" value="">
+                                <button class="btn btn-warning back-3">Back</button>
+                                <button class="btn btn-info clear">Clear</button>
+                                <button type="submit" class="btn btn-success register">Register</button>
+                                <span>Sign above</span>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="./bootstrap/js/signature_pad.js" type="text/javascript"></script>
+                    <script>
+                        String.prototype.digits = function()
+                        {
+                            var arr = [];
+                            var digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+                            for(var i = 0; i < this.length; i++)
+                            {
+                                if(digits.indexOf(this[i]) > -1)
+                                {
+                                arr.push(this[i]);
+                                }
+                            }
+                            if(arr.length === 0)
+                            {
+                                return null;
+                            }
+                            return arr.join("");
+                        };
+                        $(document).ajaxComplete(function()
+                        {
+                            var wrapper = document.getElementById("signature-pad"),
+                                canvas = wrapper.querySelector("canvas"),
+                                signaturePad;
+
+                            // Adjust canvas coordinate space taking into account pixel ratio,
+                            // to make it look crisp on mobile devices.
+                            // This also causes canvas to be cleared.
+                            function resizeCanvas()
+                            {
+                                // When zoomed out to less than 100%, for some very strange reason,
+                                // some browsers report devicePixelRatio as less than 1
+                                // and only part of the canvas is cleared then.
+                                var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                                canvas.width = canvas.offsetWidth * ratio;
+                                canvas.height = canvas.offsetHeight * ratio;
+                                canvas.getContext("2d").scale(ratio, ratio);
+                            }
+
+                            //window.onresize = resizeCanvas;
+                            resizeCanvas();
+
+                            signaturePad = new SignaturePad(canvas);
+
+                            $(".back-2").click(function(ev)
+                            {
+                                $(".step-1").fadeIn('slow');
+                                $(".step-2").fadeOut('slow');
+                                ev.preventDefault();
+                            });
+                            $("#next-2").click(function(ev)
+                            {
+                                $(".step-2").fadeOut('slow');
+                                $(".step-3").fadeIn('slow');
+                                resizeCanvas();
+                                var signaturedataold = $("#user-signature").val();
+                                if(signaturedataold != "")
+                                {
+                                    signaturePad.fromDataURL(signaturedataold);
+                                    $(".register").prop("disabled", false);
+                                }
+                                else
+                                {
+                                    $(".register").prop("disabled", true);
+                                }
+                                ev.preventDefault();
+                            });
+                            $(".back-3").click(function(ev)
+                            {
+                                $(".step-2").fadeIn('slow');
+                                $(".step-3").fadeOut('slow');
+                                ev.preventDefault();
+                            });
+                            $(".clear").click(function(ev)
+                            {
+                                signaturePad.clear();
+                                $(".register").prop("disabled", true);
+                                $("#user-signature").val("");
+                                ev.preventDefault();
+                            });
+                            $(".register").click(function(ev)
+                            {
+                                showSubmitScreen();
+                                var signaturedata = signaturePad.toDataURL();
+                                $("#user-signature").val(signaturedata);
+                                $(".step-1,.step-2,.step-3").css('opacity', 0);
+                                $(".step-1,.step-2").show();
+                                $("div.container").css({"height" : "500px", "overflow": "hidden"});
+                                $("div.step-1 >div").css({"width" : "0px", "height" : "0px"});
+                                $("div.step-2 >div").css({"width" : "0px", "height" : "0px"});
+                                $("div.step-3 >div").css({"width" : "0px", "height" : "0px"});
+                                return true;
+                            });
+                            $(document).on("click, mousedown",".m-signature-pad--body", function()
+                            {
+                                $(".register").prop("disabled", false);
+                            });
+                            $(document).on("mouseup",".m-signature-pad--body", function()
+                            {
+                                var signaturedata = signaturePad.toDataURL();
+                                $("#user-signature").val(signaturedata);
+                            });
+                    });
+                    </script>
+                </div>
+                <input type="hidden" name="prior_work_title_1" id="prior_work_title_1" value="" />
+                <input type="hidden" name="prior_work_date_1" id="prior_work_date_1" value="" />
+                <input type="hidden" name="prior_work_description_1" id="prior_work_description_1" value="" />
+                <input type="hidden" name="prior_work_title_2" id="prior_work_title_2" value="" />
+                <input type="hidden" name="prior_work_date_2" id="prior_work_date_2" value="" />
+                <input type="hidden" name="prior_work_description_2" id="prior_work_description_2" value="" />
+                <input type="hidden" name="prior_work_title_3" id="prior_work_title_3" value="" />
+                <input type="hidden" name="prior_work_date_3" id="prior_work_date_3" value="" />
+                <input type="hidden" name="prior_work_description_3" id="prior_work_description_3" value="" />
+                <input type="hidden" name="prior_work_title_4" id="prior_work_title_4" value="" />
+                <input type="hidden" name="prior_work_date_4" id="prior_work_date_4" value="" />
+                <input type="hidden" name="prior_work_description_4" id="prior_work_description_4" value="" />
+                <input type="hidden" name="prior_work_title_5" id="prior_work_title_5" value="" />
+                <input type="hidden" name="prior_work_date_5" id="prior_work_date_5" value="" />
+                <input type="hidden" name="prior_work_description_5" id="prior_work_description_5" value="" />
+                <input type="hidden" name="prior_work_title_6" id="prior_work_title_6" value="" />
+                <input type="hidden" name="prior_work_date_6" id="prior_work_date_6" value="" />
+                <input type="hidden" name="prior_work_description_6" id="prior_work_description_6" value="" />
+                <input type="hidden" name="prior_work_title_7" id="prior_work_title_7" value="" />
+                <input type="hidden" name="prior_work_date_7" id="prior_work_date_7" value="" />
+                <input type="hidden" name="prior_work_description_7" id="prior_work_description_7" value="" />
+                <input type="hidden" name="prior_work_title_8" id="prior_work_title_8" value="" />
+                <input type="hidden" name="prior_work_date_8" id="prior_work_date_8" value="" />
+                <input type="hidden" name="prior_work_description_8" id="prior_work_description_8" value="" />
+            </form>
+        </div>
+        <div id="loading">
+            <h3></h3>
+        </div>
+    </body>
+</html>

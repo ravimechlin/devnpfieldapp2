@@ -1,0 +1,3 @@
+applicable_offices
+ndb.StringProperty
+{}

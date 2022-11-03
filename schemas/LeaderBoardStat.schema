@@ -1,0 +1,7 @@
+identifier=ndb.StringProperty(required=True)
+rep_id=ndb.StringProperty(required=True)
+dt=ndb.DateTimeProperty(required=True)
+metric_key=ndb.StringProperty(required=True)
+
+office_identifier = ndb.StringProperty(required=True)
+field_app_identifier = ndb.StringProperty(required=True)

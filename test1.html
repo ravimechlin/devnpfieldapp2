@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>New Power Company - Field Application</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/bootstrap-dialog.min.css" />
+        <link rel="stylesheet" href="./bootstrap/css/datepicker.css" />
+        <script src="./bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/hashids.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/moment.min.js" type="text/javascript"></script>
+        <script src="./bootstrap/js/errortracker_v1.js" type="text/javascript"></script>
+        <style type="text/css">
+            #loading
+            {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2000px;
+                opacity: 0.9;
+                z-index: 100;
+                background: #000;
+            }
+            #loading h3
+            {
+                text-align: center;
+                top: 200px;
+                position: relative;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+            body
+            {
+                font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+                color: #ffffff;
+                background: #353030;
+                position: relative;
+                z-index: 2;
+            }
+            @media(max-width:767px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:768px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 0em;
+                    text-align: center;
+                }
+            }
+            @media(min-width:992px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            @media(min-width:1200px)
+            {
+                body > .container > .row > .col-xs-12 > h2
+                {
+                    margin-top: 1.75em;
+                    text-align: right;
+                }
+            }
+            .modal-header
+            {
+                background-color: #D19F28 !important;
+                text-align: center;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            .modal-body
+            {
+                background: #353030;
+            }
+            .bootstrap-dialog-message
+            {
+                color: #C6C2C2;
+                text-shadow: 0px 0px 0.05em #000000;
+            }
+            input[type=text], input[type='text'], input[type="text"], input[type=email], input[type='email'], input[type="email"]
+            {
+                background-color: #575757;
+                border: 0;
+                color: #D8D1D1;
+            }
+            .dropdown > button, .open > button
+            {
+                background: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:hover, .open > button:hover
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .dropdown > button:focus, .open > button:focus
+            {
+                /*background: #1F6FBD !important;*/
+                background-color: #1F6FBD !important;
+                color: #ffffff !important;
+                text-shadow: 0px 0px 0.05em #000 !important;
+            }
+            .glyphicon-camera
+            {
+                color: #FB8A0B;
+                font-size: 5em;
+                cursor: pointer;
+            }
+            #file_sel_confirm
+            {
+                top: -3.5em;
+                position: relative;
+                display: block;
+                left: 6em;
+                color: #FFF;
+                display: none;
+            }
+            .modal-footer
+            {
+                background: #353030;
+                border-top: 0px solid #000;
+            }
+            ::-webkit-input-placeholder
+            {
+                color: #000000;
+            }
+            :-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            ::-moz-placeholder
+            {
+                color: #000000;
+                opacity:  1;
+            }
+            :-ms-input-placeholder
+            {
+                color: #909;
+            }
+            #signout
+            {
+                text-align: right;
+                line-height: 2em;
+            }
+            input[disabled]
+            {
+                background: #AAAAAA !important;
+                color: #000000 !important;
+                border: 1px solid #ff0000;
+            }
+            #lead_id
+            {
+                font-family: monospace, "MonoSpace";
+            }
+            .datepicker
+            {
+                color: #000000;
+            }
+            #cust_dob, #cust_signature_date, #cust_appointment_date
+            {
+                text-indent: 1em;
+                position: relative;
+                top: 0.5em;
+            }
+        </style>
+        <script type="text/javascript">
+
+            function getDateString()
+            {
+                var fn = function()
+                {
+                    var d = new Date();
+                    var str = (d.getMonth() + 1) + '';
+                    str += "/";
+                    str += d.getDay() + '';
+                    str += "/";
+                    str += d.getFullYear() + '';
+
+                    return str;
+
+                    str += " ";
+                    var hours = d.getHours();
+                    var is_pm = false;
+                    if(hours > 11)
+                    {
+                        is_pm = true;
+                        hours -= 12;
+                    }
+                    str += hours + '';
+                    str += ":";
+                    var mins_str = d.getMinutes() + '';
+                    if(mins_str.length === 1)
+                    {
+                        mins_str = "0" + mins_str;
+                    }
+                    str += mins_str;
+                    str += ":";
+                    var seconds_str = d.getSeconds() + '';
+                    if(seconds_str.length === 1)
+                    {
+                        seconds_str = "0" + seconds_str;
+                    }
+                    str += " ";
+                    if(is_pm)
+                    {
+                        str += "PM";
+                    }
+                    else
+                    {
+                        str += "AM";
+                    }
+                    return str;
+                };
+                return fn();
+            }
+            window.onunload = function() {killReservations(false);};
+            window.onbeforeunload = function() {killReservations(false);};
+            window.all_keys_reserved = {};
+            window.current_reservation_key = "";
+            window.all_keys_reserved = [];
+
+            $(document).ready(function()
+            {
+                if(window.location.protocol.toLowerCase().indexOf("https") === -1 && window.location.href.indexOf("localhost") === -1)
+                {
+                    $("body").html("");
+                    var url = window.location.href.toLowerCase();
+                    url = url.replace("http://", "https://");
+                    window.location.href = url;
+                    return;
+                }
+                $("#pic").change(function()
+                {
+                    if($("#pic").val().length > 0)
+                    {
+                        $("#file_sel_confirm").css("display", "block");
+                    }
+                });
+
+                $("form").eq(0).submit(function()
+                {
+                    return false;
+                });
+                $(".glyphicon-camera").click(function()
+                {
+                    $(this).nextAll("input").eq(0).click();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="loading">
+            <h3>Please wait while content is loading...</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    &nbsp;
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="signout">
+                    ... | <a href="/logout">SignOut</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img img-responsive" src="./bootstrap/images/np_logox21.png" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <h2>New Power Company &therefore; Field Application
+                </div>
+            </div>
+            <form class="form-horizontal" role="form" action="./sales" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lead_id">
+                        Lead ID:
+                    </label>
+                    <div class="col-sm-10">
+                        <input autocomplete="off" type="text" class="form-control" id="lead_id" name="lead_id" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_first">
+                        Customer First Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input autocomplete="off" type="text" class="form-control" id="cust_first" placeholder="John" name="cust_first" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_last">
+                        Customer Last Name:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_last" placeholder="Doe" name="cust_last" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_phone">
+                        Customer Phone:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_phone" placeholder="(123) 456-7890" name="cust_phone" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_email">
+                        Customer Email:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="email" autocomplete="off" class="form-control" id="cust_email" placeholder="example@gmail.com" name="cust_email" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_dob">
+                        Customer DOB:
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2" size="16" type="text" value="12-02-2012" name="cust_dob" id="cust_dob" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_postal">
+                        Customer Postal Code:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_postal" placeholder="12345" name="cust_postal" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_address">
+                        Customer Address:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_address" placeholer="342 Willow St" name="cust_address" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_city">
+                        Customer City:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_city" placeholder="Escondido" name="cust_city" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_state">
+                        Customer State:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_state" placeholder="CA" name="cust_state" required="required" maxlength="2" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_utility_account_no">
+                        Customer Utility Account #:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="cust_utility_account_no" placeholder="2369877139" name="cust_utility_account_no" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="rep_id">
+                        Rep ID:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="rep_id" placeholder="SHA265" name="rep_id" required="required" value="{{ rep_id }}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="rep_email">
+                        Rep Email:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="email" autocomplete="off" class="form-control" id="rep_email" placeholder="example@thepower.co" name="rep_email" required="required" value="{{ rep_email }}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="rep_phone">
+                        Rep Phone:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" autocomplete="off" class="form-control" id="rep_phone" placeholder="(123) 456-7890" name="rep_phone" required="required" value="{{ rep_phone }}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="rep_office">
+                        Office:
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                            Select an office
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <!-- li role="presentation" id="office_1">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    Escondido
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_2">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                Murrieta
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_3">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    OC
+                                </a>
+                            </li>
+                            <li role="presentation" id="office_4">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    Valencia
+                                </a>
+                            </li -->
+                          </ul>
+                        </div>
+                        <input type="text" id="rep_office" name="rep_office" value="N/A" autocomplete="off" style="display: none;"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_kw_price">
+                        Price per kWh:
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            Select a price
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    19.9
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                18.9
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    17.9
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                    14.9
+                                </a>
+                            </li>
+                          </ul>
+                        </div>
+                        <input type="text" id="cust_kw_price" name="cust_kw_price" value="N/A" autocomplete="off" style="display: none;"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_signature_date">
+                        Date of Customer Signature:
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt2" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2" size="16" type="text" value="12-02-2012" name="cust_signature_date" id="cust_signature_date" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="cust_appointement_date">
+                        Appointment Time for Survey
+                    </label>
+                    <div class="col-sm-10">
+                        <div id="dt3" class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                            <input class="span2" size="16" type="text" value="12-02-2012" name="cust_appointment_date" id="cust_appointment_date" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <input type="hidden" name="appt_slot_num" id="appt_slot_num" value="N/A" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pic">
+                        Tap to upload an image:
+                    </label>
+                    <div class="col-sm-10">
+                        <span class="glyphicon glyphicon-camera"></span>
+                        <p id="file_sel_confirm">File selected &#10004;</p>
+                        <input type="file" required="required" id="pic" name="pic" style="display: none;" accept="image/*" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" id="sub_btn" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

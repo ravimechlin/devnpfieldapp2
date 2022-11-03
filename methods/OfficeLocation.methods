@@ -1,0 +1,76 @@
+
+def get_override_data(self):
+	f = GCSLockedFile("/MarketSettings/Overrides/" + self.identifier + ".json")
+	return json.loads(str(f.read()))
+	
+def set_override_data(self, data):
+    f = GCSLockedFile("/MarketSettings/Overrides/" + self.identifier + ".json")
+    f.write(str(json.dumps(data)), "application/json", "public-read")
+    f.unlock()
+    
+def purge_recipient(self, recipient):
+    o_data = self.get_override_data()
+    recipients_cpy = []
+    for item in o_data["recipients"]:
+        if not item == recipient:
+            recipients_cpy.append(item)
+    
+    recipients_cpy2 = []
+    for item in recipients_cpy:
+        if not item in recipients_cpy2:
+    	    recipients_cpy2.append(item)
+    o_data["recipients"] = recipients_cpy2
+    for yielder in o_data["data"].keys():
+        cpy = []
+        for item in o_data["data"][yielder]:
+            if not item["identifier"] == recipient:
+                cpy.append(item)
+        o_data["data"][yielder] = cpy
+    cpy3 = {}
+    for item in o_data["other_accounts"].keys():
+        if not item == recipient:
+            cpy3[item] = o_data["other_accounts"][item]
+    o_data["other_accounts"] = cpy3
+    cpy4 = {}
+    for item in o_data["data"].keys():
+        lst = o_data["data"][item]
+        lst2 = []
+        for item2 in lst:
+            if not item2["identifier"] == recipient:
+                lst2.append(item2)
+        if len(lst2) > 0:
+	        cpy4[item] = lst2
+    o_data["data"] = cpy4
+    new_yielders = []
+    for item in o_data["data"].keys():
+        new_yielders.append(item)
+    o_data["yielders"] = new_yielders
+    self.set_override_data(o_data)
+    
+def purge_yielder(self, identifier):
+    o_data = self.get_override_data()
+    yielders_cpy = []
+    for item in o_data["yielders"]:
+        if not item == identifier:
+            yielders_cpy.append(item)
+    o_data["yielders"] = yielders_cpy
+    cpy2 = {}
+    for yielder in o_data["data"].keys():
+    	if not yielder == identifier:
+    		cpy2[yielder] = o_data["data"][yielder]
+    o_data["data"] = cpy2
+    new_recipients = []
+    for item in o_data["data"].keys():
+    	for list_item in o_data["data"][item]:
+    	    if not list_item["identifier"] in new_recipients:
+    	    	new_recipients.append(list_item["identifier"])
+    o_data["recipients"] = new_recipients
+    self.set_override_data(o_data)
+
+
+    
+
+
+  
+    
+    
